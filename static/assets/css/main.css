@@ -2027,3 +2027,94 @@ section {
 .footer .credits a {
   color: #fff;
 }
+
+/*
+video.html
+*/
+.select-label {
+  width: 600px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  background: var(--color-black);
+  color: #fff;
+  text-align: center;
+  padding: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+#dropZone {
+  top: 65px;
+  width: 600px;
+  height: 280px;
+  border: 3px dashed #ccc;
+  text-align: center;
+  padding: 10px;
+  padding-top: 100px;
+  margin: 0 auto;
+  position: relative;
+  background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center 140px no-repeat;
+}
+
+#dropZone.highlight {
+  border-color: var(--color-primary);
+}
+
+#selectedFile {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.group-btn {
+  justify-content: space-between;
+  width: 600px; /* 총 너비는 버튼의 너비 합과 마진 값으로 조정 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+}
+
+.reset-label {
+  width: 75px;
+  height: 100%;
+  background-color: #a9a8a8;
+  color: #fff;
+  text-align: center;
+  padding: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-label {
+  width: 520px;
+  background-color: var(--color-secondary);
+  color: #fff;
+  text-align: center;
+  padding: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.select-label:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  transition: 0.4s;
+}
+
+.reset-label:hover {
+  background: #ccc;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.upload-label:hover {
+  background: rgba(14, 29, 52, 0.8);
+  color: #fff;
+  transition: 0.4s;
+}
+
+.highlight {
+  border: 2px dashed red;
+}
