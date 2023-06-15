@@ -11,6 +11,6 @@ urlpatterns = [
     path('video/', include('video.urls')),
     path('post/', include('post.urls')),
     path('map/', include('map.urls')),
-    # path('login/', include('login.urls')),
+    path('login/', include('login.urls')),
     # path('join/', include('join.urls')),
 ]
