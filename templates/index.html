@@ -56,10 +56,20 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/" class="active">HOME</a></li>
-          <li><a href="/video">VIDEO</a></li>
-          <li><a href="/post">POST</a></li>
+          <li class="dropdown"><a href="/video"><span>VIDEO</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/video">블랙박스 영상 업로드하기</a></li>
+              <li><a href="#">결과 확인하기</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="post.html"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/post">신고 게시판 목록</a></li>
+              <li><a href="/service-details">신고하기</a></li>
+            </ul>
+          </li>
           <li><a href="/map">MAP</a></li>
-          <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          <li><a class="get-a-quote" href="get-a-quote.html">LOGIN</a></li>
         </ul>
       </nav><!-- .navbar -->
 
