@@ -56,8 +56,18 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">HOME</a></li>
-          <li><a href="/video">VIDEO</a></li>
-          <li><a href="/post" class="active">POST</a></li>
+          <li class="dropdown"><a href="/video"><span>VIDEO</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/video">블랙박스 영상 업로드하기</a></li>
+              <li><a href="#">결과 확인하기</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="/post" class="active"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/post">신고 게시판 목록</a></li>
+              <li><a href="/post/posting">신고하기</a></li>
+            </ul>
+          </li>
           <li><a href="/map">MAP</a></li>
           <li><a class="get-a-quote" href="/login">LOGIN</a></li>
         </ul>
@@ -212,14 +222,29 @@
 
               <div class="accordion-item">
                 <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                    <i class="bi bi-question-circle question-icon"></i>
+                    블랙박스 영상을 통해 검출되는 객체는 무엇인가요?
+                  </button>
+                </h3>
+                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    도로 파손, 도로 분리대 파손, 차선, 횡단보도, 시선 유도봉, 볼라드, 방지턱, 도로글씨, 제설함, 표지판 등을 감지합니다.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
                     <i class="bi bi-question-circle question-icon"></i>
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                    신고한 내용에 대한 처리 과정이 어떻게 되나요?
                   </button>
                 </h3>
                 <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    신고 게시판으로 접수된 안전신고의 처리 기관 지정 및 전달 등의 업무를 진행하고 있습니다. <br>
+                    신고처리 진행 상황, 결과 관련 문의는 관련 처리 기관의 안내된 연락처로 문의하시기 바랍니다.
                   </div>
                 </div>
               </div><!-- # Faq item-->
@@ -228,12 +253,16 @@
                 <h3 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
                     <i class="bi bi-question-circle question-icon"></i>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                    신고 게시판으로 신고하는 대상은 무엇인가요?
                   </button>
                 </h3>
                 <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                   <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                    주요 신고대상은 다음과 같습니다. <br>
+                    (예시) <br>
+                    <li>도로 위 안전 시설물</li>
+                    <li>보행/교통 안전</li>
+                    <li>취약시설물</li>
                   </div>
                 </div>
               </div><!-- # Faq item-->
@@ -242,27 +271,13 @@
                 <h3 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
                     <i class="bi bi-question-circle question-icon"></i>
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                    회원에 반드시 가입해야 신고가 가능한가요?
                   </button>
                 </h3>
                 <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                   <div class="accordion-body">
                     <i class="bi bi-question-circle question-icon"></i>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                  </button>
-                </h3>
-                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                    회원 가입 후 로그인을 통해 신고가 가능합니다. 
                   </div>
                 </div>
               </div><!-- # Faq item-->

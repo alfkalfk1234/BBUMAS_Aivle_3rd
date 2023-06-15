@@ -49,11 +49,22 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">HOME</a></li>
-          <li><a href="/video" class="active">VIDEO</a></li>
-          <li><a href="/post">POST</a></li>
+          <li class="dropdown"><a href="/video" class="active"><span>VIDEO</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/video">블랙박스 영상 업로드하기</a></li>
+              <li><a href="#">결과 확인하기</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="/post"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/post">신고 게시판 목록</a></li>
+              <li><a href="/post/posting">신고하기</a></li>
+            </ul>
+          </li>
           <li><a href="/map">MAP</a></li>
           <li><a class="get-a-quote" href="/login">LOGIN</a></li>
         </ul>
+
       </nav><!-- .navbar -->
 
     </div>
@@ -64,7 +75,7 @@
 
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs">
-        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/traffic_1.jpg');">
+        <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/traffic_1.jpg' %});">
           <div class="container position-relative">
             <div class="row d-flex justify-content-center">
               <div class="col-lg-6 text-center">
