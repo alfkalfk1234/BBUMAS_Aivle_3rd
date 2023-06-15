@@ -30,286 +30,303 @@
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
   
-  <style>
-    .file-label {
-      width: 600px;
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
-      background: var(--color-black);
-      color: #fff;
-      text-align: center;
-      padding: 11px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
 
-    #dropZone {
-      top: 65px;
-      width: 600px;
-      height: 280px;
-      border: 4px dashed #ccc;
-      text-align: center;
-      padding: 10px;
-      padding-top: 100px;
-      border-radius: 6px;
-      margin: 0 auto;
-      position: relative;
-      background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center 140px no-repeat;
-    }
-    
-    #dropZone.highlight {
-      border-color: var(--color-primary);
-    }
-
-    #selectedFile {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-
-    .group-btn {
-      justify-content: space-between;
-      width: 600px; /* 총 너비는 버튼의 너비 합과 마진 값으로 조정 */
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: 10px;
-    }
-
-    .reset-label {
-      width: 75px;
-      height: 100%;
-      background-color: #a9a8a8;
-      color: #fff;
-      text-align: center;
-      padding: 11px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .upload-label {
-      width: 520px;
-      background-color: var(--color-secondary);
-      color: #fff;
-      text-align: center;
-      padding: 11px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .file-label:hover {
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      transition: 0.4s;
-    }
-
-    .reset-label:hover {
-      background: #ccc;
-      color: #fff;
-      transition: 0.4s;
-    }
-
-    .upload-label:hover {
-      background: rgba(14, 29, 52, 0.8);
-      color: #fff;
-      transition: 0.4s;
-    }
-    
-    .highlight {
-      border: 2px dashed red;
-    }
-  </style>
 
 </head>
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header d-flex align-items-center fixed-top">
-      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-  
-        <a href="/" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt=""> -->
-          <h1>Logis</h1>
-        </a>
-  
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a href="/">HOME</a></li>
-            <li><a href="/video" class="active">VIDEO</a></li>
-            <li><a href="/post">POST</a></li>
-            <li><a href="/map">MAP</a></li>
-            <li><a class="get-a-quote" href="get-a-quote.html">LOGIN</a></li>
-          </ul>
-        </nav><!-- .navbar -->
-  
-      </div>
-    </header><!-- End Header -->
-    <!-- End Header -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-    <main id="main">
+      <a href="/" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Logis</h1>
+      </a>
 
-        <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs">
-          <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/traffic_1.jpg' %});">
-            <div class="container position-relative">
-              <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 text-center">
-                  <h2>블랙박스 영상 업로드</h2>
-                  <p><br>불법 주정차 단속 차량의 블랙박스 영상을 통해 파손 물체를 감지합니다.
-                    <br><br>We detect damaged objects through black box video of the vehicle.
-                  </p>
-                </div>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">HOME</a></li>
+          <li><a href="/video" class="active">VIDEO</a></li>
+          <li><a href="/post">POST</a></li>
+          <li><a href="/map">MAP</a></li>
+          <li><a class="get-a-quote" href="get-a-quote.html">LOGIN</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+      <!-- ======= Breadcrumbs ======= -->
+      <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/traffic_1.jpg');">
+          <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+              <div class="col-lg-6 text-center">
+                <h2>블랙박스 영상 업로드</h2>
+                <p><br>불법 주정차 단속 차량의 블랙박스 영상을 통해 파손 물체를 감지합니다.
+                  <br><br>We detect damaged objects through black box video of the vehicle.
+                </p>
               </div>
             </div>
           </div>
-          <nav>
-            <div class="container">
-              <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>Video Upload</li>
-              </ol>
+        </div>
+        <nav>
+          <div class="container">
+            <ol>
+              <li><a href="index.html">Home</a></li>
+              <li>Video Upload</li>
+            </ol>
+          </div>
+        </nav>
+      </div><!-- End Breadcrumbs -->
+  </main>
+
+
+  <label class="select-label" for="fileInput">파일 선택</label>
+  
+  <!-- 드래그 앤 드롭 -->
+  <div id="dropZone">
+    <p>동영상을 이곳에 드래그하여 업로드하세요.</p>
+  </div>
+
+  <!-- 파일 정보 -->
+  <div id="selectedFile">파일 이름: (선택된 파일 없음)</div>
+
+
+  <!-- 파일 선택 버튼 -->
+  <input type="file" id="fileInput" accept="video/*" style="display: none;">
+
+  <!-- 파일 선택 취소 버튼 -->
+  <input type="reset" id="fileReset" accept="video/*" style="display: none;">
+
+  <!-- 파일 업로드 버튼 -->
+  <input type="submit" id="fileUpload" accept="video/*" style="display: none;">
+
+
+  <div class="group-btn">
+    <label class="reset-label" for="fileReset">취소</label>
+    <label class="upload-label" for="fileUpload">업로드</label>
+  </div>
+
+
+  <!-- 개인정보 수집 동의 section -->
+  <div class="table_bbs singo tb_sty03">
+    <!-- <table width="100%" border="1"> -->
+      <tbody>
+        <th>
+          <th scope="row">
+            <label for="C_A_TITLE">개인정보 수집 동의</label>
+          </th>
+          <td>
+            <article class="inputWmd dsp_inblck">
+              <div class="radio">
+                <label for="agreeUseMyInfo1">
+                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
+                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                  <span class="txt">예</span>
+                </label>
+                <label for="agreeUseMyInfo2">
+                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
+                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                  <span class="txt">아니오</span>
+                </label>
+              </div>
+            </article>
+            
+            <!-- 내용보기 가리기 -->
+            <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
+            data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+            
+            <div class="moreView">
+              <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
+                  <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
+                  <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
+                  <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
+                  <ul>
+                      <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
+                      <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
+                      <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
+                  </ul>
+              </article>
             </div>
-          </nav>
-        </div><!-- End Breadcrumbs -->
-    </main>
-
-    <label class="file-label" for="fileInput">파일 선택</label>
-    
-    <div id="dropZone">
-      <p>동영상을 이곳에 드래그하여 업로드하세요.</p>
-    </div>
-
-    <div id="selectedFile">파일 이름: (선택된 파일 없음)</div>
-
-    <!-- 파일 선택 버튼 -->
-    <input type="file" id="fileInput" accept="video/*" style="display: none;">
-    <!-- 파일 선택 취소 버튼 -->
-    <input type="reset" id="fileReset" accept="video/*" style="display: none;">
-    <!-- 파일 업로드 버튼 -->
-    <input type="submit" id="fileUpload" accept="video/*" style="display: none;">
+          </td>
+        </th>
+      </tbody>
+    </table>
+  </div>
 
 
-    <div class="group-btn">
-      <label class="reset-label" for="fileReset">취소</label>
-      <label class="upload-label" for="fileUpload">업로드</label>
-    </div>
+  <script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const selectedFile = document.getElementById('selectedFile');
+    const fileReset = document.getElementById('fileReset');
+    const fileUpload = document.getElementById('fileUpload');
 
-    <th>
-      <th scope="row">개인정보 수집 동의</th>
-      <td>
-        <div class="radio">
-          <label for="agreeUseMyInfo1">
-            <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
-            <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;">
-              <i class="cr-icon fa fa-circle"></i>
-            </span>
-            <span class="txt">예</span>
-          </label>
-          <label for="agreeUseMyInfo2">
-            <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked>
-            <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;">
-              <i class="cr-icon fa fa-circle"></i>
-            </span>
-            <span class="txt">아니오</span>
-          </label>
-        </div>
-        <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson">내용보기  
-          <i class="fa fa-angle-down" aria-hidden="true"></i> 
-        </button>
+    dropZone.addEventListener('dragenter', function(event) {
+      event.preventDefault();
+      dropZone.classList.add('highlight');
+    });
 
-        <button type="button" class="button btnWmd moreBtn on" data-toggle="collapse" data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson">내용닫기  
-          <i class="fa fa-angle-up" aria-hidden="true"></i>
-        </button>
-        <div class="moreView">
-          <article class="moreDoc collapse show" id="singoPerson" style="display: block;">
-              <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
-              <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
-              <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
-              <ul>
-                  <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
-                  <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
-                  <li>다. 안전신문고 정책지원 안전신문고 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
-              </ul>
-              
-          </article>
-        </div>
-      </td>
-    </th>
+    dropZone.addEventListener('dragover', function(event) {
+      event.preventDefault();
+    });
 
-    <script>
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-        const selectedFile = document.getElementById('selectedFile');
-        const fileReset = document.getElementById('fileReset');
-        const fileUpload = document.getElementById('fileUpload');
-    
-        dropZone.addEventListener('dragenter', function(event) {
-          event.preventDefault();
-          dropZone.classList.add('highlight');
-        });
-    
-        dropZone.addEventListener('dragover', function(event) {
-          event.preventDefault();
-        });
-    
-        dropZone.addEventListener('dragleave', function(event) {
-          event.preventDefault();
-          dropZone.classList.remove('highlight');
-        });
-    
-        dropZone.addEventListener('drop', function(event) {
-          event.preventDefault();
-          dropZone.classList.remove('highlight');
-    
-          handleFileUpload(event.dataTransfer.files[0]);
-        });
-    
-        fileInput.addEventListener('change', function(event) {
-          handleFileUpload(event.target.files[0]);
-        });
+    dropZone.addEventListener('dragleave', function(event) {
+      event.preventDefault();
+      dropZone.classList.remove('highlight');
+    });
 
-        fileReset.addEventListener('click', function() {
-          fileInput.value = ''; // 파일 선택 초기화
-          selectedFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
-        });
+    dropZone.addEventListener('drop', function(event) {
+      event.preventDefault();
+      dropZone.classList.remove('highlight');
 
-        function handleFileUpload(file) {
-          if (file && file.type.startsWith('video/')) {
-            const fileName = file.name;
-            const fileSize = formatFileSize(file.size);
-            selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
-            // 동영상 파일 업로드 처리
-            console.log('동영상 파일 업로드:', file);
-          } else {
-            // selectedFile.textContent = '파일명: (유효한 동영상 파일이 아님)';
-            console.log('유효한 동영상 파일이 아닙니다.');
-            alert("파일 형식을 확인해 주세요.");
-          }
+      handleFileUpload(event.dataTransfer.files[0]);
+    });
+
+    fileInput.addEventListener('change', function(event) {
+      handleFileUpload(event.target.files[0]);
+    });
+
+    fileReset.addEventListener('click', function() {
+      fileInput.value = ''; // 파일 선택 초기화
+      selectedFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
+    });
+
+    function handleFileUpload(file) {
+      if (file && file.type.startsWith('video/')) {
+        const fileName = file.name;
+        const fileSize = formatFileSize(file.size);
+        selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
+        // 동영상 파일 업로드 처리
+        console.log('동영상 파일 업로드:', file);
+      } else {
+        // selectedFile.textContent = '파일명: (유효한 동영상 파일이 아님)';
+        console.log('유효한 동영상 파일이 아닙니다.');
+        alert("파일 형식을 확인해 주세요.");
+      }
+    }
+
+    function formatFileSize(size) {
+        if (size === 0) {
+          return '0 Bytes';
         }
+        const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const k = 1024;
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
+      }
 
-        function formatFileSize(size) {
-            if (size === 0) {
-              return '0 Bytes';
-            }
-            const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            const k = 1024;
-            const i = Math.floor(Math.log(size) / Math.log(k));
-            return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
-          }
+    /* $(function(){
+      $("#cancelButton").click(function(){
+          alert("업로드가 취소되었습니다.")
+        })
+    }) */
 
-        /* $(function(){
-          $("#cancelButton").click(function(){
-              alert("업로드가 취소되었습니다.")
-            })
-        }) */
+    
+    // 개인정보 수집 동의 내용보기 버튼
+    function toggleContent() {
+      var singoPerson = document.getElementById("singoPerson");
+      var button = document.querySelector(".moreBtn");
+  
+      if (singoPerson.style.display === "none") {
+        // 숨겨진 상태일 때 보이도록 변경
+        singoPerson.style.display = "block";
+        button.classList.add("on"); // 버튼 스타일 변경
+      } else {
+        // 보여지는 상태일 때 숨기도록 변경
+        singoPerson.style.display = "none";
+        button.classList.remove("on"); // 버튼 스타일 변경
+      }
+    }
+    
+  </script>
 
-      </script>
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>Logis</span>
+          </a>
+          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            A108 Adam Street <br>
+            New York, NY 535022<br>
+            United States <br><br>
+            <strong>Phone:</strong> +1 5589 55488 55<br>
+            <strong>Email:</strong> info@example.com<br>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
 
   <!-- Vendor JS Files -->
   <script src="{%static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
