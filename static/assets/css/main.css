@@ -345,6 +345,24 @@ section {
   inset: 0;
 }
 
+/* short */
+.breadcrumbs .short-page-header {
+  padding: 100px 0 0 0;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.breadcrumbs .short-page-header:before {
+  content: "";
+  background-color: rgba(14, 29, 52, 0.8);
+  position: absolute;
+  inset: 0;
+}
+/* short end */
+
+
 .breadcrumbs .page-header h2 {
   font-size: 56px;
   font-weight: 500;
