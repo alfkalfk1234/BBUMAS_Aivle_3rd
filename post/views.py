@@ -5,3 +5,6 @@ def index(request):
 
 def posting(request):
     return render(request, 'post/service-details.html')
+
+def faq(request):
+    return render(request, 'post/faq.html')
