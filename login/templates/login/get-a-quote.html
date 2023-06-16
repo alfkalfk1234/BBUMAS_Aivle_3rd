@@ -55,7 +55,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/index">HOME</a></li>
+          <li><a href="/">HOME</a></li>
           <li class="dropdown"><a href="/video"><span>VIDEO</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/video">블랙박스 영상 업로드하기</a></li>
@@ -106,61 +106,19 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row g-0">
-
-          <div class="col-lg-5 quote-bg" style="background-image: url({%static 'assets/img/quote-bg.jpg' %});"></div>
-
-          <div class="col-lg-7">
-            <form action="forms/quote.php" method="post" class="php-email-form">
-              <h3>Get a quote</h3>
-              <p>Vel nobis odio laboriosam et hic voluptatem. Inventore vitae totam. Rerum repellendus enim linead sero park flows.</p>
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="departure" class="form-control" placeholder="City of Departure" required>
-                </div>
-
-                <div class="col-md-6">
-                  <input type="text" name="delivery" class="form-control" placeholder="Delivery City" required>
-                </div>
-
-                <div class="col-md-6">
-                  <input type="text" name="weight" class="form-control" placeholder="Total Weight (kg)" required>
-                </div>
-
-                <div class="col-md-6">
-                  <input type="text" name="dimensions" class="form-control" placeholder="Dimensions (cm)" required>
-                </div>
-
-                <div class="col-lg-12">
-                  <h4>Your Personal Details</h4>
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" name="name" class="form-control" placeholder="Name" required>
-                </div>
-
-                <div class="col-md-12 ">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required>
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="phone" placeholder="Phone" required>
-                </div>
-
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your quote request has been sent successfully. Thank you!</div>
-
-                  <button type="submit">Get a quote</button>
-                </div>
-
-              </div>
-            </form>
+          <div class="col-lg-7 text-center">
+            <div class="login-wrapper">
+              <h2>Login</h2>
+              <form method="post" action="서버url" id="login-form">
+                  <input type="text" name="userName" placeholder="ID">
+                  <input type="password" name="userPassword" placeholder="Password">
+                  <label for="remember-check">
+                      <input type="checkbox" id="remember-check"> 아이디 저장하기
+                  </label>
+                  <input type="submit" value="Login">
+                  <label class="join-label" href="#">Join Us</label>
+              </form>
+            </div>
           </div><!-- End Quote Form -->
 
         </div>
