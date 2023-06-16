@@ -70,7 +70,7 @@ h6 {
 }
 .file-label {
   margin-top: 30px;
-  background-color: rgba(13, 66, 255, 0.8);
+  background-color: var(--color-black);
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -78,6 +78,13 @@ h6 {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.file-label:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  transition: 0.4s;
+}
+
 .file {
   display: none;
 }
@@ -118,6 +125,39 @@ h6 {
   width: 100%;
   height: 100%;
 }
+
+.cancel-label {
+  background-color: #a9a8a8;
+  color: #fff;
+  text-align: center;
+  padding: 11px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.cancel-label:hover {
+  background: #ccc;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.btn-sub {
+  width: 20%;
+  background-color: var(--color-black);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-sub:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  transition: 0.4s;
+}
+
 
 
 /*-----------------------------------------------------------
@@ -162,6 +202,54 @@ text-align: center;
 .separator2 {
   border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
   margin: 10px 0; /* 선 위아래에 여백을 설정합니다 */
+}
+
+.separator3 {
+  width: 20%;
+  background-color: var(--color-black);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.separator3:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  transition: 0.4s;
+}
+
+.psot-table {
+  margin-left : auto;
+  margin-right : auto;
+  border-style:solid;
+  border-width: 3px thin
+}
+
+.post-btn {
+  color: white;
+}
+
+/*--------------------------------------------
+faq페이지
+------------------------------------------*/
+.notice {
+  font-size: 29px;
+  color: #001973;
+  font-weight: 700;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+  line-height: 1.2;
+}
+
+.faq-line {
+  margin-left : auto;
+  margin-right : auto;
+  width : 50%;
+  border : 0px;
+  border-top: 3px solid rgba(13, 66, 255, 0.8);
 }
 
 

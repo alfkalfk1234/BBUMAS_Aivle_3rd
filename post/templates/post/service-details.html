@@ -66,6 +66,7 @@
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
               <li><a href="/post/posting">신고하기</a></li>
+              <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
           <li><a href="/map">MAP</a></li>
@@ -160,7 +161,6 @@
 
             <br /><br />
             <img id="preview" />
-            <br>
             <output id="output"></output>
             <div class="container">
               <form action="write.jsp" method="post">
@@ -170,7 +170,56 @@
                 name="content" placeholder="신고할 내용을 사진 첨부와 함께 작성해주세요"></textarea>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-default">등록</button>
+                <div class="table_bbs singo tb_sty03">
+                  <!-- <table width="100%" border="1"> -->
+                    <tbody>
+                      <th>
+                        <th scope="row">
+                          <label for="C_A_TITLE">개인정보 수집 동의</label>
+                        </th>
+                        <td>
+                          <article class="inputWmd dsp_inblck" style='float:right;'>
+                            <div class="radio">
+                              <label for="agreeUseMyInfo1" style="margin-right:10px;">
+                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
+                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                <span class="txt">예</span>
+                              </label>
+                              <label for="agreeUseMyInfo2">
+                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
+                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                <span class="txt">아니오</span>
+                              </label>
+                            </div>
+                          </article>
+                          
+                          <!-- 내용보기 가리기 -->
+                          <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
+                          data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                          
+                          <div class="moreView">
+                            <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
+                                <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
+                                <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
+                                <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
+                                <ul>
+                                    <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
+                                    <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
+                                    <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
+                                </ul>
+                            </article>
+                          </div>
+                        </td>
+                      </th>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="btn-sub" style='float:right;' style="margin-right:10px;">
+                  <button type="submit" class="btn btn-default" style="color:white">등록</button>
+                </div>
+                <div class="btn-sub" style='float:right;' style="margin-right:10px;">
+                  <button type="button" class="btn btn-default" style="color:white" href="/post">취소</button>
+                </div>
               </form>
             </div>
             
@@ -313,8 +362,23 @@
         const i = Math.floor(Math.log(size) / Math.log(k));
         return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
       }
-    
 
+    // 개인정보 수집 동의 내용보기 버튼
+    function toggleContent() {
+      var singoPerson = document.getElementById("singoPerson");
+      var button = document.querySelector(".moreBtn");
+  
+      if (singoPerson.style.display === "none") {
+        // 숨겨진 상태일 때 보이도록 변경
+        singoPerson.style.display = "block";
+        button.classList.add("on"); // 버튼 스타일 변경
+      } else {
+        // 보여지는 상태일 때 숨기도록 변경
+        singoPerson.style.display = "none";
+        button.classList.remove("on"); // 버튼 스타일 변경
+      }
+    }
+    
   </script>
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
