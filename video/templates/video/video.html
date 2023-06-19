@@ -105,14 +105,22 @@
     <p>압축 파일을 이곳에 드래그하여 업로드하세요.</p>
   </div>
 
-  <!-- 파일 선택 버튼 -->
-  <input type="file" id="fileInput" style="display: none;">
+  <!-- upload_video.html -->
 
-  <!-- 파일 선택 취소 버튼 -->
-  <input type="reset" id="fileReset" style="display: none;">
+  <form method="POST" action="{% url 'video:video_upload' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- 파일 선택 버튼 -->
+    <input type="file" name="video_file" id="fileInput" style="display: none;">
 
-  <!-- 파일 업로드 버튼 -->
-  <input type="submit" id="fileUpload" style="display: none;">
+    <!-- 파일 선택 취소 버튼 -->
+    <input type="reset" id="fileReset" style="display: none;">
+
+    <!-- 파일 업로드 버튼 -->
+    <input type="submit" id="fileUpload" value="제출" style="display: none;">
+  </form>
+
+
+  
 
 
   <div class="group-btn">
@@ -220,11 +228,15 @@
       if (src.toLowerCase() == "zip") {
         selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
         // 동영상 파일 업로드 처리
-        console.log('동영상 파일 업로드:', file);
+        console.log('압축 파일 업로드:', file);
+       } else if (src.toLowerCase() == "avi" || src.toLowerCase() == "mp4" || src.toLowerCase() == "jpg" || src.toLowerCase() == "png") {
+        selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
+        // 동영상 파일 업로드 처리
+        console.log('영상 파일 업로드:', file);
        } else {
         // selectedFile.textContent = '파일명: (유효한 동영상 파일이 아님)';
         console.log('유효한 동영상 파일이 아닙니다.');
-        alert("압축 파일을 첨부하시오.");
+        alert("압축 파일이나 동영상 파일을 첨부하세요.");
       }
     }
 
