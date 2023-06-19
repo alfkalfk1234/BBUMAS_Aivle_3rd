@@ -94,17 +94,16 @@
       </div><!-- End Breadcrumbs -->
   </main>
 
-
-  <label class="select-label" for="fileInput">파일 선택</label>
   
-  <!-- 드래그 앤 드롭 -->
-  <div id="dropZone">
-    <p>동영상을 이곳에 드래그하여 업로드하세요.</p>
+  <div class="group-select">
+    <label class="select-label" for="fileInput">파일 선택</label>
+    <div id="selectedFile">파일 이름: (선택된 파일 없음)</div>
   </div>
 
-  <!-- 파일 정보 -->
-  <div id="selectedFile">파일 이름: (선택된 파일 없음)</div>
-
+  <!-- 드래그 앤 드롭 -->
+  <div id="dropZone">
+    <p>압축 파일을 이곳에 드래그하여 업로드하세요.</p>
+  </div>
 
   <!-- 파일 선택 버튼 -->
   <input type="file" id="fileInput" style="display: none;">
