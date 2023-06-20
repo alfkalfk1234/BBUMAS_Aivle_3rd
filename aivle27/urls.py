@@ -6,11 +6,11 @@ def index(request):
     return render(request,'index.html')
 
 urlpatterns = [
-    path('', index),
+    path('', index, name = 'main'),
     path("admin/", admin.site.urls),
     path('video/', include('video.urls')),
     path('post/', include('post.urls')),
     path('map/', include('map.urls')),
-    path('login/', include('login.urls')),
+    path('login/', include('login.urls'),name='login'),
     path('join/', include('join.urls')),
 ]
