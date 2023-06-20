@@ -68,12 +68,23 @@ WSGI_APPLICATION = "aivle27.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'aivle27',
+        'USER': 'admin',
+        'PASSWORD': 'aivle202303',
+        'HOST': 'database-big1.cvafnevemvap.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',  # MySQL의 기본 포트는 3306입니다.
     }
 }
 
+AUTH_USER_MODEL = 'join.CustomUser'
+COGNITO_USER_POOL_ID = 'ap-northeast-2_WlSheU2sW'
+COGNITO_CLIENT_ID = '3hbfsmrihu7c3fq4krfii00e7t'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

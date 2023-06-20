@@ -8,8 +8,8 @@ var pw2 = document.querySelector('#pswd2');
 var pwImg2 = document.querySelector('#pswd2_img1');
 var pwMsgArea = document.querySelector('.int_pass');
 var userName = document.querySelector('#name');
-var email = document.querySelector('#username');
-var mobile = document.querySelector('#mobile');
+var email = document.querySelector('#email');
+var mobile = document.querySelector('#phone');
 var error = document.querySelectorAll('.error_next_box');
 
 var idPattern = /[a-zA-Z0-9_-]{5,20}/;
@@ -126,24 +126,25 @@ function checkPhoneNum() {
 }
 
 
-document.getElementById("btnJoin").addEventListener("click", function() {
-    var id = document.getElementById("id").value;
-    var pswd1 = document.getElementById("pswd1").value;
-    var pswd2 = document.getElementById("pswd2").value;
-    var name = document.getElementById("name").value;
-    var username = document.getElementById("username").value;
-    var mobile = document.getElementById("mobile").value;
+document.querySelector('form').addEventListener("submit", function(event) {
+    event.preventDefault();
+    var id = document.querySelector("#id").value;
+    var pswd1 = document.querySelector("#pswd1").value;
+    var pswd2 = document.querySelector("#pswd2").value;
+    var name = document.querySelector("#name").value;
+    var email = document.querySelector("#email").value;
+    var mobile = document.querySelector("#phone").value;
 
-    if (id === "" || pswd1 === "" || pswd2 === "" || name === "" || username === "" || mobile === "") {
+    if (id === "" || pswd1 === "" || pswd2 === "" || name === "" || email === "" || mobile === "") {
         alert("필수 정보를 모두 입력해주세요.");
+        event.preventDefault(); // 폼 제출을 막습니다.
     }
-    
     else if (pswd1 !== pswd2) {
         alert("비밀번호를 확인해주세요.");
+        event.preventDefault(); // 폼 제출을 막습니다.
     }
-    
     else {
         alert("가입이 완료되었습니다.");
-        window.location.href = "/login";
+        document.querySelector('form').submit();
     }
 });
