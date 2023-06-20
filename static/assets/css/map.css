@@ -1,0 +1,60 @@
+#map-container {
+  display: flex;
+}
+
+#damage-table {
+  width: 70%;
+  margin-left: 20px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+#damage-table caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+
+#damage-table th,
+#damage-table td {
+  border: 3px solid #fff;
+  padding: 8px;
+  width: 25%;
+  font-size: 0.8em;
+}
+
+#damage-table th {
+  border: 1px solid #fff;
+}
+
+#damage-table tbody tr {
+  background-color: #fff; /* 수정된 부분 */
+}
+
+#damage-table tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#damage-table tbody tr:hover {
+  background-color: #eef4fb;
+}
+
+.checkbox-cell {
+  width: 5%;
+}
+
+.checkbox-cell2 {
+  width: 5%;
+  border: 0px solid #fff;
+}
+
+.button-group {
+  margin-top: 10px;
+}
+
+.button-group button {
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+  
