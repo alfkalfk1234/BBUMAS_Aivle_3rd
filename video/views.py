@@ -21,6 +21,9 @@ def analyze_video(video_path):
 def index(request):
     return render(request, 'video/video.html')
 
+def videoresult(request):
+    return render(request, 'video/videoresult.html')
+
 def video_upload(request):
     if request.method == 'POST' and request.FILES['video_file']:
         video_file = request.FILES['video_file']
