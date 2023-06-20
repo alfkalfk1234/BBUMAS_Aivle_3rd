@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Logis Bootstrap Template - Contact</title>
+  <title>Video Result</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -56,20 +56,20 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/">HOME</a></li>
-          <li><a href="/video">VIDEO</a></li>
-          <li class="dropdown"><a href="/post"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="/">Home</a></li>
+          <li><a href="/video">Video</a></li>
+          <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
               <li><a href="post/posting" class="active">신고하기</a></li>
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
-          <li><a href="/map">MAP</a></li>
+          <li><a href="/map">Map</a></li>
           {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}" class="get-a-quote">LOGOUT</a></li>
+            <li><a href="{% url 'logout' %}" class="get-a-quote">Logout</a></li>
           {% else %}
-            <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+            <li><a class="get-a-quote" href="/login">Login</a></li>
           {% endif %}
         </ul>
       </nav><!-- .navbar -->
