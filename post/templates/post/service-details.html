@@ -340,32 +340,38 @@
   
       console.log('이미지 파일 업로드:', file);
       });
-    
+      let warningDisplayed = false;
+
       function handleFileUpload(file) {
-      if (file) {
-        const fileName = file.name;
-        const fileSize = formatFileSize(file.size);
-        selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
-        
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var imageData = e.target.result;
-          var exifData = EXIF.readFromBinaryFile(imageData);
+        if (file) {
+          const fileName = file.name;
+          const fileSize = formatFileSize(file.size);
+          selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
 
-          if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
-            var latitude = calculateCoordinate(exifData.GPSLatitude);
-            var longitude = calculateCoordinate(exifData.GPSLongitude);
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var imageData = e.target.result;
+            var exifData = EXIF.readFromBinaryFile(imageData);
 
-            var gpsInfo = latitude + ", " + longitude;
-            console.log("사진의 GPS 정보:", gpsInfo);
-          } else {
-            alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
-          }
-        };
+            if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
+              var latitude = calculateCoordinate(exifData.GPSLatitude);
+              var longitude = calculateCoordinate(exifData.GPSLongitude);
 
-        reader.readAsArrayBuffer(file);
+              var gpsInfo = latitude + ", " + longitude;
+              console.log("사진의 GPS 정보:", gpsInfo);
+
+              warningDisplayed = false; // Reset the warningDisplayed variable to false
+            } else {
+              if (!warningDisplayed) {
+                alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+                warningDisplayed = true;
+              }
+            }
+          };
+
+          reader.readAsArrayBuffer(file);
+        }
       }
-    }
     
     function formatFileSize(size) {
       if (size === 0) {
@@ -393,8 +399,12 @@
 
           var gpsInfo = latitude + ", " + longitude;
           console.log("사진의 GPS 정보:", gpsInfo);
+          warningDisplayed = false;
         } else {
-          alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+          if (!warningDisplayed) {
+            alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+            warningDisplayed = true;
+          }
         }
       };
 
