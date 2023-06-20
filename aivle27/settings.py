@@ -85,7 +85,7 @@ COGNITO_CLIENT_ID = '3hbfsmrihu7c3fq4krfii00e7t'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
-
+LOGOUT_REDIRECT_URL = '/'
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

@@ -65,7 +65,7 @@
             </ul>
           </li>
           <li><a href="/map">Map</a></li>
-          <li><a class="get-a-quote" href="/login" class="active">Login</a></li>
+          {% comment %} <li><a class="get-a-quote" href="/login" class="active">LOGIN</a></li> {% endcomment %}
         </ul>
       </nav><!-- .navbar -->
 
@@ -99,16 +99,25 @@
     <!-- ======= Get a Quote Section ======= -->
     <div class="login-wrapper">
       <h2>Login</h2>
-      <form method="post" action="서버url" id="login-form">
-          <input type="text" name="userName" placeholder="ID">
-          <input type="password" name="userPassword" placeholder="Password">
-          <label for="remember-check">
-              <input type="checkbox" id="remember-check"> 아이디 저장하기
-          </label>
-          <input type="submit" value="Login">
-          <button class="join-label">
-            <a href="/join" style="color: white">Join Us</a>
-          </button>
+      <form method="post" id="login-form">
+        {% csrf_token %}
+        <!-- 수정된 부분: name 속성 값 변경 -->
+        <input type="text" name="username" placeholder="ID">
+        <input type="password" name="password" placeholder="Password">
+        <label for="remember-check">
+            <input type="checkbox" id="remember-check"> 아이디 저장하기
+        </label>
+        <input type="submit" value="Login">
+        <button class="join-label">
+          <a href="/join" style="color: white">Join Us</a>
+        </button>
+        {% if form.non_field_errors %}
+          <!-- 오류 메시지에 id 부여 -->
+          <div id="error-message" class="alert alert-danger">
+              {{ form.non_field_errors }}
+          </div>
+        {% endif %} 
+
       </form>
     </div>
 
@@ -199,7 +208,17 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
-
+  <script type="text/javascript">
+    window.onload = function() {
+      var error_message = document.getElementById('error-message');
+      if (error_message) {
+        setTimeout(function() {
+          error_message.style.display = 'none';
+        }, 3000);  // 3초 후에 사라짐
+      }
+    };
+  </script>
+  
 </body>
 
 </html>

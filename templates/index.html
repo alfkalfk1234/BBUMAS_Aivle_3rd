@@ -65,7 +65,11 @@
             </ul>
           </li>
           <li><a href="/map">Map</a></li>
-          <li><a class="get-a-quote" href="/login">Login</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="get-a-quote">Logout</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">Login</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
 
