@@ -48,7 +48,7 @@
       <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Logis</h1>
+        <h1>BBUMAS</h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -57,15 +57,19 @@
         <ul>
           <li><a href="/">HOME</a></li>
           <li><a href="/video">VIDEO</a></li>
-          <li class="dropdown"><a href="/post" class="active"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="/post"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="/post">신고 게시판 목록</a></li>
-              <li><a href="/post/posting">신고하기</a></li>
+              <li><a href="/post" class="active">신고 게시판 목록</a></li>
+              <li><a href="post/posting">신고하기</a></li>
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
           <li><a href="/map">MAP</a></li>
-          <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="get-a-quote">LOGOUT</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
 

@@ -48,7 +48,7 @@
       <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Logis</h1>
+        <h1>BBUMAS</h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -65,7 +65,11 @@
             </ul>
           </li>
           <li><a href="/map">MAP</a></li>
-          <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="get-a-quote">LOGOUT</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
 
