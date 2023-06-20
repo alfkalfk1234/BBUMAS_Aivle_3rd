@@ -157,7 +157,7 @@
               <img src="" alt="미리보기 이미지" class="preview" id="preview" />
             </div>
           </div>
-          <br />
+          <br/>
 
           <output id="output"></output>
             <div class="container">
@@ -238,7 +238,7 @@
     </section><!-- End Service Details Section -->
 
   </main><!-- End #main -->
-
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
   <script>
     function DropFile(dropAreaId, fileListId) {
       let dropArea = document.getElementById(dropAreaId);
@@ -290,6 +290,7 @@
           let img = dropArea.getElementsByClassName("preview")[0];
           img.src = reader.result;
           img.style.display = "block";
+          handleFileUpload(file);
         };
       }
     
@@ -329,24 +330,73 @@
       console.log('이미지 파일 업로드:', file);
       });
     
-     
-    function handleFileUpload(file) {
+      function handleFileUpload(file) {
       if (file) {
         const fileName = file.name;
         const fileSize = formatFileSize(file.size);
         selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
-        }
+        
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var imageData = e.target.result;
+          var exifData = EXIF.readFromBinaryFile(imageData);
+
+          if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
+            var latitude = calculateCoordinate(exifData.GPSLatitude);
+            var longitude = calculateCoordinate(exifData.GPSLongitude);
+
+            var gpsInfo = latitude + ", " + longitude;
+            console.log("사진의 GPS 정보:", gpsInfo);
+          } else {
+            alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
     }
     
     function formatFileSize(size) {
       if (size === 0) {
         return '0 Bytes';
       }
-        const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        const k = 1024;
-        const i = Math.floor(Math.log(size) / Math.log(k));
-        return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
-      }
+      const units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      const k = 1024;
+      const i = Math.floor(Math.log(size) / Math.log(k));
+      return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
+    }
+    
+    var fileInput = document.getElementById('photo-upload');
+
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var imageData = e.target.result;
+        var exifData = EXIF.readFromBinaryFile(imageData);
+
+        if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
+          var latitude = calculateCoordinate(exifData.GPSLatitude);
+          var longitude = calculateCoordinate(exifData.GPSLongitude);
+
+          var gpsInfo = latitude + ", " + longitude;
+          console.log("사진의 GPS 정보:", gpsInfo);
+        } else {
+          alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+        }
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
+
+    function calculateCoordinate(coordinates) {
+      var degree = coordinates[0];
+      var minute = coordinates[1];
+      var second = coordinates[2];
+      var coordinate = ((((degree * 60) + minute) * 60) + second) / 60 / 60;
+      return parseFloat(coordinate);
+    }
 
     // 개인정보 수집 동의 내용보기 버튼
     function toggleContent() {
