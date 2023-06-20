@@ -160,7 +160,7 @@
             <div id="drop-file" class="drag-file">
               <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
               <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
-              <img src="" alt="미리보기 이미지" class="preview" id="preview" />
+              <img src="" alt="미리보기 이미지" class="preview" id="preview">
             </div>
           </div>
           </br>
@@ -332,6 +332,9 @@
     fileReset.addEventListener('click', function() {
       chooseFile.value = ''; // 파일 선택 초기화
       dropfile.value='';
+      preview.src = '';
+      preview.style.display = 'none';
+      fileReset.style.display = 'none';
         
       selectFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
   
@@ -422,12 +425,6 @@
         }
       }
 
-    fileReset.addEventListener('click', function() {
-      chooseFile.value = '';
-      preview.src = '';
-      preview.style.display = 'none';
-      fileReset.style.display = 'none';
-    });
     
   </script>
 
