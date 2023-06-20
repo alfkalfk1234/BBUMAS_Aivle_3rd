@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Logis Bootstrap Template - Service Details</title>
+  <title>신고 게시글 작성</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -48,24 +48,24 @@
       <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Logis</h1>
+        <h1>BBUMAS</h1>
       </a>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/">HOME</a></li>
-          <li><a href="/video">VIDEO</a></li>
-          <li class="dropdown"><a href="/post" class="active"><span>POST</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="/">Home</a></li>
+          <li><a href="/video">Video</a></li>
+          <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
               <li><a href="/post/posting">신고하기</a></li>
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
-          <li><a href="/map">MAP</a></li>
-          <li><a class="get-a-quote" href="/login">LOGIN</a></li>
+          <li><a href="/map">Map</a></li>
+          <li><a class="get-a-quote" href="/login">Login</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -126,12 +126,12 @@
                 <option>가드레일</option>
               </select>
               <input type="date"
-                       id="date"
-                       max="2023-12-31"
+                       id="date">
+                       {% comment %} max="2023-12-31"
                        min="2023-06-05"
-                       value="2023-06-05">
+                       value="2023-06-05"> {% endcomment %}
             </form>
-          </div>
+          {% comment %} </div> {% endcomment %}
           <br>
 
           <div class="title">
@@ -149,70 +149,71 @@
             <input type="reset" id="fileReset" style="display: none;"> 
             <label class="reset-label" for="fileReset">취소</label>
           </div>
+
           <br>
           <div class="upload-box">
             <div id="drop-file" class="drag-file">
               <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-              <p class="message">파일을 선택하거나 드래그 해서 업로드 해주세요.</p>
+              <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
               <img src="" alt="미리보기 이미지" class="preview" id="preview" />
             </div>
           </div>
-          <br/>
+          </br>
 
           <output id="output"></output>
             <div class="container">
               <form action="write.jsp" method="post">
                 <div class="form-group">
-                  <label class="te" for="content">내용</label>
+                  <label class="te" for="content">신고 내용</label>
                   <textarea class="form-text" rows="5" id="content"
-                    name="content" placeholder="신고할 내용을 사진 첨부와 함께 작성해주세요"></textarea>
+                    name="content" placeholder="신고할 내용을 작성해주세요."></textarea>
                 </div>
                 <br>
-                <div class="table_bbs">
-                  <!-- <table width="100%" border="1"> -->
-                    <tbody>
-                      <th>
-                        <th scope="row">
-                          <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
-                        </th>
-                        <td>
-                          <article class="dsp_inblck" style='float:right; margin-right: 15%'>
-                            <div class="radio" >
-                              <label for="agreeUseMyInfo1">
-                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
-                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                <span class="txt">예</span>
-                              </label>
-                              <label for="agreeUseMyInfo2">
-                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
-                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                <span class="txt">아니오</span>
-                              </label>
-                            </div>
-                          </article>
-                          
-                          <!-- 내용보기 가리기 -->
-                          <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
-                          data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                          
-                          <div class="moreView">
-                            <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
-                                <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
-                                <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
-                                <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
-                                <ul>
-                                    <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
-                                    <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
-                                    <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
-                                </ul>
+                  <div class="table_bbs">
+                    <!-- <table width="100%" border="1"> -->
+                      <tbody>
+                        <th>
+                          <th scope="row">
+                            <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
+                          </th>
+                          <td>
+                            <article class="dsp_inblck" style='float:right; margin-right: 15%'>
+                              <div class="radio" >
+                                <label for="agreeUseMyInfo1">
+                                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
+                                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                  <span class="txt">예</span>
+                                </label>
+                                <label for="agreeUseMyInfo2">
+                                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
+                                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                  <span class="txt">아니오</span>
+                                </label>
+                              </div>
                             </article>
-                          </div>
-                        </td>
-                      </th>
-                    </tbody>
-                  </table>
-                </div>
-                <br>
+                            
+                            <!-- 내용보기 가리기 -->
+                            <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
+                            data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                            
+                            <div class="moreView">
+                              <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
+                                  <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
+                                  <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
+                                  <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
+                                  <ul>
+                                      <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
+                                      <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
+                                      <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
+                                  </ul>
+                              </article>
+                            </div>
+                          </td>
+                        </th>
+                      </tbody>
+                    {% comment %} </table> {% endcomment %}
+                  </div>
+                </br>
                 <div class="btn-sub" style='float:right;'>
                   <button type="submit" class="btn-s" style="color:white">등록</button>
                   <button type="button" class="btn-btn" style="color:white"><a href="/post" style="color:white">취소</a></button>
@@ -238,6 +239,8 @@
     </section><!-- End Service Details Section -->
 
   </main><!-- End #main -->
+
+  
   <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
   <script>
     function DropFile(dropAreaId, fileListId) {
