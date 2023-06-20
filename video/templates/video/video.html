@@ -201,8 +201,11 @@
 
         // 동영상 파일 업로드 처리
         console.log('압축 파일 업로드:', file);
+
+        // 테스트용!!!!!!!!!!!!!!!!!!!!!!!! 추후 avi 파일을 제외한 나머지는 삭제할 것임
        } else if (src.toLowerCase() == "avi" || src.toLowerCase() == "mp4" || src.toLowerCase() == "jpg" || src.toLowerCase() == "png") {
-        selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
+        filename.textContent = fileName;
+        filesize.textContent = fileSize;
         // 동영상 파일 업로드 처리
         console.log('영상 파일 업로드:', file);
        } else {

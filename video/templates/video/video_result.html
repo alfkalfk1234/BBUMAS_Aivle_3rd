@@ -1,3 +1,491 @@
-<!-- video_result.html -->
-<h1>YOLOv8 Analysis Result</h1>
-<p>{{ result }}</p>
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Video Result</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{%static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{%static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/css/map.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Logis
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== hi --> 
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>BBUMAS</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/video">Video</a></li>
+          <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/post">신고 게시판 목록</a></li>
+              <li><a href="post/posting" class="active">신고하기</a></li>
+              <li><a href="/post/faq">FAQ</a></li>
+            </ul>
+          </li>
+          <li><a href="/map">Map</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="get-a-quote">Logout</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="short-page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/page-header.jpg' %});">
+        <div class="container position-relative">
+
+        </div>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="container">
+          <div class="row gy-4 d-flex justify-content-between">
+            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+              <br>
+              <!-- <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p> -->
+    
+              <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+                <input type="text" class="form-control" placeholder="점검이 필요한 도시를 검색해보세요.">
+                <button type="submit" class="btn btn-primary">Search</button>
+              </form>
+    
+              <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
+    
+                <div class="col-lg-3 col-6">
+                  <div class="stats-item text-center w-100 h-100">
+                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>파손 검출량</p>
+                  </div>
+                </div><!-- End Stats Item -->
+    
+                <div class="col-lg-3 col-6">
+                  <div class="stats-item text-center w-100 h-100">
+                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>신고 건수</p>
+                  </div>
+                </div><!-- End Stats Item -->
+    
+                <div class="col-lg-3 col-6">
+                  <div class="stats-item text-center w-100 h-100">
+                    <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>누적 처리 건수</p>
+                  </div>
+                </div><!-- End Stats Item -->
+    
+                <div class="col-lg-3 col-6">
+                  <div class="stats-item text-center w-100 h-100">
+                    <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>운행 차량</p>
+                  </div>
+                </div><!-- End Stats Item -->
+    
+              </div>
+            </div>
+    
+            <!--<div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+              <img src="assets/img/autonomous-car.png" class="img-fluid mb-3 mb-lg-0" alt="">
+            </div>-->
+    
+          </div>
+        </div>
+
+        <div>
+          <div id="map" style="width: 50%; height: 600px; float: left;"></div>
+          <div style="width: 50%; height: 600px; overflow-y: auto;">
+            <form>
+              <table id="damage-table">
+                <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
+                <thead>
+                  <tr>
+                    <th class="checkbox-cell"></th>
+                    <th>시간</th>
+                    <th>위치</th>
+                    <th>파손 내용</th>
+                    <th>관련 부서</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>     
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>
+                  <tr>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>9:00 AM</td>
+                    <td>도로 A</td>
+                    <td>포트홀 발생</td>
+                    <td>도로 관리팀</td>
+                  </tr>         
+                  <!-- 다른 행들도 동일한 형식으로 추가 -->
+                </tbody>
+              </table>
+            </form>
+          </div>
+          <div class="button-group">
+            <button type="button">저장</button>
+            <button type="button">취소</button>
+          </div>
+        </div>
+        
+          
+          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d"></script>
+          <!--<iframe style="border:0; width: 100%; height: 340px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>-->
+          <script>
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = { 
+                    center: new kakao.maps.LatLng(36.34892564237924, 127.38488260807728), // 지도의 중심좌표
+                    level: 8 // 지도의 확대 레벨
+                };
+            
+            // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+              var map = new kakao.maps.Map(mapContainer, mapOption); 
+            
+              // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+              var positions = [
+                  {
+                      content: '<div>시선유도봉</div>', 
+                      latlng: new kakao.maps.LatLng(36.300411, 127.3410807)
+                  },
+                  {
+                      content: '<div>포트홀</div>', 
+                      latlng: new kakao.maps.LatLng(36.3000163, 127.3407064)
+                  },
+                  {
+                      content: '<div>볼라드</div>', 
+                      latlng: new kakao.maps.LatLng(36.34908411417334, 127.3860419654625)
+                  },
+                  {
+                      content: '<div>포트홀</div>', 
+                      latlng: new kakao.maps.LatLng(36.3486357131836, 127.3797344527189)
+                  },
+                  {
+                      content: '<div>차선지워짐</div>', 
+                      latlng: new kakao.maps.LatLng(36.346674819178205, 127.38422542062516)
+                  },
+                  {
+                      content: '<div>제설함</div>', 
+                      latlng: new kakao.maps.LatLng(36.35967364545341, 127.37448462778818)
+                  },
+                  {
+                      content: '<div>도로분리대</div>', 
+                      latlng: new kakao.maps.LatLng(36.36801952029056, 127.37987319665282)
+                  },
+                  
+              ];
+            // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
+              var infowindowImage = new kakao.maps.InfoWindow({
+                removable: true // 인포윈도우를 닫을 수 있도록 설정합니다
+              });
+            
+              for (var i = 0; i < positions.length; i++) {
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng // 마커의 위치
+                });
+            
+                // 마커에 표시할 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: positions[i].content // 인포윈도우에 표시할 내용
+                });
+            
+                // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+                kakao.maps.event.addListener(marker, 'click', handleClickMarker(marker, '/static/images/aivle.png'));
+                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+              }
+            
+            // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+              function makeOverListener(map, marker, infowindow) {
+                return function() {
+                    infowindow.open(map, marker);
+                };
+              } 
+            
+            // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+              function makeOutListener(infowindow) {
+                return function() {
+                    infowindow.close();
+                };
+              }
+            
+              function handleClickMarker(marker, imageSrc) {
+                return function() {
+                    var content =
+                        '<div style="padding:5px;">' +
+                        '<img src="' + imageSrc + '" width="200" height="150">' +
+                        '</div>';
+                    infowindowImage.setContent(content);
+                    infowindowImage.open(map, marker);
+                };
+              }
+              </script>
+        </div>
+
+        <div class="row gy-4 mt-4">
+
+          <div class="col-lg-4">
+
+            <div class="info-item d-flex justify-content-center">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h4>Location:</h4>
+                <p>대전광역시</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-info">
+          <a href="/" class="logo d-flex align-items-center">
+            <span>BBUMAS</span>
+          </a>
+          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <!--<div class="social-links d-flex mt-4">
+            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>-->
+        </div>
+
+        <!--<div class="col-lg-2 col-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>-->
+
+        <!--<div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>-->
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contact Us</h4>
+          <p>
+            A108 Adam Street,
+            New York, NY 535022
+            United States <br>
+            <strong>Phone:</strong> +1 5589 55488 55<br>
+            <strong>Email:</strong> info@example.com<br>
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{%static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{%static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{%static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File .-->
+  <script src="{%static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

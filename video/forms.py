@@ -5,5 +5,3 @@ class FileUploadForm(ModelForm):
     class Meta:
         model = FileUpload
         fields = ['title', 'imgfile', 'content']
-        
-        
