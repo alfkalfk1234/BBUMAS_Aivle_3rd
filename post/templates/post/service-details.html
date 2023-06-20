@@ -113,7 +113,7 @@
               <a href="#">Packaging</a>
               <a href="#">Warehousing</a>
             </div>-->
-            <form>
+            <form style=" text-align: center;">
               <select>
                 <option value="none">신고 유형</option>
                 <option>도로 파손</option>
@@ -134,48 +134,51 @@
           </div>
           <br>
 
-          <div class="col-lg-8">
-            <div class="title">
-              <dt>제목</dt>
-              <dd><input type="text" placeholder="제목 입력"></dd>
-            </div>
-            <!--<input id="file" type="file" multiple onchange="readURL(this);">-->
-            <label class="file-label" for="chooseFile">Choose File</label>
-            <input class="file" id="chooseFile"
-                type="file" 
-                onchange="dropFile.handleFiles(this.files)"
-                accept="image/png, image/jpeg, image/gif">
-                <div id="selectFile">선택한 파일: (파일 없음)</div>
-            <div class="upload-box">
-                <div id="drop-file" class="drag-file">
-                  <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-                  <p class="message">파일을 선택하거나 드래그 해서 업로드 해주세요.</p>
-                  <img src="" alt="미리보기 이미지" class="preview">
-                </div>
-              </div>
+          <div class="title">
+            <dt style=" text-align: center;">제목</dt>
+            <dd><input type="text" placeholder="제목 입력"></dd>
+          </div>
 
-            <br /><br />
-            <img id="preview" />
-            <output id="output"></output>
+          <div class="choose">
+            <label class="file-label" for="chooseFile">파일 선택</label>
+            <div id="selectFile">선택한 파일: (파일 없음)</div>
+            <input class="file" id="chooseFile"
+              type="file" 
+              onchange="dropFile.handleFiles(this.files)"
+              accept="image/png, image/jpeg, image/gif">
+            <input type="reset" id="fileReset" style="display: none;"> 
+            <label class="reset-label" for="fileReset">취소</label>
+          </div>
+          <br>
+          <div class="upload-box">
+            <div id="drop-file" class="drag-file">
+              <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+              <p class="message">파일을 선택하거나 드래그 해서 업로드 해주세요.</p>
+              <img src="" alt="미리보기 이미지" class="preview" id="preview" />
+            </div>
+          </div>
+          <br />
+
+          <output id="output"></output>
             <div class="container">
               <form action="write.jsp" method="post">
                 <div class="form-group">
-                <label for="content">내용</label>
-                <textarea class="form-control" rows="5" id="content"
-                name="content" placeholder="신고할 내용을 사진 첨부와 함께 작성해주세요"></textarea>
+                  <label class="te" for="content">내용</label>
+                  <textarea class="form-text" rows="5" id="content"
+                    name="content" placeholder="신고할 내용을 사진 첨부와 함께 작성해주세요"></textarea>
                 </div>
                 <br>
-                <div class="table_bbs singo tb_sty03">
+                <div class="table_bbs">
                   <!-- <table width="100%" border="1"> -->
                     <tbody>
                       <th>
                         <th scope="row">
-                          <label for="C_A_TITLE">개인정보 수집 동의</label>
+                          <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
                         </th>
                         <td>
-                          <article class="inputWmd dsp_inblck" style='float:right;'>
-                            <div class="radio">
-                              <label for="agreeUseMyInfo1" style="margin-right:10px;">
+                          <article class="dsp_inblck" style='float:right; margin-right: 15%'>
+                            <div class="radio" >
+                              <label for="agreeUseMyInfo1">
                                 <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
                                 <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
                                 <span class="txt">예</span>
@@ -209,11 +212,10 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="btn-sub" style='float:right;' style="margin-right:10px;">
-                  <button type="submit" class="btn btn-default" style="color:white">등록</button>
-                </div>
-                <div class="btn-sub" style='float:right;' style="margin-right:10px;">
-                  <button type="button" class="btn btn-default" style="color:white" href="/post">취소</button>
+                <br>
+                <div class="btn-sub" style='float:right;'>
+                  <button type="submit" class="btn-s" style="color:white">등록</button>
+                  <button type="button" class="btn-btn" style="color:white"><a href="/post" style="color:white">취소</a></button>
                 </div>
               </form>
             </div>
@@ -229,7 +231,6 @@
             <p>
               Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
             </p>-->
-          </div>
 
         </div>
 
@@ -305,38 +306,27 @@
     const dropFile = new DropFile("drop-file", "files");
     
     
-    /*function popupImgFileRm(){
-      $('#popupImgFile, #popupImgFile_text').val('');
-    }
-    */
-    
     const dropfile = document.getElementById('drop-file');
     const chooseFile = document.getElementById('chooseFile');
     const selectFile = document.getElementById('selectFile');
-        
-    dropfile.addEventListener('dragenter', function(event) {
-      event.preventDefault();
-      dropfile.classList.add('highlight');
-    });
-        
-    dropfile.addEventListener('dragover', function(event) {
-      event.preventDefault();
-    });
-        
-    dropfile.addEventListener('dragleave', function(event) {
-      event.preventDefault();
-      dropfile.classList.remove('highlight');
-    });
-     
+    const fileReset = document.getElementById('fileReset');
+    const preview = document.getElementById('preview');
+
     dropfile.addEventListener('drop', function(event) {
-      event.preventDefault();
-      dropfile.classList.remove('highlight');
-        
       handleFileUpload(event.dataTransfer.files[0]);
     });
         
     chooseFile.addEventListener('change', function(event) {
         handleFileUpload(event.target.files[0]);
+      });
+
+    fileReset.addEventListener('click', function() {
+      chooseFile.value = ''; // 파일 선택 초기화
+      dropfile.value='';
+        
+      selectFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
+  
+      console.log('이미지 파일 업로드:', file);
       });
     
      
@@ -371,10 +361,18 @@
         // 보여지는 상태일 때 숨기도록 변경
         singoPerson.style.display = "none";
         button.classList.remove("on"); // 버튼 스타일 변경
+        }
       }
-    }
+
+    fileReset.addEventListener('click', function() {
+      chooseFile.value = '';
+      preview.src = '';
+      preview.style.display = 'none';
+      fileReset.style.display = 'none';
+    });
     
   </script>
+
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
