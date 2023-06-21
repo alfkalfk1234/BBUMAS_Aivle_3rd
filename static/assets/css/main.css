@@ -302,7 +302,7 @@ text-align: center;
 
 .separator3 {
   width: 20%;
-  background-color: var(--color-black);
+  background-color: #0e1d34e6;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -337,15 +337,40 @@ faq페이지
   text-align: center;
   padding: 30px 0;
   position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 60%;
   line-height: 1.2;
 }
 
 .faq-line {
   margin-left : auto;
   margin-right : auto;
-  width : 50%;
   border : 0px;
   border-top: 3px solid rgba(13, 66, 255, 0.8);
+  content: "";
+  position: relative;
+  display: block;
+  width: 65%;
+  height: 3px;
+  background: var(--color-primary);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: auto;
+}
+
+/*--------------------------------------------
+map
+---------------------------------------------*/
+.btn-search {
+  width: 20%;
+  background-color: #0e1d34e6;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 
