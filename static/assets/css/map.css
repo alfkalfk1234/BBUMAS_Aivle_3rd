@@ -15,7 +15,6 @@
   font-size: 1.2em;
 }
 
-
 #damage-table th,
 #damage-table td {
   border: 3px solid #fff;
@@ -28,8 +27,12 @@
   border: 1px solid #fff;
 }
 
+#damage-table thead tr {
+  background-color: #808080;
+}
+
 #damage-table tbody tr {
-  background-color: #fff; /* 수정된 부분 */
+  background-color: #fff;
 }
 
 #damage-table tbody tr:nth-child(even) {
