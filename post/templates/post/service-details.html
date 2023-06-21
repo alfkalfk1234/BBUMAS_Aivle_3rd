@@ -144,15 +144,30 @@
             <dd><input type="text" placeholder="제목 입력"></dd>
           </div>
 
+          
+
           <div class="choose">
             <label class="file-label" for="chooseFile">파일 선택</label>
-            <div id="selectFile">선택한 파일: (파일 없음)</div>
+            {% comment %} <div id="selectFile">선택한 파일: (파일 없음)</div> {% endcomment %}
             <input class="file" id="chooseFile"
               type="file" 
               onchange="dropFile.handleFiles(this.files)"
               accept="image/png, image/jpeg, image/gif">
             <input type="reset" id="fileReset" style="display: none;"> 
-            <label class="reset-label" for="fileReset">취소</label>
+            <label class="reset-label" for="fileReset">파일 제거</label>
+
+            {% comment %} 업로드 파일 정보 테이블 {% endcomment %}
+            <table id="imgfile-table">
+              <tr>
+                <th class="tb-th-1" scope="row">파일 이름</th>
+                <th class="tb-th-2" scope="row">파일 크기</th>
+              </tr>
+              <tr>
+                <td id="filename"></td>
+                <td id="filesize"></td>
+              </tr>
+            </table>
+            
           </div>
 
           <br>
@@ -166,65 +181,65 @@
           </br>
 
           <output id="output"></output>
-            <div class="container">
-              <form action="write.jsp" method="post">
-                <div class="form-group">
-                  <label class="te" for="content">신고 내용</label>
-                  <textarea class="form-text" rows="5" id="content"
-                    name="content" placeholder="신고할 내용을 작성해주세요."></textarea>
-                </div>
-                <br>
-                  <div class="table_bbs">
-                    <!-- <table width="100%" border="1"> -->
-                      <tbody>
-                        <th>
-                          <th scope="row">
-                            <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
-                          </th>
-                          <td>
-                            <article class="dsp_inblck" style='float:right; margin-right: 15%'>
-                              <div class="radio" >
-                                <label for="agreeUseMyInfo1">
-                                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
-                                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                  <span class="txt">예</span>
-                                </label>
-                                <label for="agreeUseMyInfo2">
-                                  <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
-                                  <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                  <span class="txt">아니오</span>
-                                </label>
-                              </div>
-                            </article>
-                            
-                            <!-- 내용보기 가리기 -->
-                            <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
-                            data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                            
-                            <div class="moreView">
-                              <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
-                                  <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
-                                  <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
-                                  <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
-                                  <ul>
-                                      <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
-                                      <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
-                                      <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
-                                  </ul>
-                              </article>
-                            </div>
-                          </td>
+
+          <div class="container">
+            <form action="write.jsp" method="post">
+              <div class="form-group">
+                <label class="te" for="content" style="font-weight: 700;">신고 내용</label>
+                <textarea class="form-text" rows="5" id="content" name="content" placeholder="신고할 내용을 작성해주세요."></textarea>
+              </div>
+              <br>
+                <div class="table_bbs">
+                  <!-- <table width="100%" border="1"> -->
+                    <tbody>
+                      <th>
+                        <th scope="row">
+                          <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
                         </th>
-                      </tbody>
-                    {% comment %} </table> {% endcomment %}
-                  </div>
-                </br>
-                <div class="btn-sub" style='float:right;'>
-                  <button type="submit" class="btn-s" style="color:white">등록</button>
-                  <button type="button" class="btn-btn" style="color:white"><a href="/post" style="color:white">취소</a></button>
+                        <td>
+                          <article class="dsp_inblck" style='float:right; margin-right: 15%'>
+                            <div class="radio" >
+                              <label for="agreeUseMyInfo1">
+                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
+                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                <span class="txt">예</span>
+                              </label>
+                              <label for="agreeUseMyInfo2">
+                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
+                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
+                                <span class="txt">아니오</span>
+                              </label>
+                            </div>
+                          </article>
+                          
+                          <!-- 내용보기 가리기 -->
+                          <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
+                          data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                          
+                          <div class="moreView">
+                            <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
+                                <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
+                                <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
+                                <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
+                                <ul>
+                                    <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
+                                    <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
+                                    <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
+                                </ul>
+                            </article>
+                          </div>
+                        </td>
+                      </th>
+                    </tbody>
+                  {% comment %} </table> {% endcomment %}
                 </div>
-              </form>
-            </div>
+              </br>
+              <div class="btn-sub" style='float:right;'>
+                <button type="submit" class="btn-s" style="color:white">등록</button>
+                <button type="button" class="btn-btn" style="color:white"><a href="/post" style="color:white">취소</a></button>
+              </div>
+            </form>
+          </div>
             
             <!--<ul>
               <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
@@ -246,8 +261,23 @@
   </main><!-- End #main -->
 
   
+  
   <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
   <script>
+    // 개인정보 미동의 시 팝업창
+    {% comment %} function showPopup() {
+      alert("팝업창이 뜨는 코드입니다."); // 팝업창이 뜨는 동작을 수행하는 코드
+    }
+  
+    function checkAgreement() {
+      const agreementNo = document.getElementById('agreeUseMyInfo2'); // "아니오" 버튼 요소 선택
+      if (agreementNo.checked) {
+        showPopup(); // "아니오" 버튼이 선택된 경우에만 팝업창 띄우기
+      }
+    } {% endcomment %}
+
+
     function DropFile(dropAreaId, fileListId) {
       let dropArea = document.getElementById(dropAreaId);
       let fileList = document.getElementById(fileListId);
@@ -335,6 +365,10 @@
       preview.src = '';
       preview.style.display = 'none';
       fileReset.style.display = 'none';
+
+      // 테이블 초기화
+      filename.textContent = '';
+      filesize.textContent = '';
         
       selectFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
   
@@ -346,7 +380,12 @@
         if (file) {
           const fileName = file.name;
           const fileSize = formatFileSize(file.size);
-          selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
+
+          // 테이블 정보
+          filename.textContent = fileName;
+          filesize.textContent = fileSize;
+
+          //selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
 
           var reader = new FileReader();
           reader.onload = function(e) {

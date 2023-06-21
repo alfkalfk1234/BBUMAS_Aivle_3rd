@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Video
+from .models import Video,Detection
 from ultralytics import YOLO
 import os
 import subprocess
@@ -259,3 +259,17 @@ def video_upload(request):
         return render(request, 'video/video_result.html', context)
     else:
         return render(request, 'video/video.html')
+    
+    
+def save_detection_data(latitude, longitude, time, detection_info, image_path, frame):
+    detection = Detection()
+    detection.latitude = latitude
+    detection.longitude = longitude
+    detection.time = time
+    detection.detection_info = detection_info
+    detection.image_path = image_path
+    detection.frame = frame
+    detection.save()
+    
+    
+    
