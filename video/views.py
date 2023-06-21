@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Video
+from .models import Video,Detection
 from ultralytics import YOLO
 import os
 import subprocess
@@ -171,7 +171,8 @@ def video_upload(request):
             LL.append(tmp)
         latlng = pd.DataFrame(LL, columns=['latitude', 'longitude', 'time'])
         latlng.to_csv(f'video/media/csv/{video.video_file.name[:-4]}.csv', index=False, encoding='utf-8-sig')
-
+        csv_data = pd.read_csv(f'video/media/csv/{video.video_file.name[:-4]}.csv')
+        
         # yolov8 분석
         result = analyze_video(video_path)
 
@@ -179,3 +180,17 @@ def video_upload(request):
         return redirect('video:video_result')
     else:
         return render(request, 'video/video.html')
+    
+    
+def save_detection_data(latitude, longitude, time, detection_info, image_path, frame):
+    detection = Detection()
+    detection.latitude = latitude
+    detection.longitude = longitude
+    detection.time = time
+    detection.detection_info = detection_info
+    detection.image_path = image_path
+    detection.frame = frame
+    detection.save()
+    
+    
+    
