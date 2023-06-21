@@ -191,37 +191,6 @@
                   var submitEvent = new Event('submit');
                   searchForm.dispatchEvent(submitEvent);
               }
-              {% comment %} var positions = [
-                  {
-                      content: '<div>시선유도봉</div>', 
-                      latlng: new kakao.maps.LatLng(36.300411, 127.3410807)
-                  },
-                  {
-                      content: '<div>포트홀</div>', 
-                      latlng: new kakao.maps.LatLng(36.3000163, 127.3407064)
-                  },
-                  {
-                      content: '<div>볼라드</div>', 
-                      latlng: new kakao.maps.LatLng(36.34908411417334, 127.3860419654625)
-                  },
-                  {
-                      content: '<div>포트홀</div>', 
-                      latlng: new kakao.maps.LatLng(36.3486357131836, 127.3797344527189)
-                  },
-                  {
-                      content: '<div>차선지워짐</div>', 
-                      latlng: new kakao.maps.LatLng(36.346674819178205, 127.38422542062516)
-                  },
-                  {
-                      content: '<div>제설함</div>', 
-                      latlng: new kakao.maps.LatLng(36.35967364545341, 127.37448462778818)
-                  },
-                  {
-                      content: '<div>도로분리대</div>', 
-                      latlng: new kakao.maps.LatLng(36.36801952029056, 127.37987319665282)
-                  },
-                  
-              ]; {% endcomment %}
 
               // Django View에서 넘겨받은 데이터를 JavaScript 변수로 만듭니다.
               var locations = {{ locations|safe }};
