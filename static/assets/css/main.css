@@ -59,9 +59,10 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-파일 업로드 ------------------------------------------------*/
+파일 업로드 
+------------------------------------------------*/
 .title input[type='text']{
-  width: 50%;
+  width: 70%;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -73,33 +74,32 @@ h6 {
 }
 
 .choose {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   position: relative;
   left: 50%;
   transform: translate(-50%);
-  width: 60%;
-  height: auto;
+  width: 70%;
+  height: 40%;
 }
 
 .file-label {
-  width: 30%;
+  width: 100px;
   position: relative;
-  background: var(--color-black);
+  background-color: #b6b6b6;
   color: #fff;
   text-align: center;
-  padding: 11px;
-  border-radius: 6px;
+  padding: 10px;
+  border-radius: 3px;
   cursor: pointer;
-  margin-top: 15px;
   align-items: center;
 }
 
-.file-label:hover {
+/* .file-label:hover {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   transition: 0.4s;
-}
+} */
 
 .file {
   display: none;
@@ -111,12 +111,22 @@ h6 {
 }
 
 .reset-label {
-  width: 20%;
+  width: 100px;
   position: relative;
-  left: 10%;
-  transform: translate(-10%);
-  margin-top: 15px;
+  /* left: 10%;
+  transform: translate(-10%); */
+  margin-top: 30px;
   margin-bottom: 15px;
+  
+  background-color: #b6b6b6;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  /* margin-left: 5px; */
+  /* transition: 0.4s; */
+  /* font-size: 14px; */
 }
 
 .upload-box {
@@ -176,7 +186,6 @@ h6 {
   cursor: pointer;
 }
 
-
 .cancel-label:hover {
   background: #ccc;
   color: #fff;
@@ -184,15 +193,14 @@ h6 {
 }
 
 .btn-sub {
-  width: 145px;
+  width: 250px;
   position: relative;
   margin-right: 15%;
 }
 
-
 .btn-s {
-  width: 70px;
-  background-color: var(--color-black);
+  width: 120px;
+  background-color: #0e1d34d2;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -201,14 +209,14 @@ h6 {
 }
 
 .btn-s:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #0e1d34;
   color: #fff;
   transition: 0.4s;
 }
 
 .btn-btn {
-  width: 70px;
-  background-color: var(--color-black);
+  width: 120px;
+  background-color: #0e1d34d2;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -217,7 +225,7 @@ h6 {
 }
 
 .btn-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #0e1d34;
   color: #fff;
   transition: 0.4s;
 }
@@ -253,6 +261,40 @@ h6 {
   left: 50%;
   transform: translate(-50%);
 }
+
+/* 개인정보 수집동의 */
+.moreView {
+  top: 10px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 70%;
+}
+
+/* 테이블 */
+#imgfile-table{
+  margin-top: 10px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  border-collapse: collapse;
+  width: 100%;
+}
+#imgfile-table th{
+  /* background-color: #6685b362; */
+  font-weight: 1;
+}
+/* #imgfile-table td{
+  background-color: rgba(163, 182, 224, 0.15);
+} */
+#imgfile-table th,td{
+  border: 1px solid #a9a8a8;
+  vertical-align: top;
+  vertical-align: bottom;
+  vertical-align: middle;
+}
+
+
 
 
 
@@ -302,7 +344,7 @@ text-align: center;
 
 .separator3 {
   width: 20%;
-  background-color: var(--color-black);
+  background-color: #0e1d34e6;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -337,15 +379,40 @@ faq페이지
   text-align: center;
   padding: 30px 0;
   position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: 60%;
   line-height: 1.2;
 }
 
 .faq-line {
   margin-left : auto;
   margin-right : auto;
-  width : 50%;
   border : 0px;
   border-top: 3px solid rgba(13, 66, 255, 0.8);
+  content: "";
+  position: relative;
+  display: block;
+  width: 65%;
+  height: 3px;
+  background: var(--color-primary);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: auto;
+}
+
+/*--------------------------------------------
+map
+---------------------------------------------*/
+.btn-search {
+  width: 20%;
+  background-color: #0e1d34e6;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 
@@ -1708,8 +1775,8 @@ section {
   padding: 40px;
   box-sizing: border-box;
   background-color: #f5f5f7;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 70px;
+  margin-bottom: 150px;
   text-align: center;
 }
 .login-wrapper > h2{

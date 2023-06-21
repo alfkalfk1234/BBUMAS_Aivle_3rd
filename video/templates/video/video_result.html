@@ -145,8 +145,8 @@
         </div>
 
         <div>
-          <div id="map" style="width: 50%; height: 600px; float: left;"></div>
-          <div style="width: 50%; height: 600px; overflow-y: auto;">
+          <div id="map" style="width: 48%; height: 600px; float: left; margin-right: 4%;"></div>
+          <div style="width: 48%; height: 600px; overflow-y: auto; float: right">
             <form>
               <table id="damage-table">
                 <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
@@ -167,121 +167,26 @@
                     <td>포트홀 발생</td>
                     <td>도로 관리팀</td>
                   </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>     
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
-                  </tr>         
                   <!-- 다른 행들도 동일한 형식으로 추가 -->
                 </tbody>
               </table>
             </form>
           </div>
-          <div class="button-group">
-            <button type="button">저장</button>
-            <button type="button">취소</button>
+          <div style="clear: both;"></div>
+          <div style="margin-top: 40px;">
+            <div style="display: flex; align-items: flex-start;">
+              <img src="{%static 'assets/img/location.png' %}" style="margin-right: 10px; height: 50px;">
+              <div>
+                <h4 style="margin-bottom: 0; line-height: 25px; height: 25px;">Location:</h4>
+                <p>대전광역시</p>
+              </div>        
+              <div class="button-group" style="margin-left: auto;">
+                <button type="button">저장</button>
+                <button type="button">취소</button>
+              </div>   
+            </div>
           </div>
-        </div>
+      
         
           
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d"></script>
@@ -382,13 +287,13 @@
 
           <div class="col-lg-4">
 
-            <div class="info-item d-flex justify-content-center">
+            <!-- <div class="info-item d-flex justify-content-center">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
                 <h4>Location:</h4>
                 <p>대전광역시</p>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <!-- End Contact Form -->
