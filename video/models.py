@@ -12,4 +12,5 @@ class Detection(models.Model):
     detected_object = models.IntegerField()
     image_path = models.CharField(max_length=200)
     frame = models.IntegerField()
+    is_checked = models.BooleanField(default=False)
 

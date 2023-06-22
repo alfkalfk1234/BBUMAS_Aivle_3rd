@@ -24,8 +24,8 @@ def analyze_video(video_path):
         save = True,
         save_txt = True,
         project = 'video/media',
-        classes = [0, 2, 3, 4, 5, 7, 8, 9, 10],
-        # names: {0: 'bollard_abnormal', 1: 'bollard_normal', 2: 'crosswalk', 3: 'loading-box', 4: 'pothole', 5: 'road_separator', 6: 'road_separator_normal', 7: 'roadmarking', 8: 'speedbump', 9: 'tubular-marker-abnormal', 10: 'tubular-marker-normal'}
+        classes = [0, 2, 3, 4, 5, 7, 8, 9],
+        # names: {0: 'bollard_abnormal', 1: 'bollard_normal', 2: 'crosswalk', 3: 'loading-box', 4: 'pothole', 5: 'road_separator', 6: 'road_separator_normal', 7: 'roadmarking', 8: 'speedbump', 9: 'tubular-marker-abnormal'}
     )
 
     os.remove(video_path)
