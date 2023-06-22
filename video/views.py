@@ -6,15 +6,12 @@ import subprocess
 import time
 import struct
 import pandas as pd
-import csv
 import cv2
-from datetime import datetime, timedelta
+import shutil
+from datetime import datetime
 
 def index(request):
     return render(request, 'video/video.html')
-
-def video_result(request):
-    return render(request, 'video/video_result.html')
 
 def analyze_video(video_path):
     # YOLOv8 analysis code
@@ -29,10 +26,12 @@ def analyze_video(video_path):
         project = 'video/media',
         classes = [0, 2, 3, 4, 5, 7, 8, 9],
         # names: {0: 'bollard_abnormal', 1: 'bollard_normal', 2: 'crosswalk', 3: 'loading-box', 4: 'pothole', 5: 'road_separator', 6: 'road_separator_normal', 7: 'roadmarking', 8: 'speedbump', 9: 'tubular-marker-abnormal'}
+        classes = [0, 2, 3, 4, 5, 7, 8, 9],
+        # names: {0: 'bollard_abnormal', 1: 'bollard_normal', 2: 'crosswalk', 3: 'loading-box', 4: 'pothole', 5: 'road_separator', 6: 'road_separator_normal', 7: 'roadmarking', 8: 'speedbump', 9: 'tubular-marker-abnormal'}
     )
-    result = "YOLOv8 analysis result"
 
-    return result
+    os.remove(video_path)
+    return 0
 
 def get_latlng(path,video_path):
     idx = []
@@ -40,6 +39,7 @@ def get_latlng(path,video_path):
     geo = []
     
     name,ext = os.path.splitext(video_path)
+    os.mkdir(f'{path}/bin')
     if ext =='.avi' or ext=='.mp4':
         file_name = name
 
@@ -83,7 +83,8 @@ def get_latlng(path,video_path):
         time_converted_value = datetime.fromtimestamp(time_converted_value)
         formattime = time_converted_value.strftime('%Y. %m. %d. %H. %M. %S')
         geo.append({'lat':round(lat_converted_value,6),'lng':round(lng_converted_value,6), 'time':formattime})
-        
+    
+    shutil.rmtree(f'{path}/bin')
     return geo
 
 def extract_latitude_longitude(string):
@@ -148,10 +149,62 @@ def convert_to_degrees(coord):
 
     return round(result,7)
 
-# def video_result(request, result):
-#     return render(request, 'video/video_result.html', {'result': result})
-def video_result(request):
-    return render(request, 'video/video_result.html')
+def save_images(video_file_name):
+    # 비디오 파일 열기
+    video_path = f'video/media/predict/{video_file_name[:-4]}.mp4'
+    # video_path = f'video/media/predict/20230618-12h41m41s_N.mp4'
+    video_name = os.path.splitext(os.path.basename(video_path))[0]  # 비디오 파일의 이름 추출
+    video_capture = cv2.VideoCapture(video_path)
+
+    # 프레임 번호와 클래스 내용을 담을 딕셔너리
+    frame_info = {}
+
+    # 텍스트 파일들이 위치한 폴더 경로
+    txt_folder = 'video/media/predict/labels'
+
+    # 폴더 내의 모든 텍스트 파일을 검색하여 프레임 번호와 클래스 내용 추출
+    for file_name in os.listdir(txt_folder):
+        if file_name.endswith('.txt'):
+            txt_file = os.path.join(txt_folder, file_name)
+            frame_number = int(file_name.split('_')[-1].split('.')[0]) - 1  # 제목에서 프레임 번호 추출
+            with open(txt_file, 'r') as file:
+                class_name = file.readline().split()[0]  # 첫 번째 숫자를 클래스 내용으로 추출
+                frame_info[frame_number] = class_name
+
+    # 프레임 단위로 영상 캡쳐
+    frame_count = 0
+    info = []
+
+    os.mkdir('video/media/images')
+    while video_capture.isOpened():
+        ret, frame = video_capture.read()
+
+        if not ret:
+            break
+
+        if frame_count in frame_info:
+            class_name = frame_info[frame_count]  # 프레임 번호에 해당하는 클래스 내용 가져오기
+
+            # 특정 프레임에 대한 처리
+            # 예: 프레임 저장, 작업 수행 등
+            file_name = f'video/media/images/{video_name}_{frame_count+1}_{class_name}.jpg'
+            cv2.imwrite(file_name, frame)
+            only_file_name = f'{video_name}_{frame_count+1}_{class_name}.jpg'
+            info.append({'frame' : frame_count+1, 'class_name' : class_name, 'file_name' : only_file_name})
+            del frame_info[frame_count]  # 이미 처리한 프레임은 딕셔너리에서 제거
+
+            if not frame_info:  # 모든 프레임을 처리했으면 종료
+                break
+
+        frame_count += 1
+
+    # 비디오 캡처 종료
+    video_capture.release()
+    cv2.destroyAllWindows()
+
+    os.remove(video_path)
+    shutil.rmtree('video/media/predict')
+    return info
 
 def video_upload(request):
     if request.method == 'POST' and request.FILES['video_file']:
@@ -178,23 +231,17 @@ def video_upload(request):
         length = len(LL)
         second = [i for i in range(length)]
         latlng['second'] = second
-        # latlng.to_csv(f'video/media/csv/{filename[:-4]}.csv', index=False, encoding='utf-8-sig')
 
         # yolov8 분석
-        # result = analyze_video(video_path)
+        analyze_video(video_path)
 
         # yolov8 분석 영상을 이미지로
         info = save_images(filename) # frame, class_name, file_name
         info = pd.DataFrame(info)
         info['second'] = info['frame'] // 30
-        # 위치 정보 csv 파일 불러오기
-        # results = []
-        # with open(f'video/media/csv/{filename[:-4]}.csv', 'r', encoding='utf-8-sig') as file:
-        #     reader = csv.DictReader(file)
-        #     for row in reader:
-        #         results.append(row)
+
+        # Dataframe 결합(위치정보 + 손상정보)
         all = pd.merge(left = latlng , right = info, how = "inner", on = "second")
-        # all.to_csv(f'video/media/csv/results.csv', index=False, encoding='utf-8-sig')
         all.loc[all["class_name"] == '0', "class_name"] = '볼라드 손상'
         all.loc[all["class_name"] == '1', "class_name"] = '볼라드 정상'
         all.loc[all["class_name"] == '2', "class_name"] = '횡단보도 손상'
@@ -206,9 +253,10 @@ def video_upload(request):
         all.loc[all["class_name"] == '8', "class_name"] = '방지턱 손상'
         all.loc[all["class_name"] == '9', "class_name"] = '시선 유도봉 손상'
         all.loc[all["class_name"] == '10', "class_name"] = '시선 유도봉 정상'
+        
+        all['where'] = '도로 교통과'
         results = all.to_dict(orient='records')
         context = {'results' : results}
-
         return render(request, 'video/video_result.html', context)
     else:
         return render(request, 'video/video.html')
@@ -223,26 +271,3 @@ def save_detection_data(latitude, longitude, time, detection_info, image_path, f
     detection.image_path = image_path
     detection.frame = frame
     detection.save()
-    
-    
-import json
-from django.db import connection
-
-def video_result(request):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM map_location_test")
-        rows = cursor.fetchall()
-
-    data = []
-    for row in rows:
-        id = row[0]
-        latitude = row[1]
-        longitude = row[2]
-        data.append({'id':id,'latitude': latitude, 'longitude': longitude})
-
-    json_data = json.dumps(data)
-    context = {'locations': json_data}
-
-    return render(request, 'video/video_result.html', context)
-
-
