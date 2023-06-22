@@ -105,6 +105,12 @@
                     <button type="submit" class="btn btn-primary" >Search</button>
                 </form>
               </div>
+              <div class="container" data-aos="fade-up">
+                <form id="search-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+                    <input id="search-input" type="text" class="form-control" placeholder="점검이 필요한 도시를 검색해보세요.">
+                    <button type="submit" class="btn btn-primary" >Search</button>
+                </form>
+              </div>
     
               <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
     
@@ -164,6 +170,7 @@
                 </thead>
                 <tbody>
                   {% comment %} <tr>
+                  {% comment %} <tr>
                     <td class="checkbox-cell"><input type="checkbox"></td>
                     <td>{{ result.time }}</td>
                     <td>{{ result.latitude }}</td>
@@ -171,6 +178,46 @@
                     <td>{{ result.class_name }}</td>
                     <td>{{ result.where }}</td>
                   </tr>
+                  <!-- 다른 행들도 동일한 형식으로 추가 --> {% endcomment %}
+                  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
+
+                  <script>
+                    var locationsString = '{{ locations|safe }}'; // JSON 형식의 문자열로 가정
+                    var geocoder = new kakao.maps.services.Geocoder();  
+                    var locations = JSON.parse(locationsString);
+                    for (var i = 0; i < locations.length; i++) {
+                      var position = new kakao.maps.LatLng(locations[i].latitude, locations[i].longitude);
+                      getAddress_table(position);
+                    }
+                    
+                    function getAddress_table(position) {
+                      geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                          for (var i = 0; i < result.length; i++) {
+                            // 행정동의 region_type은 'H'입니다.
+                            if (result[i].region_type === 'H') {
+                              var address = result[i].region_3depth_name;
+                    
+                              // 테이블에 행 추가
+                              var table = document.getElementById('damage-table');
+                              var row = table.insertRow(-1);
+                              var cell1 = row.insertCell(0);
+                              var cell2 = row.insertCell(1);
+                              var cell3 = row.insertCell(2);
+                              var cell4 = row.insertCell(3);
+                              var cell5 = row.insertCell(4);
+                              cell1.innerHTML = '<td class="checkbox-cell"><input type="checkbox"></td>';
+                              cell2.innerHTML = '<td>9:00 AM</td>';
+                              cell3.innerHTML = '<td>' + address + '</td>';
+                              cell4.innerHTML = '<td>포트홀 발생</td>';
+                              cell5.innerHTML = '<td>도로 관리팀</td>';
+                              break;
+                            }
+                          }
+                        }
+                      });
+                    }
+                  </script>
                   <!-- 다른 행들도 동일한 형식으로 추가 --> {% endcomment %}
                   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
 
@@ -273,6 +320,39 @@
                 var submitEvent = new Event('submit');
                 searchForm.dispatchEvent(submitEvent);
             }
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+            var geocoder = new kakao.maps.services.Geocoder();
+
+          // 검색 폼과 입력 필드를 변수로 가져옵니다
+            var searchForm = document.getElementById('search-form');
+            var searchInput = document.getElementById('search-input');
+
+            // 검색 폼의 제출 이벤트를 처리합니다
+            searchForm.addEventListener('submit', function(e) {
+              e.preventDefault();
+
+              // 입력된 주소로 좌표를 검색합니다
+              geocoder.addressSearch(searchInput.value, function(result, status) {
+                  // 정상적으로 검색이 완료됐으면 
+                  if (status === kakao.maps.services.Status.OK) {
+                      var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                      // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                      map.setCenter(coords);
+                  } else {
+                      // 검색 결과가 없거나 에러가 발생한 경우
+                      alert('주소를 찾을 수 없습니다.');
+                  }
+              });
+            });
+            var urlParams = new URLSearchParams(window.location.search);
+            var searchQuery = urlParams.get('q');
+            if (searchQuery) {
+                searchInput.value = searchQuery;
+                // 검색 폼 제출 이벤트를 수동으로 호출하여 검색 결과를 표시합니다
+                var submitEvent = new Event('submit');
+                searchForm.dispatchEvent(submitEvent);
+            }
             
               // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
               
@@ -321,6 +401,11 @@
               } 
             
             // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+            function makeOutListener(infowindow) {
+              return function() {
+                  infowindow.close();
+              };
+            } 
             function makeOutListener(infowindow) {
               return function() {
                   infowindow.close();
