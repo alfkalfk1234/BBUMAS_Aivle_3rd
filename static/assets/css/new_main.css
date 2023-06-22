@@ -184,7 +184,11 @@ select {
     padding-top: 20px;
     background-color: #f5f5f7;
     margin-right: 25px;
-    text-align: center;
+    text-align: right;
+}
+
+.form-field label {
+    margin-right: 30px;
 }
 
 .create {
@@ -196,7 +200,9 @@ select {
 }
 
 .form-field input[type=text] {
-    margin-left: 5px;
+    /*margin-left: 10px;*/
+    position: relative;
+    right: 5%;
     /*position: relative;
     left: 50%;
     transform: translate(-50%);*/
@@ -212,7 +218,9 @@ select {
 }
 
 .form-field input[type=password] {
-    margin-left: 5px;
+    /*margin-left: 10px;*/
+    position: relative;
+    right: 5%;
     width: 60%;
     height: 44px;
     padding: 0 10px;
@@ -225,7 +233,9 @@ select {
 }
 
 .form-field input[type=email] {
-    margin-left: 5px;
+    /*margin-left: 10px;*/
+    position: relative;
+    right: 5%;
     width: 60%;
     height: 44px;
     padding: 0 10px;
