@@ -200,16 +200,38 @@
                 removable: true // 인포윈도우를 닫을 수 있도록 설정합니다
               });
               // 각 위치에 대해 마커를 생성하고 지도에 추가합니다.
+              var objectColors = {
+                '0': '{% static "assets/img/green.png" %}', 
+                '2': '{% static "assets/img/orange.png" %}', 
+                '3': '{% static "assets/img/pink.png" %}', 
+                '4': '{% static "assets/img/purple.png" %}', 
+                '5': '{% static "assets/img/red.png" %}', 
+                '7': '{% static "assets/img/yellow.png" %}', 
+                '8': '{% static "assets/img/skyblue.png" %}', 
+                '9': '{% static "assets/img/blue.png" %}'  
+              };
+
+
+              // 각 위치에 대해 마커를 생성하고 지도에 추가합니다.
               for (var i = 0; i < locations.length; i++) {
                 var position = new kakao.maps.LatLng(locations[i][0], locations[i][1]);
-            
+                var object = locations[i][2].toString(); // 객체 정보 
+
+                var imageSrc = objectColors[object];
+
+                if (imageSrc) {
+                  var imageSize = new kakao.maps.Size(30, 30);
+                  var imageOption = { offset: new kakao.maps.Point(40, 40) };
+                
                 var marker = new kakao.maps.Marker({
                     map: map,
-                    position: position
+                    position: position,
+                    image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
                 });
             
                 // 마커에 대한 주소를 가져오는 함수
                 getAddress(marker, position, locations[i][2]);
+                }
               }
 
                 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
