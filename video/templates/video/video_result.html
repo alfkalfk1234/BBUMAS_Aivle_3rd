@@ -157,7 +157,7 @@
                     <th>위도</th>
                     <th>경도</th>
                     <th>파손 내용</th>
-                    <!-- <th>관련 부서</th> -->
+                    <th>관련 부서</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -168,7 +168,7 @@
                     <td>{{ result.latitude }}</td>
                     <td>{{ result.longitude }}</td>
                     <td>{{ result.class_name }}</td>
-                    <!-- <td>도로 관리팀</td> -->
+                    <td>{{ result.where }}</td>
                   </tr>
                   {% endfor %}
                   <!-- 다른 행들도 동일한 형식으로 추가 -->
@@ -190,58 +190,40 @@
               </div>   
             </div>
           </div>
-      
-        
           
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d"></script>
           <!--<iframe style="border:0; width: 100%; height: 340px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>-->
           <script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
-                    center: new kakao.maps.LatLng(36.34892564237924, 127.38488260807728), // 지도의 중심좌표
-                    level: 8 // 지도의 확대 레벨
+                    center: new kakao.maps.LatLng({{ results.0.latitude }}, {{ results.0.longitude }}), // 지도의 중심좌표
+                    level: 5 // 지도의 확대 레벨
                 };
             
             // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
               var map = new kakao.maps.Map(mapContainer, mapOption); 
             
               // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+              
               var positions = [
+                  {% for result in results %}
                   {
-                      content: '<div>시선유도봉</div>', 
-                      latlng: new kakao.maps.LatLng(36.300411, 127.3410807)
+                      content: '<div>{{ result.class_name }}</div>', 
+                      latlng: new kakao.maps.LatLng({{ result.latitude }}, {{ result.longitude }})
                   },
-                  {
-                      content: '<div>포트홀</div>', 
-                      latlng: new kakao.maps.LatLng(36.3000163, 127.3407064)
-                  },
-                  {
-                      content: '<div>볼라드</div>', 
-                      latlng: new kakao.maps.LatLng(36.34908411417334, 127.3860419654625)
-                  },
-                  {
-                      content: '<div>포트홀</div>', 
-                      latlng: new kakao.maps.LatLng(36.3486357131836, 127.3797344527189)
-                  },
-                  {
-                      content: '<div>차선지워짐</div>', 
-                      latlng: new kakao.maps.LatLng(36.346674819178205, 127.38422542062516)
-                  },
-                  {
-                      content: '<div>제설함</div>', 
-                      latlng: new kakao.maps.LatLng(36.35967364545341, 127.37448462778818)
-                  },
-                  {
-                      content: '<div>도로분리대</div>', 
-                      latlng: new kakao.maps.LatLng(36.36801952029056, 127.37987319665282)
-                  },
-                  
+                  {% endfor %}
               ];
             // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
               var infowindowImage = new kakao.maps.InfoWindow({
                 removable: true // 인포윈도우를 닫을 수 있도록 설정합니다
               });
-            
+
+              var fileNames = [
+                {% for result in results %}
+                '{{ result.file_name }}',
+                {% endfor %}
+              ];
+
               for (var i = 0; i < positions.length; i++) {
                 // 마커를 생성합니다
                 var marker = new kakao.maps.Marker({
@@ -255,7 +237,7 @@
                 });
             
                 // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
-                kakao.maps.event.addListener(marker, 'click', handleClickMarker(marker, '/static/images/aivle.png'));
+                kakao.maps.event.addListener(marker, 'click', handleClickMarker(marker, '/video/media/images/' + fileNames[i]));
                 kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
                 kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
               }
