@@ -232,27 +232,15 @@
               });
               // 각 위치에 대해 마커를 생성하고 지도에 추가합니다.
               for (var i = 0; i < locations.length; i++) {
-                  var position = new kakao.maps.LatLng(locations[i][0], locations[i][1]);
-                  
-                  var marker = new kakao.maps.Marker({
-                      map: map,
-                      position: position
-                  });
-
-                  // 마커에 표시할 인포윈도우를 생성합니다
-                  var infowindow = new kakao.maps.InfoWindow({
-                      content: '<div>마커 ID: ' + locations[i][2] + '</div>' // 인포윈도우에 표시할 내용
-                  });
-
-                  // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
-                  kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-
-                  // 마커에서 마우스가 벗어났을 때 인포윈도우를 닫는 이벤트 리스너를 등록합니다
-                  kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-          
-                  // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
-                  kakao.maps.event.addListener(marker, 'click', handleClickMarker(map, marker, infowindowImage, '/static/images/aivle.png'));
-          
+                var position = new kakao.maps.LatLng(locations[i][0], locations[i][1]);
+            
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: position
+                });
+            
+                // 마커에 대한 주소를 가져오는 함수
+                getAddress(marker, position, locations[i][2]);
               }
 
                 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -278,6 +266,37 @@
                     infowindowImage.open(map, marker);
                 };
               }
+
+              function getAddress(marker, position, markerId) {
+                geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        for (var i = 0; i < result.length; i++) {
+                            // 행정동의 region_type은 'H'입니다.
+                            if (result[i].region_type === 'H') {
+                                var address = result[i].region_3depth_name;
+                                var content = '<div>마커 ID: ' + markerId + '<br>' + address + '</div>';
+            
+                                // 마커에 표시할 인포윈도우를 생성합니다
+                                var infowindow = new kakao.maps.InfoWindow({
+                                    content: content // 인포윈도우에 표시할 내용
+                                });
+            
+                                // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+                                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            
+                                // 마커에서 마우스가 벗어났을 때 인포윈도우를 닫는 이벤트 리스너를 등록합니다
+                                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+            
+                                // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+                                kakao.maps.event.addListener(marker, 'click', handleClickMarker(map, marker, infowindowImage, '/static/images/aivle.png'));
+            
+                                // 주소 정보를 가져왔으면 반복문을 종료합니다.
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
               </script>
         </div>
 

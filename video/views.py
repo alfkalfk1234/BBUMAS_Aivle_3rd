@@ -25,7 +25,7 @@ def analyze_video(video_path):
         save = True,
         save_txt = True,
         project = 'video/media',
-        # classes = [0, 2, 3, 4, 5, 7, 8, 9, 10],
+        # classes = [0, 2, 3, 4, 5, 7, 8, 9],
     )
     result = "YOLOv8 analysis result"
     return result
@@ -146,8 +146,8 @@ def convert_to_degrees(coord):
 
 # def video_result(request, result):
 #     return render(request, 'video/video_result.html', {'result': result})
-def video_result(request):
-    return render(request, 'video/video_result.html')
+# def video_result(request):
+#     return render(request, 'video/video_result.html')
 
 def video_upload(request):
     if request.method == 'POST' and request.FILES['video_file']:
@@ -193,4 +193,25 @@ def save_detection_data(latitude, longitude, time, detection_info, image_path, f
     detection.save()
     
     
-    
+
+import json
+from django.db import connection
+
+def video_result(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM map_location_test")
+        rows = cursor.fetchall()
+
+    data = []
+    for row in rows:
+        id = row[0]
+        latitude = row[1]
+        longitude = row[2]
+        data.append({'id':id,'latitude': latitude, 'longitude': longitude})
+
+    json_data = json.dumps(data)
+    context = {'locations': json_data}
+
+    return render(request, 'video/video_result.html', context)
+
+
