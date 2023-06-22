@@ -2,7 +2,6 @@ from django import forms
 from .models import CustomUser
 
 class UserForm(forms.ModelForm):
-
     password = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'pswd1'}))
     class Meta:
         model = CustomUser
