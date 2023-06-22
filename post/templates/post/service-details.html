@@ -87,7 +87,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
               <h2>신고 게시판</h2>
-              <p>신고할 부분을 사진찍어 제보해주세요.</p>
+              <p>도로 위 모든 안전 위험요인을 촬영한 사진과 함께 신고해 주세요.</p>
             </div>
           </div>
         </div>
@@ -96,8 +96,8 @@
         <div class="container">
           <ol>
             <li><a href="/">Home</a></li>
-            <li><a href="/post">신고 게시판</a></li>
-            <li>작성하기</li>
+            <li><a href="/post">Post</a></li>
+            <li>Posting</li>
           </ol>
         </div>
       </nav>
@@ -107,158 +107,156 @@
     <section id="service-details" class="service-details">
       <div class="container" data-aos="fade-up">
 
-        <div class="row gy-4">
+        <table id="bd-table">
 
-          <!--<div class="col-lg-4">
-            <div class="services-list">
-              <a href="#" class="active">Storage</a>
-              <a href="#">Logistics</a>
-              <a href="#">Cargo</a>
-              <a href="#">Trucking</a>
-              <a href="#">Packaging</a>
-              <a href="#">Warehousing</a>
-            </div>-->
-            <form style=" text-align: center;">
-              <select>
-                <option value="none">신고 유형</option>
-                <option>도로 파손</option>
-                <option>도로 분리대 파손 또는 노후화</option>
-                <option>차선</option>
-                <option>횡단보도</option>
-                <option>신호등</option>
-                <option>시선 유도봉</option>
-                <option>방지턱</option>
-                <option>가드레일</option>
-              </select>
-              <input type="date"
-                       id="date">
-                       {% comment %} max="2023-12-31"
-                       min="2023-06-05"
-                       value="2023-06-05"> {% endcomment %}
-            </form>
-          {% comment %} </div> {% endcomment %}
-          <br>
+          <tr style="border-bottom: 1px solid #ccc;">
+            <td style="background-color:#edeff3;">신고 유형</td>
+            <td>
+              <form style="width: 450px; text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                <select>
+                  <option value="none">신고 유형</option>
+                  <option>도로 파손</option>
+                  <option>도로 분리대 파손 또는 노후화</option>
+                  <option>차선</option>
+                  <option>횡단보도</option>
+                  <option>신호등</option>
+                  <option>시선 유도봉</option>
+                  <option>방지턱</option>
+                  <option>가드레일</option>
+                </select>
+                <input type="date" id="Date">
+                {% comment %} max="2023-12-31"
+                min="2023-06-05"
+                value="2023-06-05"> {% endcomment %}
+              </form>
+            </td>
+          </tr>
 
-          <div class="title">
-            <dt style=" text-align: center;">제목</dt>
-            <dd><input type="text" placeholder="제목 입력"></dd>
-          </div>
-
-          
-
-          <div class="choose">
-            <label class="file-label" for="chooseFile">파일 선택</label>
-            {% comment %} <div id="selectFile">선택한 파일: (파일 없음)</div> {% endcomment %}
-            <input class="file" id="chooseFile"
-              type="file" 
-              onchange="dropFile.handleFiles(this.files)"
-              accept="image/png, image/jpeg, image/gif">
-            <input type="reset" id="fileReset" style="display: none;"> 
-            <label class="reset-label" for="fileReset">파일 제거</label>
-
-            {% comment %} 업로드 파일 정보 테이블 {% endcomment %}
-            <table id="imgfile-table">
-              <tr>
-                <th class="tb-th-1" scope="row">파일 이름</th>
-                <th class="tb-th-2" scope="row">파일 크기</th>
-              </tr>
-              <tr>
-                <td id="filename"></td>
-                <td id="filesize"></td>
-              </tr>
-            </table>
-            
-          </div>
-
-          <br>
-          <div class="upload-box">
-            <div id="drop-file" class="drag-file">
-              <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-              <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
-              <img src="" alt="미리보기 이미지" class="preview" id="preview">
-            </div>
-          </div>
-          </br>
-
-          <output id="output"></output>
-
-          <div class="container">
-            <form action="write.jsp" method="post">
-              <div class="form-group">
-                <label class="te" for="content" style="font-weight: 700;">신고 내용</label>
-                <textarea class="form-text" rows="5" id="content" name="content" placeholder="신고할 내용을 작성해주세요."></textarea>
+          <tr style="border-bottom: 1px solid #ccc;">
+            <td style="background-color:#edeff3;">제목</td>
+            <td>
+              <div class="title">
+                <dd><input type="text" placeholder="제목을 입력하세요."></dd>
               </div>
-              <br>
-                <div class="table_bbs">
-                  <!-- <table width="100%" border="1"> -->
-                    <tbody>
-                      <th>
-                        <th scope="row">
-                          <label for="C_A_TITLE" style="margin-left: 15%;">개인정보 수집 동의</label>
-                        </th>
-                        <td>
-                          <article class="dsp_inblck" style='float:right; margin-right: 15%'>
-                            <div class="radio" >
-                              <label for="agreeUseMyInfo1">
-                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
-                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                <span class="txt">예</span>
-                              </label>
-                              <label for="agreeUseMyInfo2">
-                                <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
-                                <span class="cr" onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"><i class="cr-icon fa fa-circle"></i></span>
-                                <span class="txt">아니오</span>
-                              </label>
-                            </div>
-                          </article>
-                          
-                          <!-- 내용보기 가리기 -->
-                          <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" 
-                          data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                          
-                          <div class="moreView">
-                            <article class="moreDoc collapse show" id="singoPerson" style="display: none;">
-                                <h4>1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
-                                <p>도로정비 자동화 서비스는 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
-                                <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
-                                <ul>
-                                    <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
-                                    <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
-                                    <li>다. 도로정비 자동화 정책지원 도로정비 자동화 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
-                                </ul>
-                            </article>
-                          </div>
-                        </td>
-                      </th>
-                    </tbody>
-                  {% comment %} </table> {% endcomment %}
+            </td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid #ccc;">
+            <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
+            <td>
+              <div class="choose">
+                <label class="file-label" for="chooseFile">파일 선택</label>
+                <input class="file" id="chooseFile"
+                  type="file" 
+                  onchange="dropFile.handleFiles(this.files)"
+                  accept="image/png, image/jpeg, image/gif">
+                <input type="reset" id="fileReset" style="display: none;"> 
+                <label class="reset-label" for="fileReset">파일 제거</label>
+    
+                <!-- 업로드 파일 정보 테이블 -->
+                <table id="imgfile-table">
+                  <tr>
+                    <th class="fn-th" scope="row">파일 이름</th>
+                    <th class="fs-th" scope="row">파일 크기</th>
+                  </tr>
+                  <tr>
+                    <td id="filename"></td>
+                    <td id="filesize"></td>
+                  </tr>
+                </table>
+                
+              </div>
+    
+                <div class="upload-box">
+                  <div id="drop-file" class="drag-file">
+                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                    <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
+                    <img src="" alt="미리보기 이미지" class="preview" id="preview">
+                  </div>
                 </div>
-              </br>
-              <div class="btn-sub" style='float:right;'>
-                <button type="submit" class="btn-s" style="color:white">등록</button>
-                <button type="button" class="btn-btn" style="color:white"><a href="/post" style="color:white">취소</a></button>
+            </td>
+          </tr>
+
+          <tr style="border-bottom: 1px solid #ccc;">
+            <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">신고 내용</td>
+            <td>
+              <form action="write.jsp" method="post">
+                <div class="form-group">
+                  <textarea class="form-text" rows="7" id="content" name="content" placeholder="신고할 내용을 작성하세요. (*내용을 입력하기 전에 신고 유형을 선택해 주세요)"></textarea>
+                </div>
+              </form>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">개인정보 수집 동의</td>
+            <td>
+              <article style="float:left; margin-top: 15px; margin-left: 40px;">
+                <div class="radio">
+                  <label for="agreeUseMyInfo1">
+                    <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo1" value="Y">
+                    <span onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','Y'); return false;}" style="opacity: 0;"></span>
+                    <span class="txt">예</span>
+                  </label>
+                  <label for="agreeUseMyInfo2">
+                      <input type="radio" name="agreeUseMyInfo" id="agreeUseMyInfo2" value="N" checked="">
+                      <span onkeypress="if(event.keyCode==13) {javascript:$$.KeyCheck('agreeUseMyInfo','N'); return false;}" style="opacity: 0;"></span>
+                      <span class="txt">아니오</span>
+                  </label>
+                </div>
+              </article>
+  
+              <!-- 내용보기 가리기 -->
+              <button type="button" class="button btnWmd moreBtn" data-toggle="collapse" data-target="#singoPerson" aria-expanded="false" aria-controls="singoPerson" onclick="toggleContent()">내용보기  
+              <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+              
+              <div class="moreView">
+                <article class="moreDoc collapse done" id="singoPerson" style="display: none;">
+                  <h4 style="font-size:17px; color:#666;">1. 개인정보의 수집 및 이용 목적(개인정보보호법 제15조)</h4>
+                  <p>도로정비 자동화 시스템은 관계법령 등에서 정하는 소관 업무의 수행을 위하여 다음과 같이 개인정보를 수집 및 이용합니다. 수집된 개인정보는 정해진 목적 이외의 용도로는 이용되지 않으며 수집 목적이 변경될 경우 사전에 알리고 동의를 받을 예정입니다. </p>
+                  <p>※ 관계법령 등 : 민원사무 처리에 관한 법률 및 동법 시행령, 행정안전부의 설치와 운영에 관한 법률, 전자정부법 및 동법 시행령 등</p>
+                  <ul>
+                      <li>가. 민원사무 접수·처리·사후관리 서비스 제공민원신청서에 포함된 개인정보는 민원의 접수·처리 등 소관 업무 수행을 위해 행정·공공기관에서 이용합니다.</li>
+                      <li>나. 타 행정·공공기관 시스템 이용민원사무의 전자적 처리를 위해 내부적으로 타 시스템 연계 및 이용 시 개인정보를 이용합니다.</li>
+                      <li>다. 도로정비 자동화 시스템 정책지원 도로정비 자동화 시스템 서비스 향상 및 정책평가를 위하여 접수된 민원은 관계 법령에 따라 분석·평가 및 처리결과의 사후관리를 시행합니다.</li>
+                  </ul>
+                  <br>
+                  <h4 style="font-size:17px; color:#666;">2. 수집하는 개인정보의 항목(개인정보보호법 제15조, 제16조)</h4>
+                  <ul>
+                      <li>가. 필수항목: 위치 정보</li>
+                      <li>나. 선택항목: 성명, 기업명, 이메일 </li>
+                      <li>다. 자동수집항목: IP(Internet Protocol)주소, 이용내용의 기록- 부정한 방법으로 타인명의를 사용하는 경우에 대비하기 위해 정보이용내역 등을 자동수집 합니다.</li>
+                  </ul>
+                  <p>※ 부정한 방법으로 타인명의 사용 시, 주민등록법 제37조(벌칙)에 의해 처벌 받을 수 있습니다. </p>
+                  <br>
+                  <h4 style="font-size:17px; color:#666;">3. 개인정보의 보유 및 이용기간(공공기록물 관리에 관한 법률 시행령 제26조)</h4>
+                  <p>도로정비 자동화 시스템은 원칙적으로 개인정보 보존기간이 경과하거나, 처리목적이 달성된 경우에는 지체 없이 개인정보를 파기합니다. 다만, 다른 법령에 따라 보존하여야 하는 경우에는 그러하지 않을 수 있습니다.</p>
+                  <ul>
+                      <li><strong class="useAgreeFont2">1) 신고, 제안: 10년</strong></li>
+                      <li><strong class="useAgreeFont2">2) 회원정보: 회원탈퇴시 즉시 파기</strong></li>
+                      <li><strong class="useAgreeFont2">3) 자동수집항목 중 IP주소: 1년</strong></li>
+                  </ul>
+                  <br>
+                  <h4 style="font-size:17px; color:#666;">4. 동의를 거부할 권리가 있다는 사실 및 동의 거부에 따른 불이익 내용(개인정보보호법 제16조)</h4>
+                  <p>민원 신청 시 수집하는 필요한 최소한의 정보 외의 개인정보 수집에 동의를 거부할 권리가 있으나 최소한의 개인정보 수집동의 거부 시에는 민원 신청 서비스가 제한됩니다.</p>
+                </article>
               </div>
-            </form>
-          </div>
-            
-            <!--<ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-            </ul>
-            <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
-            </p>
-            <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
-            </p>-->
+            </td>
+          </tr>
 
+        </table>
+
+        <div class="btn-sub">
+          <button type="button" class="btn-btn"><a href="/post" style="color:white">이전 페이지로</a></button>
+          <button type="submit" class="btn-s">등록하기</button>
         </div>
+    </div>
+            
+    </section>
+    <!-- End Service Details Section -->
 
-      </div>
-    </section><!-- End Service Details Section -->
-
-  </main><!-- End #main -->
+  </main>
+  <!-- End #main -->
 
   
   
@@ -461,18 +459,24 @@
     // 개인정보 수집 동의 내용보기 버튼
     function toggleContent() {
       var singoPerson = document.getElementById("singoPerson");
-      var button = document.querySelector(".moreBtn");
-  
+      var moreBtn = document.querySelector(".moreBtn");
+      var moreDoc = document.querySelector('.moreDoc');
+      var angleIcon = document.querySelector('.moreBtn i');
+
       if (singoPerson.style.display === "none") {
         // 숨겨진 상태일 때 보이도록 변경
         singoPerson.style.display = "block";
-        button.classList.add("on"); // 버튼 스타일 변경
+        moreBtn.classList.add("on");
+        moreBtn.innerHTML = '내용닫기  <i class="fa fa-angle-up" aria-hidden="true"></i>';
       } else {
         // 보여지는 상태일 때 숨기도록 변경
         singoPerson.style.display = "none";
-        button.classList.remove("on"); // 버튼 스타일 변경
-        }
+        moreBtn.classList.remove("on");
+        moreBtn.innerHTML = '내용보기  <i class="fa fa-angle-down" aria-hidden="true"></i>';
       }
+    }
+    
+    document.querySelector('.moreBtn').addEventListener('click', toggleContent);
 
     
   </script>
