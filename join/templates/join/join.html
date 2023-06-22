@@ -97,7 +97,8 @@
     
     <!-- wrapper -->
     <div>      
-      <div id="create-content">
+      <div class="create" id="create-content">
+        <h2 style="text-align: center;">Join us</h2>
         <!-- ID -->
         <form method="post">
           {% csrf_token %}
@@ -141,8 +142,8 @@
             {{ form.phone }}
           </div>
           <div class="error_next_box" style="display:none;"></div>
-
-          <button type="submit">Create</button>
+          <br>
+          <button type="submit" class="joinus">Create</button>
         </form>
       </div>
       

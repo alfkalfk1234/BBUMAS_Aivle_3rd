@@ -156,18 +156,20 @@
                   <tr>
                     <th class="checkbox-cell"></th>
                     <th>시간</th>
-                    <th>위치</th>
+                    <th>위도</th>
+                    <th>경도</th>
                     <th>파손 내용</th>
-                    <th>관련 부서</th>
+                    <!-- <th>관련 부서</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   {% comment %} <tr>
                     <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>9:00 AM</td>
-                    <td>도로 A</td>
-                    <td>포트홀 발생</td>
-                    <td>도로 관리팀</td>
+                    <td>{{ result.time }}</td>
+                    <td>{{ result.latitude }}</td>
+                    <td>{{ result.longitude }}</td>
+                    <td>{{ result.class_name }}</td>
+                    <!-- <td>도로 관리팀</td> -->
                   </tr>
                   <!-- 다른 행들도 동일한 형식으로 추가 --> {% endcomment %}
                   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>

@@ -11,5 +11,4 @@ class UserForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'id': 'name'}),
             'email': forms.EmailInput(attrs={'id': 'email'}),
             'phone': forms.TextInput(attrs={'id': 'phone'}),
-            
         }
