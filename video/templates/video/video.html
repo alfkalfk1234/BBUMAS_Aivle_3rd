@@ -145,7 +145,6 @@
   <script>
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
-    const selectedFile = document.getElementById('selectedFile');
     const fileReset = document.getElementById('fileReset');
     const fileUpload = document.getElementById('fileUpload');
 
@@ -176,7 +175,6 @@
 
     fileReset.addEventListener('click', function() {
       fileInput.value = ''; // 파일 선택 초기화
-      // selectedFile.textContent = '파일 이름: (선택된 파일 없음)'; // 선택한 파일 초기화
       filename.textContent = '';
       filesize.textContent = '';
     });
@@ -197,8 +195,6 @@
         filename.textContent = fileName;
         filesize.textContent = fileSize;
 
-        // selectedFile.textContent = `파일 이름: ${fileName} (${fileSize})`;
-
         // 동영상 파일 업로드 처리
         console.log('압축 파일 업로드:', file);
 
@@ -209,7 +205,6 @@
         // 동영상 파일 업로드 처리
         console.log('영상 파일 업로드:', file);
        } else {
-        // selectedFile.textContent = '파일명: (유효한 동영상 파일이 아님)';
         console.log('유효한 동영상 파일이 아닙니다.');
         alert("압축 파일이나 동영상 파일을 첨부하세요.");
       }

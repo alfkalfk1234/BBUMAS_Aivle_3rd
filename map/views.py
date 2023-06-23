@@ -17,6 +17,4 @@ def map_view(request):
     locations = Location_test.objects.all()
     location_list = [[loc.latitude, loc.longitude, loc.detect_type] for loc in locations]
     
-    print(location_list)  # location_list 값을 콘솔에 출력
-    
     return render(request, 'map/map.html', {'locations': location_list})
