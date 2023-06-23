@@ -43,6 +43,19 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# AWS S3 설정
+AWS_ACCESS_KEY_ID = '여기에_액세스_키_ID_입력'
+AWS_SECRET_ACCESS_KEY = '여기에_시크릿_액세스_키_입력'
+AWS_STORAGE_BUCKET_NAME = '여기에_S3_버킷_이름_입력'
+AWS_S3_REGION_NAME = '여기에_S3_버킷의_지역_입력'
+
+# 업로드된 파일 저장 위치
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Django 프로젝트 내에서 사용할 미디어 파일 경로
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 ROOT_URLCONF = "aivle27.urls"
 
 TEMPLATES = [
