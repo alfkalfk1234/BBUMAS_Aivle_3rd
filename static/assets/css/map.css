@@ -3,7 +3,7 @@
 }
 
 #damage-table {
-  width: 70%;
+  width: 90%;
   margin-left: 20px;
   border-collapse: collapse;
   table-layout: fixed;
@@ -21,6 +21,7 @@
   padding: 8px;
   width: 25%;
   font-size: 0.8em;
+  text-align: center;
 }
 
 #damage-table th {
@@ -28,7 +29,8 @@
 }
 
 #damage-table thead tr {
-  background-color: #808080;
+  /*background-color: #808080;*/
+  background-color: #6685b362;
 }
 
 #damage-table tbody tr {
@@ -45,6 +47,12 @@
 
 .checkbox-cell {
   width: 5%;
+}
+
+.checkbox-cell input[type="checkbox"] {
+  position: relative;
+  left: 8%;
+  top: 3%
 }
 
 .checkbox-cell2 {
