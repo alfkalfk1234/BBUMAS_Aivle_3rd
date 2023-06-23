@@ -14,10 +14,9 @@ def get_locations(request):
 
 # DB에서 정보 가져와서 리스트로 변환 후 html로 정보 전송
 def map_view(request):
-    # 모든 Location_test 객체를 가져옵니다.
-    locations = Location_test.objects.all() # Location_test 라는 모델을 만든 뒤에 모델을 불러와서 DB 연동
+    locations = Location_test.objects.all()
+    location_list = [[loc.latitude, loc.longitude, loc.detect_type] for loc in locations]
     
-    # 가져온 객체를 위도, 경도, 객체 ID의 리스트로 변환합니다.
-    location_list = [[loc.latitude, loc.longitude, loc.id] for loc in locations]
+    print(location_list)  # location_list 값을 콘솔에 출력
     
     return render(request, 'map/map.html', {'locations': location_list})
