@@ -99,18 +99,20 @@
               <br>
               <!-- <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p> -->
     
-              <div class="container" data-aos="fade-up">
+              <!--<div class="container" data-aos="fade-up">
                 <form id="search-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                     <input id="search-input" type="text" class="form-control" placeholder="점검이 필요한 도시를 검색해보세요.">
                     <button type="submit" class="btn btn-primary" >Search</button>
                 </form>
-              </div>
+              </div>-->
 
               <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
                     <p>파손 검출량</p>
+                    <hr style="width: 50%; position: relative; left: 24%; border: none;
+                    border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
     
@@ -118,6 +120,8 @@
                   <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
                     <p>신고 건수</p>
+                    <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
+                    border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
     
@@ -125,6 +129,8 @@
                   <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
                     <p>누적 처리 건수</p>
+                    <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
+                    border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
     
@@ -132,6 +138,8 @@
                   <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
                     <p>운행 차량</p>
+                    <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
+                    border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
     
@@ -144,6 +152,7 @@
     
           </div>
         </div>
+        <br>
 
         <div>
           <div id="map" style="width: 48%; height: 600px; float: left; margin-right: 4%;"></div>
@@ -153,28 +162,28 @@
                 <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
                 <thead>
                   <tr>
-                    <th class="checkbox-cell"></th>
-                    <th>시간</th>
-                    <th>위도</th>
-                    <th>경도</th>
+                    <th class="checkbox-cell" style="width: 6%;"></th>
+                    <th> 시간</th>
+                    <th style="width: 15%;">위치</th>
+                    <!--<th>경도</th>-->
                     <th>파손 내용</th>
-                    <th>관련 부서</th>
+                    <th style="width: 15%;">관련 부서</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>시간1</td>
-                    <td>위도1</td>
-                    <td>경도1</td>
-                    <td>파손내용1</td>
-                    <td>관련부서1</td>
+                    <td class="checkbox-cell"><input type="checkbox" style="text-align: center;"></td>
+                    <td>2023. 06. 20. 03. 02. 23</td>
+                    <td>가수원동</td>
+                    <!--<td>경도1</td>-->
+                    <td>도로 표지 손상</td>
+                    <td>도로 교통과</td>
                   </tr>
                   <tr>
                     <td class="checkbox-cell"><input type="checkbox"></td>
                     <td>시간2</td>
-                    <td>위도2</td>
-                    <td>경도2</td>
+                    <td>위치</td>
+                    <!--<td>경도2</td>-->
                     <td>파손내용2</td>
                     <td>관련부서2</td>
                   </tr>

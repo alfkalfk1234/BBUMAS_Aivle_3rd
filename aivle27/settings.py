@@ -83,7 +83,7 @@ WSGI_APPLICATION = "aivle27.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aivle27',
+        'NAME': 'aivle27_big',
         'USER': 'admin',
         'PASSWORD': 'aivle202303',
         'HOST': 'database-big1.cvafnevemvap.ap-northeast-2.rds.amazonaws.com',
