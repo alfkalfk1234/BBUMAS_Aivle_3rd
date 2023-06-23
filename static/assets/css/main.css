@@ -59,8 +59,19 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-파일 업로드 
+파일 업로드 (service-details)
 ------------------------------------------------*/
+#bd-table {
+  width: 1000px;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-bottom: 20px;
+  border-top: 3px solid #c6c9cf;
+  border-bottom: 3px solid #c6c9cf;
+}
+
 .title input[type='text']{
   width: 90%;
   position: relative;
@@ -73,36 +84,47 @@ h6 {
   margin-bottom: 4px;
 }
 
-.choose {
-  /* display: flex; */
+/* .choose {
   align-items: center;
   position: relative;
   left: 50%;
   transform: translate(-50%);
   width: 100%;
   height: 40%;
-}
+  margin-top: 10px;
+} */
 
-.file-label {
-  width: 100px;
-  left: -29%;
-  position: relative;
-  background-color: #f7f7f7;
+.file-label,
+.reset-label,
+.moreBtn,
+.select-btn,
+.reset-btn {
+  background-color: #f5f5f5;
   border: 1px solid #ccc;
-  width: 120px;
-  height: 38px;
   color: #666;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
-  padding: 8px;
   border-radius: 2px;
   cursor: pointer;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
-.file-label:hover {
-  background: #f7f7f7bd;
-  transition: 0.4s;
+.file-label,
+.reset-label {
+  width: 120px;
+  left: -29%;
+  position: relative;
+  margin-top: 10px;
+  padding: 8px;
+}
+
+.file-label:hover,
+.reset-label:hover,
+.select-btn:hover,
+.reset-btn:hover,
+.moreBtn:hover {
+  background: #f7f7f781;
+  transition: 0.3s;
 }
 
 .file {
@@ -112,29 +134,6 @@ h6 {
 #selectFile {
   margin-left: 20px;
   width: 400px;
-}
-
-.reset-label {
-  width: 100px;
-  left: -29%;
-  position: relative;
-  margin-top: 10px;
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  width: 120px;
-  height: 38px;
-  color: #666;
-  font-size: 15px;
-  text-align: center;
-  padding: 8px;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.reset-label:hover {
-  background: #f7f7f7bd;
-  transition: 0.4s;
 }
 
 .upload-box {
@@ -162,8 +161,7 @@ h6 {
   margin: 10px;
 }
 .upload-box .drag-file.highlight {
-  border: 2px dashed rgba(13, 66, 255, 0.8);
-  text-align: center;
+  border-color: var(--color-secondary);
 }
 .upload-box .drag-file .image {
   width: 40px;
@@ -177,25 +175,9 @@ h6 {
   display: none;
   position: absolute;
   left: 0;
-  height: 0;
   width: 100%;
   height: 100%;
   text-align: center;
-}
-
-.cancel-label {
-  background-color: #a9a8a8;
-  color: #fff;
-  text-align: center;
-  padding: 11px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.cancel-label:hover {
-  background: #ccc;
-  color: #fff;
-  transition: 0.4s;
 }
 
 .btn-sub {
@@ -204,46 +186,39 @@ h6 {
   left: 50%;
   transform: translate(-50%);
 }
-
-.btn-btn {
-  width: 140px;
-  height: 50px;
-  background-color: #0e1d345b;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-.btn-btn:hover {
-  background: #0e1d346e;
-  color: #fff;
-  transition: 0.4s;
-}
-
+.btn-btn,
 .btn-s {
   width: 140px;
   height: 50px;
-  background-color: #0e1d34d2;
   color: #fff;
   text-align: center;
   padding: 10px 0;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: 0.4s;
+  transition: 0.3s;
 }
-
-.btn-s:hover {
-  background: #0e1d34;
+.btn-btn {
+  background-color: #0e1d3444;
+}
+.btn-btn:hover {
+  background: #0e1d3449;
   color: #fff;
-  transition: 0.4s;
+  transition: 0.3s;
+}
+.btn-s,
+.upload-btn {
+  background-color: #0e1d34d2;
 }
 
-.form-text {
+.upload-btn:hover,
+.btn-s:hover {
+  background: #0e1d34e8;
+  color: #fff;
+  transition: 0.3s;
+}
+
+#post_content {
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -252,17 +227,21 @@ h6 {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0.375rem 0.75rem;
+
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: var(--bs-body-color);
+
   background-color: var(--bs-body-bg);
   background-clip: padding-box;
+
   border: 1px solid #ccc;
+  border-radius: 2px;
+
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 2px;
 }
 
 .te {
@@ -273,34 +252,12 @@ h6 {
 
 
 /* 개인정보 수집동의 */
-#bd-table {
-  width: 1000px;
-  text-align: center;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  margin-bottom: 20px;
-  border-top: 3px solid #c6c9cf;
-  border-bottom: 3px solid #c6c9cf;
-}
-
 .moreBtn {
-  background: #f7f7f7;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  padding: 5px 12px 12px 12px;
   width: 125px;
   height: 35px;
-  color: #666;
-  font-size: 15px;
-  text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  transition: 0.4s;
-}
-.moreBtn:hover {
-  background: #f7f7f7bd;
-  transition: 0.4s;
+  padding: 5px 12px 12px 12px;
 }
 .radio label span.txt, .checkbox label span.txt {
   margin-left: 0;
@@ -315,7 +272,7 @@ h6 {
   text-align: left;
 }
 
-/* 테이블 */
+/* 파일 확인 테이블 */
 #imgfile-table{
   margin-top: 10px;
   position: relative;
@@ -325,13 +282,7 @@ h6 {
   width: 90%;
 }
 #imgfile-table th{
-  /* background-color: #6685b362; */
   font-weight: 1;
-}
-/* #imgfile-table td{
-  background-color: rgba(163, 182, 224, 0.15);
-} */
-#imgfile-table th{
   border: 1px solid #a9a8a8;
   vertical-align: top;
   vertical-align: bottom;
@@ -416,7 +367,7 @@ text-align: center;
 .separator3:hover {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .psot-table {
@@ -429,6 +380,11 @@ text-align: center;
 .post-btn {
   color: white;
 }
+
+#post-content {
+
+}
+
 
 /*--------------------------------------------
 faq페이지
@@ -506,7 +462,6 @@ section {
   padding-bottom: 20px;
   position: relative;
 }
-
 
 .section-header h2:after {
   content: "";
@@ -648,7 +603,7 @@ section {
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  transition: all 0.4s;
+  transition: all 0.3s;
 }
 
 .scroll-top i {
@@ -1856,7 +1811,7 @@ section {
   border-radius: 4px;
   background-color: #ffffff;
   border: none;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 #login-form > input::placeholder{
   color: #c5c4c4;
@@ -1886,13 +1841,12 @@ a.join-label {
   border-radius: 4px;
   cursor: pointer;
   border: 0;
-  /*padding: 10px;*/
-  transition: 0.4s;
+  transition: 0.3s;
 }
 a.join-label:hover{
   background: #3a658a3f;
   color: #fff;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 @keyframes animate-loading {
   0% {
@@ -2011,7 +1965,7 @@ a.join-label:hover{
   border: 0;
   padding: 10px 35px;
   color: #fff;
-  transition: 0.4s;
+  transition: 0.3s;
   border-radius: 5px;
 }
 
@@ -2319,7 +2273,7 @@ a.join-label:hover{
 video.html
 */
 #file-table{
-  margin-top: 10px;
+  margin-top: 20px;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -2327,11 +2281,11 @@ video.html
   width: 600px;
 }
 #file-table th{
-  background-color: #6685b362;
+  border: 1px solid #a9a8a8;
+  background-color: #97a3b3;
   font-weight: 1;
-}
-#file-table td{
-  background-color: rgba(163, 182, 224, 0.15);
+  color: #fff;
+  padding: 10px;
 }
 #file-table th,td{
   vertical-align: top;
@@ -2366,27 +2320,22 @@ video.html
   left: 50%;
   transform: translate(-50%);
   width: 600px;
+  margin-top: 10px;
 }
 
 .select-btn {
-  width: 100px;
-  height: 42px;
-  background-color: #ccc;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 15px;
-  /* transition: 0.4s; */
-  font-size: 14px;
+  width: 120px;  
+  height: 38px;
+  margin-top: 10px;
+  padding: 8px;
 }
-
-/* .select-btn:hover {
-  background-color: #c5c4c4;
-  color: #fff;
-  transition: 0.4s;
-} */
+.reset-btn {
+  width: 120px;
+  height: 38px;
+  margin-top: 10px;
+  margin-left: 5px;
+  padding: 8px;
+}
 
 .upload-btn {
   justify-content: space-between;
@@ -2395,41 +2344,18 @@ video.html
   transform: translateX(-50%);
   margin-top: 70px;
   width: 600px;
-  background-color: #0e1d34e6;
+  cursor: pointer;
+  margin-bottom: 20px;
+  
+  height: 50px;
   color: #fff;
   text-align: center;
-  padding: 12px;
-  border-radius: 3px;
+  padding: 10px 0;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
-  transition: 0.4s;
-  margin-bottom: 10px;
+  transition: 0.3s;
 }
-
-.upload-btn:hover {
-  background: #0e1d34;
-  color: #fff;
-  transition: 0.4s;
-}
-
-.reset-btn {
-  width: 100px;
-  background-color: #c5c4c4;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 15px;
-  margin-left: 5px;
-  /* transition: 0.4s; */
-  font-size: 14px;
-}
-
-/* .reset-btn:hover {
-  background: #c5c4c4;
-  color: #fff;
-  transition: 0.4s;
-} */
 
 #dropZone {
   top: 10px;
@@ -2443,19 +2369,8 @@ video.html
   position: relative;
   background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center 140px no-repeat;
 }
-
 #dropZone.highlight {
   border-color: var(--color-secondary);
-}
-
-#selectedFile {
-  /* height: 50px; */
-  margin-left: 10px;
-  margin-top: 15px;
-  width: 480px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .highlight {

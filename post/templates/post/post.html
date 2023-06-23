@@ -126,7 +126,14 @@
           </tr>
          </thead>
          <tbody id="board">
-        <!-- 여기에 게시물이 동적으로 추가됩니다 -->
+          {% for post in posts %}
+            <tr>
+              <td>{{ post.created_at }}</td>  
+              <td><a href={{ post.id}}> {{ post.post_title }}</a></td>
+              <td>{{ post.author }}</td>
+
+            </tr>
+          {% endfor %}
          </tbody>
         </table>
         <hr class="psot-table">

@@ -2,9 +2,13 @@ from django import forms
 from .models import Post, Photo
 
 class PostForm(forms.ModelForm):
+    latitude = forms.FloatField(widget=forms.HiddenInput())
+    longitude = forms.FloatField(widget=forms.HiddenInput())
+    report_type = forms.ChoiceField(choices=Post.REPORT_TYPES, initial='none')
+
     class Meta:
         model = Post
-        fields = ['post_title', 'post_content', 'post_image']  # 'post_image'를 추가하세요.
+        fields = ['post_title', 'post_content', 'post_image', 'latitude', 'longitude','report_type']  # 'post_image'를 추가하세요.
         
         widgets = {
             'post_title': forms.TextInput(
