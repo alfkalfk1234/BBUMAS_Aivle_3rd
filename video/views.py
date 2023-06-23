@@ -13,6 +13,9 @@ from datetime import datetime
 def index(request):
     return render(request, 'video/video.html')
 
+def video_result(request):
+    return render(request, 'video/video_result.html')
+
 def analyze_video(video_path):
     # YOLOv8 analysis code
     yolov8_model_path = 'video/tool/custom_yolov8m_0619.pt'
