@@ -157,7 +157,7 @@
         <div>
           <div id="map" style="width: 48%; height: 600px; float: left; margin-right: 4%;"></div>
           <div style="width: 48%; height: 600px; overflow-y: auto; float: right">
-            <form>
+            <form method="POST" action="{% url 'video:video' %}">
               <table id="damage-table">
                 <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
                 <thead>
@@ -165,78 +165,54 @@
                     <th class="checkbox-cell" style="width: 6%;"></th>
                     <th> 시간</th>
                     <th style="width: 15%;">위치</th>
-                    <!--<th>경도</th>-->
                     <th>파손 내용</th>
                     <th style="width: 15%;">관련 부서</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="checkbox-cell"><input type="checkbox" style="text-align: center;"></td>
-                    <td>2023. 06. 20. 03. 02. 23</td>
-                    <td>가수원동</td>
-                    <!--<td>경도1</td>-->
-                    <td>도로 표지 손상</td>
-                    <td>도로 교통과</td>
-                  </tr>
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>시간2</td>
-                    <td>위치</td>
-                    <!--<td>경도2</td>-->
-                    <td>파손내용2</td>
-                    <td>관련부서2</td>
-                  </tr>
-                  {% for result in results %}
-                  <tr>
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>{{ result.time }}</td>
-                    <td>{{ result.latitude }}</td>
-                    <td>{{ result.longitude }}</td>
-                    <td>{{ result.class_name }}</td>
-                    <td>{{ result.where }}</td>
-                  </tr>
-                  {% endfor %}
-                  <!-- 다른 행들도 동일한 형식으로 추가 -->
-                  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
 
-                  <!-- <script>
-                    var locationsString = '{{ locations|safe }}'; // JSON 형식의 문자열로 가정
-                    var geocoder = new kakao.maps.services.Geocoder();  
-                    var locations = JSON.parse(locationsString);
-                    for (var i = 0; i < locations.length; i++) {
-                      var position = new kakao.maps.LatLng(locations[i].latitude, locations[i].longitude);
-                      getAddress_table(position);
-                    }
-                    
-                    function getAddress_table(position) {
-                      geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
-                        if (status === kakao.maps.services.Status.OK) {
-                          for (var i = 0; i < result.length; i++) {
-                            // 행정동의 region_type은 'H'입니다.
-                            if (result[i].region_type === 'H') {
-                              var address = result[i].region_3depth_name;
-                    
-                              // 테이블에 행 추가
-                              var table = document.getElementById('damage-table');
-                              var row = table.insertRow(-1);
-                              var cell1 = row.insertCell(0);
-                              var cell2 = row.insertCell(1);
-                              var cell3 = row.insertCell(2);
-                              var cell4 = row.insertCell(3);
-                              var cell5 = row.insertCell(4);
-                              cell1.innerHTML = '<td class="checkbox-cell"><input type="checkbox"></td>';
-                              cell2.innerHTML = '<td>9:00 AM</td>';
-                              cell3.innerHTML = '<td>' + address + '</td>';
-                              cell4.innerHTML = '<td>포트홀 발생</td>';
-                              cell5.innerHTML = '<td>도로 관리팀</td>';
-                              break;
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
+                    <script>
+                      // var locationsString = '{{ locations|safe }}'; // JSON 형식의 문자열로 가정
+                      var geocoder = new kakao.maps.services.Geocoder();  
+                      {% for result in results %}
+                        var position = new kakao.maps.LatLng({{ result.latitude }}, {{ result.longitude }});
+                        var time = '{{ result.time|escapejs }}';
+                        var class_name= '{{ result.class_name|escapejs }}';
+                        var where = '{{ result.where|escapejs }}';
+                        getAddress_table(position, time, class_name, where);
+                      {% endfor %}
+
+                      function getAddress_table(position, time, class_name, where) {
+                        geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                          if (status === kakao.maps.services.Status.OK) {
+                            for (var i = 0; i < result.length; i++) {
+                              // 행정동의 region_type은 'H'입니다.
+                              if (result[i].region_type === 'H') {
+                                var address = result[i].region_3depth_name;
+                                
+                                // 테이블에 행 추가
+                                var table = document.getElementById('damage-table');
+                                var row = table.insertRow(-1);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                var cell5 = row.insertCell(4);
+                                cell1.innerHTML = '<td class="checkbox-cell"><input type="checkbox"></td>';
+                                cell2.innerHTML = '<td>' + time + '</td>';
+                                cell3.innerHTML = '<td>' + address + '</td>';
+                                cell4.innerHTML = '<td>' + class_name + '</td>';
+                                cell5.innerHTML = '<td>' + where + '</td>';
+                                break;
+                              }
                             }
                           }
-                        }
-                      });
-                    }
-                  </script> -->
+                        });
+                      }
+                    </script>
+                  </tr>
                 </tbody>
               </table>
             </form>
@@ -250,8 +226,8 @@
                 <p>대전광역시</p>
               </div>        
               <div class="button-group" style="margin-left: auto;">
-                <button type="button">저장</button>
-                <button type="button">취소</button>
+                <button type="submit">저장</button>
+                <button type="button"><a href="/video">취소</a></button>
               </div>   
             </div>
           </div>
