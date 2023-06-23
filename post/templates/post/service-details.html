@@ -134,31 +134,17 @@
               </td>
             </tr>
 
-
-            
-            <div class="title">
-                <dt style=" text-align: center;">제목</dt>
-                <dd>{{ form.post_title }}</dd>
-            </div>
-          
-            <div class="choose">
-                <label class="file-label" for="chooseFile">파일 선택</label>
-                {{ form.post_image }}
-                <input type="reset" id="fileReset" style="display: none;"> 
-                <label class="reset-label" for="fileReset">파일 제거</label>
-            </div>
-              
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3;">제목</td>
               <td>
                 <div class="title">
-                  <dd><input type="text" placeholder="제목을 입력하세요."></dd>
+                  <dd>{{ form.post_title }}</dd>
                 </div>
               </td>
             </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
-              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
+              <td style="background-color: #edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
               <td>
                 <div class="choose">
                   <label class="file-label" for="chooseFile">파일 선택</label>
@@ -194,7 +180,6 @@
               <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">신고 내용</td>
               <td>
                   <div class="form-group">
-                    <label class="te" for="content" style="font-weight: 700;">신고 내용</label>
                     {{ form.post_content }}
                   </div>
               </td>

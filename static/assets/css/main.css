@@ -2368,7 +2368,7 @@ video.html
   width: 600px;
 }
 
-.select-label {
+.select-btn {
   width: 100px;
   height: 42px;
   background-color: #ccc;
@@ -2382,13 +2382,13 @@ video.html
   font-size: 14px;
 }
 
-/* .select-label:hover {
+/* .select-btn:hover {
   background-color: #c5c4c4;
   color: #fff;
   transition: 0.4s;
 } */
 
-.upload-label {
+.upload-btn {
   justify-content: space-between;
   position: relative;
   left: 50%;
@@ -2405,7 +2405,7 @@ video.html
   margin-bottom: 10px;
 }
 
-.upload-label:hover {
+.upload-btn:hover {
   background: #0e1d34;
   color: #fff;
   transition: 0.4s;
