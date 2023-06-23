@@ -6,6 +6,16 @@
         <h1>게시글 개별 페이지입니다</h1>
         <p>{{post.post_title}}</p>
         <p>{{post.post_content}}</p>
-        <p>{{post.post_image}}</p>
+        {% if post.post_image %}
+            <img src="{{post.post_image.url}}" alt="Post image">
+        {% else %}
+            <p>No image uploaded for this post</p>
+        {% endif %}
+        <p>{{post.author}}</p>
+        <p>{{post.created_at}}</p>
+        <p>{{post.post_latitude}}</p>
+        <p>{{post.post_longitude}}</p>
+        <p>{{post.report_type}}</p>
+        <p></p>
     </body>
 </html>
