@@ -99,19 +99,23 @@
               <br>
               <!-- <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p> -->
     
-              <!--<div class="container" data-aos="fade-up">
+              <div class="container" data-aos="fade-up" style = 'display:none'>
                 <form id="search-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
                     <input id="search-input" type="text" class="form-control" placeholder="점검이 필요한 도시를 검색해보세요.">
                     <button type="submit" class="btn btn-primary" >Search</button>
                 </form>
-              </div>-->
+              </div>
 
               <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end=
+                      {% with last_result=results|last %}
+                      {{ last_result.id }}
+                      {% endwith %} 
+                    data-purecounter-duration="1" class="purecounter"></span>
                     <p>파손 검출량</p>
-                    <hr style="width: 50%; position: relative; left: 24%; border: none;
+                    <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
                     border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
@@ -158,15 +162,15 @@
           <div id="map" style="width: 48%; height: 600px; float: left; margin-right: 4%;"></div>
           <div style="width: 48%; height: 600px; overflow-y: auto; float: right">
             <form method="POST" action="{% url 'video:video' %}">
-              <table id="damage-table">
+              <table id="damage-table" style="width: 95%;">
                 <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
                 <thead>
                   <tr>
-                    <th class="checkbox-cell" style="width: 6%;"></th>
-                    <th> 시간</th>
-                    <th style="width: 15%;">위치</th>
-                    <th>파손 내용</th>
-                    <th style="width: 15%;">관련 부서</th>
+                    <th class="checkbox-cell" style="width: 5%; text-align: center;"></th>
+                    <th style="width: 30%; text-align: center;">시간</th>
+                    <th style="width: 13%; text-align: center;">위치</th>
+                    <th style="text-align: center;">파손 내용</th>
+                    <th style="width: 15%; text-align: center;">관련 부서</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -200,11 +204,11 @@
                                 var cell3 = row.insertCell(2);
                                 var cell4 = row.insertCell(3);
                                 var cell5 = row.insertCell(4);
-                                cell1.innerHTML = '<td class="checkbox-cell"><input type="checkbox"></td>';
-                                cell2.innerHTML = '<td>' + time + '</td>';
-                                cell3.innerHTML = '<td>' + address + '</td>';
-                                cell4.innerHTML = '<td>' + class_name + '</td>';
-                                cell5.innerHTML = '<td>' + where + '</td>';
+                                cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox"></td>';
+                                cell2.innerHTML = '<td style="text-align: center;">' + time + '</td>';
+                                cell3.innerHTML = '<td style="text-align: center;">' + address + '</td>';
+                                cell4.innerHTML = '<td style="text-align: center;">' + class_name + '</td>';
+                                cell5.innerHTML = '<td style="text-align: center;">' + where + '</td>';
                                 break;
                               }
                             }
@@ -236,27 +240,23 @@
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
                     center: new kakao.maps.LatLng({{ results.0.latitude }}, {{ results.0.longitude }}), // 지도의 중심좌표
-                    level: 5 // 지도의 확대 레벨
+                    level: 3 // 지도의 확대 레벨
                 };
             
             // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
             var map = new kakao.maps.Map(mapContainer, mapOption); 
             var geocoder = new kakao.maps.services.Geocoder();
-
           // 검색 폼과 입력 필드를 변수로 가져옵니다
             var searchForm = document.getElementById('search-form');
             var searchInput = document.getElementById('search-input');
-
             // 검색 폼의 제출 이벤트를 처리합니다
             searchForm.addEventListener('submit', function(e) {
               e.preventDefault();
-
               // 입력된 주소로 좌표를 검색합니다
               geocoder.addressSearch(searchInput.value, function(result, status) {
                   // 정상적으로 검색이 완료됐으면 
                   if (status === kakao.maps.services.Status.OK) {
                       var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
                       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                       map.setCenter(coords);
                   } else {
@@ -273,7 +273,6 @@
                 var submitEvent = new Event('submit');
                 searchForm.dispatchEvent(submitEvent);
             }
-
               // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
               var positions = [
                   {% for result in results %}
@@ -283,18 +282,15 @@
                   },
                   {% endfor %}
               ];
-
             // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
               var infowindowImage = new kakao.maps.InfoWindow({
                 removable: true // 인포윈도우를 닫을 수 있도록 설정합니다
               });
-
               var fileNames = [
                 {% for result in results %}
-                '{{ result.file_name }}',
+                  '{{ result.file_name|escapejs }}',
                 {% endfor %}
               ];
-
               for (var i = 0; i < positions.length; i++) {
                 // 마커를 생성합니다
                 var marker = new kakao.maps.Marker({
@@ -327,17 +323,21 @@
               };
             } 
             
+            function goBack() {
+              window.history.back();
+            }
+
             function handleClickMarker(map, marker, infowindowImage, imageSrc) {
               return function() {
                   var content =
-                      '<div style="padding:5px;">' +
-                      '<img src="' + imageSrc + '" width="200" height="150">' +
+                      '<div>' +
+                      '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
+                      '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
                       '</div>';
                   infowindowImage.setContent(content);
                   infowindowImage.open(map, marker);
               };
             }
-
           </script>
         </div>
 
