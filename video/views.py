@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from .forms import DamageForm
+from .models import Damage
 from .models import Video,Detection
 from ultralytics import YOLO
 import os
@@ -13,8 +15,25 @@ from datetime import datetime
 def index(request):
     return render(request, 'video/video.html')
 
-def video_result(request):
-    return render(request, 'video/video_result.html')
+def video(request):
+    if request.method == 'POST':
+        form = DamageForm(request.POST)
+        if form.is_valid():
+            selected_damages = form.cleaned_data.get('damages', [])
+            for damage_id in selected_damages:
+                damage = Damage.objects.get(id=damage_id)
+                # 선택된 파손 정보를 MySQL 데이터베이스에 저장
+                damage.save_to_mysql()
+            return redirect('video')  # 저장 후 video 페이지로 이동
+    else:
+        form = DamageForm()
+
+    damages = Damage.objects.all()
+    return render(request, 'video.html', {'form': form, 'damages': damages})
+
+# def video_result(request):
+#     damages = Damage.objects.all()
+#     return render(request, 'video_result.html', {'damages': damages})
 
 def analyze_video(video_path):
     # YOLOv8 analysis code
@@ -119,36 +138,6 @@ def convert_to_degrees(coord):
 
     return round(result,7)
 
-def extract_latitude_longitude(string):
-    # 위도와 경도 값 추출
-    latitude = string['lat']
-    longitude = string['lng']
-    time = string['time']
-    lat = convert_to_degrees(latitude)
-    lng = convert_to_degrees(longitude)
-
-    return lat, lng, time
-
-def convert_to_degrees(coord):
-    # 위도 또는 경도 값에서 필요한 정보 추출
-    coord = str(coord)
-    digit = coord.split('.')
-    if len(digit[0]) > 4:
-        length = 3
-    else:
-        length = 2
-    degrees = int(coord[:length])
-    minutes = float(coord[length:])
-    # 분을 계산
-    minutes_decimal = (minutes % 100) / 60.0
-    # 도와 분을 합하여 실제 좌표 값 계산
-    result = degrees + minutes_decimal
-
-    # 북위(S), 남위(N), 서경(W)와, 동경(E)을 고려해 부호 조정
-    if coord[-1] in ['S', 'W']:
-        result *= -1
-
-    return round(result,7)
 
 def save_images(video_file_name):
     # 비디오 파일 열기
@@ -256,6 +245,8 @@ def video_upload(request):
         all.loc[all["class_name"] == '10', "class_name"] = '시선 유도봉 정상'
         
         all['where'] = '도로 교통과'
+        all['id'] = range(1, len(all) + 1)
+        print(all)
         results = all.to_dict(orient='records')
         context = {'results' : results}
         return render(request, 'video/video_result.html', context)
@@ -263,12 +254,12 @@ def video_upload(request):
         return render(request, 'video/video.html')
     
     
-def save_detection_data(latitude, longitude, time, detection_info, image_path, frame):
-    detection = Detection()
-    detection.latitude = latitude
-    detection.longitude = longitude
-    detection.time = time
-    detection.detection_info = detection_info
-    detection.image_path = image_path
-    detection.frame = frame
-    detection.save()
+# def save_detection_data(latitude, longitude, time, detection_info, image_path, frame):
+#     detection = Detection()
+#     detection.latitude = latitude
+#     detection.longitude = longitude
+#     detection.time = time
+#     detection.detection_info = detection_info
+#     detection.image_path = image_path
+#     detection.frame = frame
+#     detection.save()
