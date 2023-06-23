@@ -113,14 +113,11 @@
 
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3;">신고 유형</td>
-              <td>
+              <td style="float:left; margin: 10px; margin-left: 40px;">
                 {{ form.report_type }}
               </td>
             </tr>
 
-
-          
-              
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3;">제목</td>
               <td>
@@ -130,77 +127,70 @@
               </td>
             </tr>
 
-              <tr style="border-bottom: 1px solid #ccc;">
-                <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
-                <td>
-                  <div class="choose">
-                    <label for="post_image" class="file-label">파일 선택</label>
-                    {{ form.post_image }} 
+            <tr style="border-bottom: 1px solid #ccc;">
+              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
+              <td>
+                <label for="post_image" class="file-label">파일 선택</label>
+                {{ form.post_image }} 
+                <form id='img_form'>
+                  <input type="reset" id="fileReset" style="display: none;"> 
+                  <!-- Add this script at the end of your HTML file or inside the <head> tag -->
+                    <script>
+                      // Reset img_form function
+                      function resetImgForm() {
+                        const imgForm = document.getElementById("img_form");
+                        imgForm.reset();
+                    
+                        // Clear the filename and filesize elements
+                        document.getElementById("filename").textContent = "";
+                        document.getElementById("filesize").textContent = "";
+                    
+                        // Clear the image preview element
+                        const preview = document.getElementById("preview");
+                        preview.src = "";
+                        preview.style.display = "none";
+                    
+                        // Remove image file data
+                        let fileInput = document.querySelector('#post_image');
+                        fileInput.value = '';
+                      }
+                    </script>
+                    
+                  
+                  <!-- Use this reset button inside the img_form -->
+                  <button type="button" onclick="resetImgForm()" class='reset-label'>파일 제거</button>
+  
+                  <div>
+                    <!-- 업로드 파일 정보 테이블 -->
+                    <table id="imgfile-table">
+                      <tr>
+                        <th class="fn-th" scope="row">파일 이름</th>
+                        <th class="fs-th" scope="row">파일 크기</th>
+                      </tr>
+                      <tr>
+                        <td id="filename"></td>
+                        <td id="filesize"></td>
+                      </tr>
+                    </table>
+                    
                   </div>
-                  <form id='img_form'>
-                    <input type="reset" id="fileReset" style="display: none;"> 
-                    <!-- Add this script at the end of your HTML file or inside the <head> tag -->
-                      <script>
-                        // Reset img_form function
-                        function resetImgForm() {
-                          const imgForm = document.getElementById("img_form");
-                          imgForm.reset();
-                      
-                          // Clear the filename and filesize elements
-                          document.getElementById("filename").textContent = "";
-                          document.getElementById("filesize").textContent = "";
-                      
-                          // Clear the image preview element
-                          const preview = document.getElementById("preview");
-                          preview.src = "";
-                          preview.style.display = "none";
-                      
-                          // Remove image file data
-                          let fileInput = document.querySelector('#post_image');
-                          fileInput.value = '';
-                        }
-                      </script>
-                      
-                    
-                    <!-- Use this reset button inside the img_form -->
-                    <button type="button" onclick="resetImgForm()" class='reset-label'>파일 제거</button>
-    
-                    
-                    <div>
-                      <!-- 업로드 파일 정보 테이블 -->
-                      <table id="imgfile-table">
-                        <tr>
-                          <th class="fn-th" scope="row">파일 이름</th>
-                          <th class="fs-th" scope="row">파일 크기</th>
-                        </tr>
-                        <tr>
-                          <td id="filename"></td>
-                          <td id="filesize"></td>
-                        </tr>
-                      </table>
-                      
-                    </div>
-                  </form>
+                </form>
 
-                  <div class="upload-box">
-                    <div id="drop-file" class="drag-file">
-                      <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-                      <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
-                      <img src="" alt="미리보기 이미지" class="preview" id="preview">
-                      {{ form.post_image }}
-                    </div>
+                <div class="upload-box">
+                  <div id="drop-file" class="drag-file">
+                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                    <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
+                    <img src="" alt="미리보기 이미지" class="preview" id="preview">
+                    {{ form.post_image }}
                   </div>
-                </td>
-              </tr>
-              
+                </div>
+              </td>
+            </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">신고 내용</td>
               <td>
-                  <div class="form-group">
-                    <label class="te" for="content" style="font-weight: 700;">신고 내용</label>
-                    {{ form.post_content }}
-                  </div>
+                {{ form.post_content }}
               </td>
             </tr>
 
@@ -261,6 +251,7 @@
             </tr>
 
           </table>
+
           <input type="hidden" id="latitude" name="latitude">
           <input type="hidden" id="longitude" name="longitude">
 
