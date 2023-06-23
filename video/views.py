@@ -13,6 +13,9 @@ from datetime import datetime
 def index(request):
     return render(request, 'video/video.html')
 
+def video_result(request):
+    return render(request, 'video/video_result.html')
+
 def analyze_video(video_path):
     # YOLOv8 analysis code
     yolov8_model_path = 'video/tool/custom_yolov8m_0619.pt'
@@ -84,37 +87,6 @@ def get_latlng(path,video_path):
     
     shutil.rmtree(f'{path}/bin')
     return geo
-
-def extract_latitude_longitude(string):
-    # 위도와 경도 값 추출
-    latitude = string['lat']
-    longitude = string['lng']
-    time = string['time']
-    lat = convert_to_degrees(latitude)
-    lng = convert_to_degrees(longitude)
-
-    return lat, lng, time
-
-def convert_to_degrees(coord):
-    # 위도 또는 경도 값에서 필요한 정보 추출
-    coord = str(coord)
-    digit = coord.split('.')
-    if len(digit[0]) > 4:
-        length = 3
-    else:
-        length = 2
-    degrees = int(coord[:length])
-    minutes = float(coord[length:])
-    # 분을 계산
-    minutes_decimal = (minutes % 100) / 60.0
-    # 도와 분을 합하여 실제 좌표 값 계산
-    result = degrees + minutes_decimal
-
-    # 북위(S), 남위(N), 서경(W)와, 동경(E)을 고려해 부호 조정
-    if coord[-1] in ['S', 'W']:
-        result *= -1
-
-    return round(result,7)
 
 def extract_latitude_longitude(string):
     # 위도와 경도 값 추출
