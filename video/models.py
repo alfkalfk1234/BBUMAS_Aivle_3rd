@@ -14,3 +14,13 @@ class Detection(models.Model):
     frame = models.IntegerField()
     is_checked = models.BooleanField(default=False)
 
+class Damage(models.Model):
+    id = models.IntegerField(primary_key=True)
+    time = models.DateTimeField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    department = models.CharField(max_length=100)
+    imaga_name = models.CharField(max_length=100)
+
+    def save_to_mysql(self):
+        self.save()
