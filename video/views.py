@@ -101,7 +101,7 @@ def get_latlng(path,video_path):
         time_binarydata = geo_bin[2]
         time_converted_value = struct.unpack('<I', time_binarydata)[0]
         time_converted_value = datetime.fromtimestamp(time_converted_value)
-        formattime = time_converted_value.strftime('%Y. %m. %d. %H. %M. %S')
+        formattime = time_converted_value.strftime('%Y. %m. %d. %H시 %M분 %S초')
         geo.append({'lat':round(lat_converted_value,6),'lng':round(lng_converted_value,6), 'time':formattime})
     
     shutil.rmtree(f'{path}/bin')
