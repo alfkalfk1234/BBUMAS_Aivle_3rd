@@ -8,11 +8,10 @@ class Detection(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    timestamp = models.DateTimeField()
     detected_object = models.IntegerField()
-    image_path = models.CharField(max_length=200)
-    frame = models.IntegerField()
-    is_checked = models.BooleanField(default=False)
+    detected_time = models.DateTimeField()
+    detected_where = models.CharField(max_length=200, null=True)
+    image_path = models.URLField(max_length=200, null=True)
 
 class Damage(models.Model):
     id = models.IntegerField(primary_key=True)

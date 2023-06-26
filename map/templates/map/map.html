@@ -193,7 +193,7 @@
               }
 
               // Django View에서 넘겨받은 데이터를 JavaScript 변수로 만듭니다.
-              var locations = {{ locations|safe }};
+              var locations_post = {{ location_posts|safe }};
               // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
           
               var infowindowImage = new kakao.maps.InfoWindow({
@@ -208,14 +208,22 @@
                 '5': '{% static "assets/img/red.png" %}', 
                 '7': '{% static "assets/img/yellow.png" %}', 
                 '8': '{% static "assets/img/skyblue.png" %}', 
-                '9': '{% static "assets/img/blue.png" %}'  
+                '9': '{% static "assets/img/blue.png" %}',  
+                'bollard': '{% static "assets/img/green.png" %}', 
+                'crosswalk': '{% static "assets/img/orange.png" %}', 
+                'snowbox': '{% static "assets/img/pink.png" %}', 
+                'pothole': '{% static "assets/img/purple.png" %}', 
+                'road_barrier_damage': '{% static "assets/img/red.png" %}', 
+                'lane': '{% static "assets/img/yellow.png" %}', 
+                'speed_bump': '{% static "assets/img/skyblue.png" %}', 
+                'guide_post': '{% static "assets/img/blue.png" %}',
               };
 
 
               // 각 위치에 대해 마커를 생성하고 지도에 추가합니다.
-              for (var i = 0; i < locations.length; i++) {
-                var position = new kakao.maps.LatLng(locations[i][0], locations[i][1]);
-                var object = locations[i][2].toString(); // 객체 정보 
+              for (var i = 0; i < locations_post.length; i++) {
+                var position = new kakao.maps.LatLng(locations_post[i][0], locations_post[i][1]);
+                var object = locations_post[i][2].toString(); // 객체 정보 
 
                 var imageSrc = objectColors[object];
 
@@ -230,7 +238,7 @@
                 });
             
                 // 마커에 대한 주소를 가져오는 함수
-                getAddress(marker, position, locations[i][2]);
+                getAddress(marker, position, locations_post[i][2]);
                 }
               }
 

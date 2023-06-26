@@ -15,14 +15,14 @@ class Photo(models.Model):
 class Post(models.Model):
     REPORT_TYPES = (
         ('none', '신고 유형'),
-        ('road_damage', '도로 파손'),
-        ('road_barrier_damage', '도로 분리대 파손 또는 노후화'),
-        ('lane', '차선'),
-        ('crosswalk', '횡단보도'),
-        ('traffic_light', '신호등'),
-        ('guide_post', '시선 유도봉'),
+        ('bollard','볼라드 손상'),
+        ('crosswalk', '횡단보도 손상'),
+        ('snowbox', '제설함 손상'),
+        ('pothole', '포트홀'),
+        ('road_barrier_damage', '도로 분리대 손상'),
+        ('lane', '도로 표시 손상'),
         ('speed_bump', '방지턱'),
-        ('guardrail', '가드레일'),
+        ('guide_post', '시선 유도봉'),
     )
     post_title = models.CharField(max_length=200)
     post_content = models.TextField(null=True, blank=True)
