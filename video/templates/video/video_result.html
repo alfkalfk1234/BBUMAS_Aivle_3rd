@@ -157,38 +157,50 @@
           </div>
         </div>
         <br>
-
+        
         <div>
           <div id="map" style="width: 48%; height: 600px; float: left; margin-right: 4%;"></div>
           <div style="width: 48%; height: 600px; overflow-y: auto; float: right">
-            <form method="POST" action="{% url 'video:video' %}">
-              <table id="damage-table" style="width: 95%;">
-                <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
-                <thead>
-                  <tr>
-                    <th class="checkbox-cell" style="width: 5%; text-align: center;"></th>
-                    <th style="width: 30%; text-align: center;">시간</th>
-                    <th style="width: 13%; text-align: center;">위치</th>
-                    <th style="text-align: center;">파손 내용</th>
-                    <th style="width: 15%; text-align: center;">관련 부서</th>
-                  </tr>
-                </thead>
+            <table id="damage-table" style="width: 95%;">
+              <!--<caption>시간 위치 파손 내용 관련 부서</caption>-->
+              <thead>
+                <tr>
+                  <th class="checkbox-cell" style="width: 5%; text-align: center;"><input type="checkbox" id="checkedRows" name="checkedRows" onchange="handleChange(this, time, class_name, where, latitude, longitude)" onclick='selectAll(this)'></th>
+                  <th style="width: 30%; text-align: center;">시간</th>
+                  <th style="width: 13%; text-align: center;">위치</th>
+                  <th style="text-align: center;">파손 내용</th>
+                  <th style="width: 15%; text-align: center;">관련 부서</th>
+                </tr>
+                <script>
+                  function selectAll(selectAll)  {
+                    const checkboxes 
+                      = document.querySelectorAll('input[type="checkbox"]');
+                    
+                    checkboxes.forEach((checkbox) => {
+                      checkbox.checked = selectAll.checked
+                    })
+                  }
+                </script>
+              </head>
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <tbody>
                   <tr>
-
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
                     <script>
-                      // var locationsString = '{{ locations|safe }}'; // JSON 형식의 문자열로 가정
                       var geocoder = new kakao.maps.services.Geocoder();  
                       {% for result in results %}
                         var position = new kakao.maps.LatLng({{ result.latitude }}, {{ result.longitude }});
+                        var latitude = '{{ result.latitude|escapejs }}'
+                        var longitude = '{{ result.longitude|escapejs }}'
                         var time = '{{ result.time|escapejs }}';
                         var class_name= '{{ result.class_name|escapejs }}';
                         var where = '{{ result.where|escapejs }}';
-                        getAddress_table(position, time, class_name, where);
+                        var file_path = '{{result.file_name|escapejs}}'
+                        getAddress_table(position, time, class_name, where, latitude, longitude);
                       {% endfor %}
 
-                      function getAddress_table(position, time, class_name, where) {
+                      function getAddress_table(position, time, class_name, where, latitude, longitude) {
                         geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
                           if (status === kakao.maps.services.Status.OK) {
                             for (var i = 0; i < result.length; i++) {
@@ -204,7 +216,7 @@
                                 var cell3 = row.insertCell(2);
                                 var cell4 = row.insertCell(3);
                                 var cell5 = row.insertCell(4);
-                                cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox"></td>';
+                                cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="checkedRows" name="checkedRows" onchange="handleChange(this, time, class_name, where, latitude, longitude)"></td>';
                                 cell2.innerHTML = '<td style="text-align: center;">' + time + '</td>';
                                 cell3.innerHTML = '<td style="text-align: center;">' + address + '</td>';
                                 cell4.innerHTML = '<td style="text-align: center;">' + class_name + '</td>';
@@ -215,11 +227,90 @@
                           }
                         });
                       }
+
+                      var checkedItems = []; // 체크된 항목들을 저장할 배열
+
+                      function handleChange(checkbox, time, class_name, where, latitude, longitude) {
+                        if (checkbox.checked) {
+                          // console.log("handleChange 함수가 호출되었습니다.");
+                          // console.log(time, class_name, where, latitude, longitude);
+                          // 선택된 경우 배열에 추가
+                          checkedItems.push({
+                            time: time,
+                            class_name: class_name,
+                            where: where,
+                            latitude: latitude,
+                            longitude: longitude
+                          });
+                        } else {
+                          // 선택 해제된 경우 배열에서 제거
+                          var index = checkedItems.findIndex(function(item) {
+                            return (
+                              item.time === time &&
+                              item.class_name === class_name &&
+                              item.where === where &&
+                              item.latitude === latitude &&
+                              item.longitude === longitude
+                            );
+                          });
+                          if (index > -1) {
+                            checkedItems.splice(index, 1);
+                          }
+                        }
+                      }
+
+                      function sendCheckedItems() {
+                        // Ajax 요청을 보낼 URL 설정
+                        var url = "/video/video_db_save/";  
+
+                        // 선택된 항목들을 Ajax 요청의 데이터로 변환
+                        var data = {
+                          data: JSON.stringify(checkedItems)
+                        };
+                        console.log('ajaxJSON:', data)
+                        // Ajax 요청 보내기
+                        $.ajax({
+                          url: url,
+                          type: "POST",
+                          data: data,
+                          contentType: "application/json",
+                          dataType: "json",
+                          beforeSend: function(xhr) {
+                            xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));  // CSRF 토큰을 요청 헤더에 추가
+                          },
+                          success: function(response) {
+                            // 성공적으로 서버 응답을 받았을 때 수행할 작업
+                            console.log("전송 성공");
+                            // (주의) ajax handler가 존재할 때에 views.py에서 redirect나 render가 불가 해당 부분에서 처리 해야한다!!!!!!
+                            window.location.href = "/video";
+                          },
+                          error: function(xhr, status, error) {
+                            // 서버 요청이 실패했을 때 수행할 작업
+                            console.error("전송 실패");
+                          }
+                        });
+                      }
+
+                      // CSRF 토큰 값을 가져오는 함수 -> 요청에 대한 유효성 검증
+                      function getCookie(name) {
+                        var cookieValue = null;
+                        if (document.cookie && document.cookie !== '') {
+                          var cookies = document.cookie.split(';');
+                          for (var i = 0; i < cookies.length; i++) {
+                            var cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                              break;
+                            }
+                          }
+                        }
+                        return cookieValue;
+                      }
                     </script>
                   </tr>
                 </tbody>
-              </table>
-            </form>
+              </form> 
+            </table>
           </div>
           <div style="clear: both;"></div>
           <div style="margin-top: 40px;">
@@ -228,14 +319,15 @@
               <div>
                 <h4 style="margin-bottom: 0; line-height: 25px; height: 25px;">Location:</h4>
                 <p>대전광역시</p>
-              </div>        
+              </div>
               <div class="button-group" style="margin-left: auto;">
-                <button type="submit">저장</button>
-                <button type="button"><a href="/video">취소</a></button>
-              </div>   
+                <button type="button" class="btn-btn" onclick="window.location.href = '/video'" style="color:white">취소</button>
+                <button type="submit" onclick="sendCheckedItems()" class="btn-s">저장</button>
+              </div>
             </div>
           </div>
-          
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
           <script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
