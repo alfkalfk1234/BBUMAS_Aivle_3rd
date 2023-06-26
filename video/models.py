@@ -18,6 +18,7 @@ class Detection(models.Model):
     detected_object = models.CharField(max_length=200, null=True)
     detected_time = models.CharField(max_length=200, null=True)
     detected_where = models.CharField(max_length=200, null=True)
+    image_path = models.URLField(max_length=200, null=True)
     def __str__(self):
         return f"Detection {self.pk}"
 

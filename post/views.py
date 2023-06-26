@@ -28,6 +28,15 @@ def posting(request):
     return render(request, 'post/service-details.html', {'form': form})
 
 
+from django.shortcuts import redirect
+from django.views import View
+from .models import Post
+
+class PostDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        post.delete()
+        return redirect('post_list')  # 'post_list'는 게시물 목록 페이지의 URL 패턴 이름입니다.
 
 
 def post_detail(request, pk):
