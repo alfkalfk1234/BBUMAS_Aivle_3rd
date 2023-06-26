@@ -391,6 +391,7 @@
       let warningDisplayed = false;
 
       function handleFileUpload(file) {
+        let warningDisplayed = false;
         if (file) {
           const fileName = file.name;
           const fileSize = formatFileSize(file.size);
@@ -417,7 +418,7 @@
               document.getElementById('latitude').value = latitude;
               document.getElementById('longitude').value = longitude;
 
-              warningDisplayed = false; // Reset the warningDisplayed variable to false
+
             } else {
               if (!warningDisplayed) {
                 alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
@@ -440,33 +441,6 @@
       return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
     }
     
-    var fileInput = document.getElementById('photo-upload');
-
-    fileInput.addEventListener('change', function(e) {
-      var file = e.target.files[0];
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        var imageData = e.target.result;
-        var exifData = EXIF.readFromBinaryFile(imageData);
-
-        if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
-          var latitude = calculateCoordinate(exifData.GPSLatitude);
-          var longitude = calculateCoordinate(exifData.GPSLongitude);
-
-          var gpsInfo = latitude + ", " + longitude;
-          console.log("사진의 GPS 정보:", gpsInfo);
-          warningDisplayed = false;
-        } else {
-          if (!warningDisplayed) {
-            alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
-            warningDisplayed = true;
-          }
-        }
-      };
-
-      reader.readAsArrayBuffer(file);
-    });
 
     function calculateCoordinate(coordinates) {
       var degree = coordinates[0];
