@@ -313,41 +313,66 @@ h6 {
 /*-----------------------------------------------------------
 신고 게시판
 ------------------------------------------------------------*/
+.side-control {
+  width: 94%;
+  margin-left: 3%;
+}
+#listTable {
+  border-top: 2px solid #0e1d347c;
+  width: 100%;
+  margin-bottom: 20px;
+}
+#board>tr>td {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+}
+#listTable>tbody>tr:last-child>td {
+  border-bottom: 2px solid #0e1d347c;
+}
 #search {
+  position: relative;
   display: block;
   margin: 0 auto;
   width: 100%;
   max-width: 900px;
 }
-
-
-th {
-width: 1000px;
-text-align: center;
-/* 너비 조정을 위한 값 설정 */
+.btnSearch {
+  width: 80px;
+}
+select {
+  height: 34px;
+  padding: 5px 13px 7px 13px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  background-image: none;
 }
 
+th {
+  font-size: 16px;
+  font-weight: 5;
+  padding: 10px;
+  background-color: #edeff3;
+  width: 1000px;
+  text-align: center;
+}
 
 .space {
   height: 70px; /* 원하는 공간의 높이를 설정합니다 */
 }
 
-
 .space2 {
   height: 40px; /* 원하는 공간의 높이를 설정합니다 */
 }
-
 
 #writeBtn {
   float: right;
 }
 
-
 .separator {
   border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
   margin: 20px 0; /* 선 위아래에 여백을 설정합니다 */
 }
-
 
 .separator2 {
   border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
@@ -355,31 +380,27 @@ text-align: center;
 }
 
 .separator3 {
-  width: 20%;
-  background-color: #0e1d34e6;
+  border: none;
+  width: 200px;
+  background-color: #0e1d34d2;
   color: #fff;
   text-align: center;
   padding: 10px 0;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .separator3:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #0e1d34e8;;
   color: #fff;
   transition: 0.3s;
 }
 
-.psot-table {
-  margin-left : auto;
-  margin-right : auto;
-  border-style:solid;
-  border-width: 3px thin
-}
 
-.post-btn {
+/* .post-btn {
   color: white;
-}
+} */
 
 
 /*--------------------------------------------
