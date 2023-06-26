@@ -18,3 +18,7 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, 'login/get-a-quote.html', {'form': form})
+
+def policy(request):
+    return render(request, 'login/policy.html')
+
