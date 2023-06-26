@@ -2376,3 +2376,13 @@ video.html
 .highlight {
   border: 2px dashed red;
 }
+
+/*-------------------------------------
+post_detail.html
+------------------------------------*/
+.post-detail {
+  padding: 80px;
+}
+.btn-back {
+  position: relative;
+}
