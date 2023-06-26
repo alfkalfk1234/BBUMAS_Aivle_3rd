@@ -77,6 +77,7 @@
   </header><!-- End Header -->
   <!-- End Header -->
 
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
@@ -101,212 +102,120 @@
       </nav>
     </div><!-- End Breadcrumbs -->
 
+
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container">
-          
-        <!-- 공간 -->
-        <div class="space"></div>
+        <div class="side-control">
 
-        <!-- 검색창 -->
-        <input type="text" id="search" placeholder="검색어를 입력하세요">
-          
-        <!-- 선 -->
-        <div class="space2"></div>
-        <div class="separator2"></div>
-          
-        <!-- 게시판 -->
-   
-        <table>
-         <thead>
-          <tr class="go">   
-            <th>작성일</th>
-            <th>제목</th>
-            <th>작성자</th>
-          </tr>
-         </thead>
-         <tbody id="board">
-          {% for post in posts %}
+          {% comment %} <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
             <tr>
-              <td>{{ post.created_at }}</td>  
-              <td><a href={{ post.id}}> {{ post.post_title }}</a></td>
-              <td>{{ post.author }}</td>
-
+              <td style="padding-left: 5px">
+                <select class="custom-select" id="_choice" name="choice">
+                  <option selected>선택</option>
+                  <option value="title">제목</option>
+                  <option value="content">내용</option>
+                  <option value="writer">작성자</option>
+                </select>
+              </td>
+                
+              <td style="padding-left: 5px" class="align-middle">
+              <input type="text" class="form-control" id="_search" name="search" placeholder="검색어를 입력하세요."></td>
+                
+              <td style="padding-left: 5px">
+                <span><button type="button" class="btn btn-primary" id="btnSearch">검색</button></span>
+              </td>
             </tr>
-          {% endfor %}
-         </tbody>
-        </table>
-        <hr class="psot-table">
-        
-        <!-- 작성하기 버튼 -->
-        <!--<div class="separator3" style='float:right;'>
-          <label for="writeBtn"><a  class="post-btn" href="/post/posting" style="color:white">작성하기</a></label>
-          <button id="writeBtn" style="display: none;"></button>-->
-        <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
-        <!--</div>-->
-        <!--<button id="writeBtn"><a href="service-details.html" class="readmore stretched-link">작성하기<i class="bi bi-arrow-right"></i></a></button>-->
-        <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
-        <!-- <button id="Delete">삭제하기</button> -->
+          </table> {% endcomment %}
           
-        <!-- 작성 모달 창 -->
-      
-        <!--<div id="writeModal" class="modal">
-         <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>게시물 작성</h2>
-          <label for="titleInput">제목:</label>
-          <input type="text" id="titleInput" placeholder="제목을 입력하세요">
-          <br>
-          <label for="authorInput">작성자:</label>
-          <input type="text" id="authorInput" placeholder="작성자를 입력하세요">
-          <br>
-          <button id="submitBtn">작성 완료</button>
-         </div>
-        </div>-->
+          <!-- 공간 -->
+          {% comment %} <div class="space"></div> {% endcomment %}
 
+          <!-- 검색창 -->
+          {% comment %} <fieldset class="form-inline">
+            <select name="searchType" id="searchType" title="검색구분">
+              <option value="tit">제목</option>
+              <option value="con">내용</option>
+              <option value="titcon">제목+내용</option>
+            </select>
+            <input type="text" id="search" placeholder="검색어를 입력하세요">
+            <button type="button" class="btnSearch" onclick="">검색</button>
+          </fieldset> {% endcomment %}
 
-        <!-- <div class="row gy-4">
+          <!-- 선 -->
+          {% comment %} <div class="space2"></div> {% endcomment %}
+          {% comment %} <div class="separator2"></div> {% endcomment %}
             
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-cart-flatbed"></i></div>
-            <div>
-              <h4 class="title">Lorem Ipsum</h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
+          {% comment %} <select id="dataPerPage">
+            <option value="10">10개씩보기</option>
+            <option value="15">15개씩보기</option>
+            <option value="20">20개씩보기</option>
+          </select> {% endcomment %}
+
+
+          <!-- 게시판 목록 -->
+          <table id="listTable">
+            <tbody id="board">
+              <tr class="go">   
+                <th style="width:24%;">등록일</th>
+                <th style="width:63%;">제목</th>
+                <th style="width:23%;">작성자</th>
+              </tr>
+
+              {% for post in posts %}
+                <tr>
+                  <td>{{ post.created_at }}</td>  
+                  <td style="text-align: left"><a href={{ post.id}}> {{ post.post_title }}</a></td>
+                  <td>{{ post.author }}</td>
+                </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+
+          <div class="container">
+            <nav aria-label="Page navigation">
+              <ul class="pagination" id="pagination" style="justify-content: center"></ul>
+            </nav>
           </div>
-          <!-- End Service Item 
 
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck"></i></div>
-            <div>
-              <h4 class="title">Dolor Sitema</h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item 
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck-ramp-box"></i></div>
-            <div>
-              <h4 class="title">Sed ut perspiciatis</h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item 
-
-        </div>-->
+          {% comment %} <hr class="psot-table"> {% endcomment %}
           
-          
-
-      
-
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <!--<section id="faq" class="faq">-->
-      <!--<div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <span>자주 묻는 질문(FAQ)</span>
-          <h2>자주 묻는 질문(FAQ)</h2>
+          <!-- 작성하기 버튼 -->
+          <!--<div class="separator3" style='float:right;'>
+            <label for="writeBtn"><a  class="post-btn" href="/post/posting" style="color:white">작성하기</a></label>
+            <button id="writeBtn" style="display: none;"></button>-->
+          <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
+          <!--</div>-->
+          <!--<button id="writeBtn"><a href="service-details.html" class="readmore stretched-link">작성하기<i class="bi bi-arrow-right"></i></a></button>-->
+          <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
+          <!-- <button id="Delete">삭제하기</button> -->
+            
+          <!-- 작성 모달 창 -->
+        
+          <!--<div id="writeModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>게시물 작성</h2>
+            <label for="titleInput">제목:</label>
+            <input type="text" id="titleInput" placeholder="제목을 입력하세요">
+            <br>
+            <label for="authorInput">작성자:</label>
+            <input type="text" id="authorInput" placeholder="작성자를 입력하세요">
+            <br>
+            <button id="submitBtn">작성 완료</button>
+          </div>
+          </div>-->
 
         </div>
-
-        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-10">
-
-            <div class="accordion accordion-flush" id="faqlist">
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    블랙박스 영상을 통해 파손 여부를 어떻게 확인하나요?
-                  </button>
-                </h3>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    영상 분석과 객체 탐지 기술을 이용해 학습한 모델이 파손을 감지합니다. 
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    블랙박스 영상을 통해 검출되는 객체는 무엇인가요?
-                  </button>
-                </h3>
-                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    도로 파손, 도로 분리대 파손, 차선, 횡단보도, 시선 유도봉, 볼라드, 방지턱, 도로글씨, 제설함, 표지판 등을 감지합니다.
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    신고한 내용에 대한 처리 과정이 어떻게 되나요?
-                  </button>
-                </h3>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    신고 게시판으로 접수된 안전신고의 처리 기관 지정 및 전달 등의 업무를 진행하고 있습니다. <br>
-                    신고처리 진행 상황, 결과 관련 문의는 관련 처리 기관의 안내된 연락처로 문의하시기 바랍니다.
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    신고 게시판으로 신고하는 대상은 무엇인가요?
-                  </button>
-                </h3>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    주요 신고대상은 다음과 같습니다. <br>
-                    (예시) <br>
-                    <li>도로 위 안전 시설물</li>
-                    <li>보행/교통 안전</li>
-                    <li>취약시설물</li>
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    회원에 반드시 가입해야 신고가 가능한가요?
-                  </button>
-                </h3>
-                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    회원 가입 후 로그인을 통해 신고가 가능합니다. 
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-            <!--</div>
-
-          </div>
-        </div>
-
       </div>
-    </section>-->
-    <!-- End Frequently Asked Questions Section -->
-
+    </section>
+          
   </main><!-- End #main -->
+
+
+    
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -314,10 +223,10 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="/" class="logo d-flex align-items-center">
-            <span>Logis</span>
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>BBUMAS</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Black Box Urban Maintenance Automation System</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -327,35 +236,33 @@
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+          <h4>Policy</h4>
+          <ul class="policy_link">
+            <li>
+              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+            </li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="/">Main</a></li>
+            <li><a href="/video">Black box Upload</a></li>
+            <li><a href="/post">Alert Board</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
           <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
+            대전 서구 문정로48번길 30 <br>
+            (탄방동)<br>
+            <br>
+            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
+            <strong>Email:</strong> ktaivle@kt.com<br>
           </p>
 
         </div>
@@ -365,18 +272,18 @@
 
     <div class="container mt-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer>
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
