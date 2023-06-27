@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Detected
 from .models import Video
+from storages.backends.s3boto3 import S3Boto3Storage
 from ultralytics import YOLO
 import urllib.parse
 import os
@@ -195,7 +196,7 @@ def video_upload(request):
         title = video_file.name
 
         video = Video(title=title, video_file=video_file)
-        video.save()
+        # video.save()
 
         video_path = os.path.join('video/media', video.video_file.name)
         with open(video_path, 'wb') as file:
@@ -272,8 +273,15 @@ def video_db_save(request):
                         detected_where = item["where"],
                         latitude = item.get("latitude", ""),
                         longitude = item.get("longitude", ""),
-                        image_path = item["file_path"],
+                        image_path= item["file_path"],
                     )
+                    storage = S3Boto3Storage()
+                    fromfilepath = 'video/media/images/' + item["file_path"]
+                    tofilepath = 'video/' + item["file_path"]
+                    storage.save(tofilepath, open(fromfilepath, 'rb'))
+                    # detection.image_path = filepath
+                    detection.save()
+                    
                 print("MySQL DataBase Upload success")
                 return JsonResponse({"success": True})
             except json.JSONDecodeError:

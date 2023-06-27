@@ -198,7 +198,7 @@
                         var time = '{{ result.time|escapejs }}';
                         var class_name = '{{ result.class_name|escapejs }}';
                         var where = '{{ result.where|escapejs }}';
-                        var file_path = '/video/media/images/' + '{{result.file_name|escapejs}}';
+                        var file_path = '{{result.file_name|escapejs}}';
                         getAddress_table(position, time, class_name, where, latitude, longitude, file_path);
                       {% endfor %}
 

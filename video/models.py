@@ -2,7 +2,7 @@ from django.db import models
 
 class Video(models.Model):
     title = models.CharField(max_length=100)
-    video_file = models.FileField(upload_to='')
+    video_file = models.FileField(max_length=100, default=1)
 
 class Detection(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, default=1)
@@ -32,6 +32,6 @@ class Detected(models.Model):
     detected_object = models.CharField(max_length=200, null=True)
     detected_time = models.CharField(max_length=200, null=True)
     detected_where = models.CharField(max_length=200, null=True)
-    image_path = models.CharField(max_length=200, null=True)
+    image_path = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
         return f"Detected {self.pk}"
