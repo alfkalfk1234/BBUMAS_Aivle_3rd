@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Detection
+from .models import Detected
 from .models import Video
 from ultralytics import YOLO
 import urllib.parse
@@ -262,15 +262,17 @@ def video_db_save(request):
         data = urllib.parse.unquote(request.body.decode('utf-8'))
         if data.startswith('data='):
             data = data[5:] # 'data=' 제거
+            print(data)
             try:
                 data = json.loads(data)
                 for item in data:
-                    detection = Detection.objects.create(
-                        detected_time=item["time"],
-                        detected_object=item["class_name"],
-                        detected_where=item["where"],
-                        latitude=item.get("latitude", ""),
-                        longitude=item.get("longitude", "")
+                    detection = Detected.objects.create(
+                        detected_time = item["time"],
+                        detected_object = item["class_name"],
+                        detected_where = item["where"],
+                        latitude = item.get("latitude", ""),
+                        longitude = item.get("longitude", ""),
+                        image_path = item["file_path"],
                     )
                 print("MySQL DataBase Upload success")
                 return JsonResponse({"success": True})
