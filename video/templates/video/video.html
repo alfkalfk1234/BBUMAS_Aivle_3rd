@@ -75,7 +75,13 @@
   <!-- End Header -->
 
   <main id="main">
-
+  {% block content %}
+    {% if message %}
+      <script>
+        alert('{{ message }}');
+      </script>
+    {% endif %}
+  {% endblock %}
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
       <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/traffic_1.jpg' %});">
