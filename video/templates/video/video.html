@@ -101,48 +101,48 @@
 
   </main>
 
+  <div class="container" data-aos="fade-up">
+    <table id="file-table">
+      <tr>
+        <th class="tb-th-1" scope="row">파일 이름</th>
+        <th class="tb-th-2" scope="row">파일 크기</th>
+      </tr>
+      <tr>
+        <td id="filename"></td>
+        <td id="filesize"></td>
+      </tr>
+    </table>
 
-  <table id="file-table">
-    <tr>
-      <th class="tb-th-1" scope="row">파일 이름</th>
-      <th class="tb-th-2" scope="row">파일 크기</th>
-    </tr>
-    <tr>
-      <td id="filename"></td>
-      <td id="filesize"></td>
-    </tr>
-  </table>
+    
+    <!-- 드래그 앤 드롭 -->
+    <div id="dropZone">
+      <p>압축 파일을 이곳에 드래그하여 업로드하세요.</p>
+    </div>
 
-  
-  <!-- 드래그 앤 드롭 -->
-  <div id="dropZone">
-    <p>압축 파일을 이곳에 드래그하여 업로드하세요.</p>
+    
+    <div class="group-select">
+      <label class="select-btn" for="fileInput">파일 선택</label>
+      <label class="reset-btn" for="fileReset">파일 제거</label>
+    </div>
+
+
+    <!-- upload_video.html -->
+
+    <form method="POST" action="{% url 'video:video_upload' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- 파일 선택 버튼 -->
+      <input type="file" name="video_file" id="fileInput" style="display: none;">
+
+      <!-- 파일 선택 취소 버튼 -->
+      <input type="reset" id="fileReset" style="display: none;">
+
+      <!-- 파일 업로드 버튼 -->
+      <input type="submit" id="fileUpload" value="제출" style="display: none;">
+    </form>
+
+
+    <label class="upload-btn" for="fileUpload">업로드</label>
   </div>
-
-  
-  <div class="group-select">
-    <label class="select-btn" for="fileInput">파일 선택</label>
-    <label class="reset-btn" for="fileReset">파일 제거</label>
-  </div>
-
-
-  <!-- upload_video.html -->
-
-  <form method="POST" action="{% url 'video:video_upload' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!-- 파일 선택 버튼 -->
-    <input type="file" name="video_file" id="fileInput" style="display: none;">
-
-    <!-- 파일 선택 취소 버튼 -->
-    <input type="reset" id="fileReset" style="display: none;">
-
-    <!-- 파일 업로드 버튼 -->
-    <input type="submit" id="fileUpload" value="제출" style="display: none;">
-  </form>
-
-
-  <label class="upload-btn" for="fileUpload">업로드</label>
-
 
   <script>
     const dropZone = document.getElementById('dropZone');
