@@ -85,11 +85,19 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="short-page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/page-header.jpg' %});">
+      <div class="short-page-header d-flex align-items-center">
         <div class="container position-relative">
-
         </div>
       </div>
+
+      {% comment %} <nav>
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li>Map</li>
+          </ol>
+        </div>
+      </nav> {% endcomment %}
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Contact Section ======= -->
@@ -357,7 +365,7 @@
               </script>
         </div>
 
-        <div class="row gy-4 mt-4">
+        {% comment %} <div class="row gy-4 mt-4">
 
           <div class="col-lg-4">
 
@@ -372,7 +380,7 @@
 
           <!-- End Contact Form -->
 
-        </div>
+        </div> {% endcomment %}
 
       </div>
     </section><!-- End Contact Section -->
