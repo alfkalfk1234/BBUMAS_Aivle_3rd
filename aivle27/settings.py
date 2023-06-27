@@ -29,9 +29,7 @@ INSTALLED_APPS = [
     'post',
     'map',
     'login',
-    'join',
-    'storages',
-    
+    'join',    
 ]
 
 MIDDLEWARE = [

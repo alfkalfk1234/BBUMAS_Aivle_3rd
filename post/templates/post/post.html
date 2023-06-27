@@ -26,6 +26,9 @@
   <link href="{%static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{%static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
   <link href="{%static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <!-- Pagination CSS-->
+  <link href="{%static 'assets/vendor/bootstrap/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+  {% comment %} <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> {% endcomment %}
 
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
@@ -39,7 +42,41 @@
   ======================================================== -->
 </head>
 
+
 <body>
+
+  <style>
+
+    a {
+      text-decoration: none;
+    }
+    
+    .page-link {
+      color: #000; 
+      background-color: #fff;
+      border: 1px solid #ccc; 
+    }
+    
+    .page-item.active .page-link {
+      z-index: 1;
+      color: #555;
+      font-weight:bold;
+      background-color: #edeff3;
+      border-color: #c6c9cf;  
+    }
+    
+    .page-link:focus, .page-link:hover {
+      color: #000;
+      background-color: #fafafa; 
+      border-color: #c6c9cf;
+    }
+
+    .col-md-7{
+      flex:0 0 auto;
+      width:30%;
+    }
+
+  </style>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -108,118 +145,51 @@
       <div class="container">
         <div class="side-control">
 
-          {% comment %} <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
-            <tr>
-              <td style="padding-left: 5px">
-                <select class="custom-select" id="_choice" name="choice">
-                  <option selected>선택</option>
-                  <option value="title">제목</option>
-                  <option value="content">내용</option>
-                  <option value="writer">작성자</option>
-                </select>
-              </td>
-                
-              <td style="padding-left: 5px" class="align-middle">
-              <input type="text" class="form-control" id="_search" name="search" placeholder="검색어를 입력하세요."></td>
-                
-              <td style="padding-left: 5px">
-                <span><button type="button" class="btn btn-primary" id="btnSearch">검색</button></span>
-              </td>
-            </tr>
-          </table> {% endcomment %}
-          
-          <!-- 공간 -->
-          {% comment %} <div class="space"></div> {% endcomment %}
-
-          <!-- 검색창 -->
-          {% comment %} <fieldset class="form-inline">
-            <select name="searchType" id="searchType" title="검색구분">
-              <option value="tit">제목</option>
-              <option value="con">내용</option>
-              <option value="titcon">제목+내용</option>
-            </select>
-            <input type="text" id="search" placeholder="검색어를 입력하세요">
-            <button type="button" class="btnSearch" onclick="">검색</button>
-          </fieldset> {% endcomment %}
-
-          <!-- 선 -->
-          {% comment %} <div class="space2"></div> {% endcomment %}
-          {% comment %} <div class="separator2"></div> {% endcomment %}
-            
-          {% comment %} <select id="dataPerPage">
-            <option value="10">10개씩보기</option>
-            <option value="15">15개씩보기</option>
-            <option value="20">20개씩보기</option>
-          </select> {% endcomment %}
-
-
           <!-- 게시판 목록 -->
           <table id="listTable">
-            <tbody id="board">
+            <thead>
               <tr class="go">   
                 <th style="width:24%;">등록일</th>
                 <th style="width:63%;">제목</th>
                 <th style="width:23%;">작성자</th>
               </tr>
+            </thead>
 
-              {% for post in posts %}
-                <tr>
-                  <td>{{ post.created_at }}</td>  
-                  <td style="text-align: left"><a href={{ post.id}}> {{ post.post_title }}</a></td>
-                  <td>{{ post.author }}</td>
-                </tr>
-              {% endfor %}
-
+            <tbody id="board">
+            {% for post in posts %}
+              <tr>
+                <td>{{ post.created_at }}</td>  
+                <td style="text-align: left"><a href={{ post.id }}>{{ post.post_title }}</a></td>
+                <td>{{ post.author }}</td>
+              </tr>
+            {% endfor %}
             </tbody>
           </table>
 
-          <div class="container">
-            <nav aria-label="Page navigation">
-              <ul class="pagination" id="pagination" style="justify-content: center"></ul>
-            </nav>
-          </div>
-
-          {% comment %} <hr class="psot-table"> {% endcomment %}
-          
-          <!-- 작성하기 버튼 -->
-          <!--<div class="separator3" style='float:right;'>
-            <label for="writeBtn"><a  class="post-btn" href="/post/posting" style="color:white">작성하기</a></label>
-            <button id="writeBtn" style="display: none;"></button>-->
           <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
-          <!--</div>-->
-          <!--<button id="writeBtn"><a href="service-details.html" class="readmore stretched-link">작성하기<i class="bi bi-arrow-right"></i></a></button>-->
-          <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
-          <!-- <button id="Delete">삭제하기</button> -->
-            
-          <!-- 작성 모달 창 -->
-        
-          <!--<div id="writeModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>게시물 작성</h2>
-            <label for="titleInput">제목:</label>
-            <input type="text" id="titleInput" placeholder="제목을 입력하세요">
-            <br>
-            <label for="authorInput">작성자:</label>
-            <input type="text" id="authorInput" placeholder="작성자를 입력하세요">
-            <br>
-            <button id="submitBtn">작성 완료</button>
-          </div>
-          </div>-->
-
+                  
         </div>
       </div>
     </section>
           
   </main><!-- End #main -->
-
-
     
+
+  <!-- Pagination -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> {% endcomment %}
+
+  <script>
+    $(document).ready(function () {
+      $('#listTable').DataTable();
+    });
+  </script>
+  <!-- Pagination End -->
 
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-
+  <footer id="footer" class="footer">3
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
@@ -297,6 +267,9 @@
   <script src="{%static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{%static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{%static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <script src="{%static 'assets/vendor/bootstrap/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/bootstrap/js/dataTables.bootstrap5.min.js' %}"></script>
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
