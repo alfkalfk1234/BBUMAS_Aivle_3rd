@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Post, Photo
 from .forms import PostForm
 from .utils import create_post
+from django.views.decorators.csrf import csrf_exempt
+
+from django.http import JsonResponse
 def index(request):
     posts = Post.objects.all()  # get all posts
     return render(request, 'post/post.html', {'posts': posts})
@@ -28,17 +32,6 @@ def posting(request):
     return render(request, 'post/service-details.html', {'form': form})
 
 
-from django.shortcuts import redirect
-from django.views import View
-from .models import Post
-
-class PostDeleteView(View):
-    def get(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=kwargs['pk'])
-        post.delete()
-        return redirect('post_list')  # 'post_list'는 게시물 목록 페이지의 URL 패턴 이름입니다.
-
-
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
     return render(request, 'post/post_detail.html', {'post': post})
@@ -48,3 +41,10 @@ def faq(request):
     return render(request, 'post/faq.html')
 
 
+
+@csrf_exempt
+def delete_post(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=post_id)
+        post.delete()
+        return JsonResponse({'success': True})
