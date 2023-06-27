@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.http import JsonResponse
 def index(request):
-    posts = Post.objects.all()  # get all posts
+    posts = Post.objects.all().order_by('-created_at')
     return render(request, 'post/post.html', {'posts': posts})
 
 # def posting(request):
@@ -39,8 +39,6 @@ def post_detail(request, pk):
 
 def faq(request):
     return render(request, 'post/faq.html')
-
-
 
 @csrf_exempt
 def delete_post(request, post_id):
