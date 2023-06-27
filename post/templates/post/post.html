@@ -119,14 +119,8 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/back1.jpg' %});">
+      <div class="short-page-header d-flex align-items-center">
         <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>신고 게시판</h2>
-              {% comment %} <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> {% endcomment %}
-            </div>
-          </div>
         </div>
       </div>
       <nav>
@@ -140,6 +134,10 @@
     </div><!-- End Breadcrumbs -->
 
 
+    
+          
+  </main><!-- End #main -->
+    
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container">
@@ -148,17 +146,15 @@
           <!-- 게시판 목록 -->
           <table id="listTable">
             <thead>
-              <tr class="go">   
                 <th style="width:24%;">등록일</th>
                 <th style="width:63%;">제목</th>
                 <th style="width:23%;">작성자</th>
-              </tr>
             </thead>
 
             <tbody id="board">
             {% for post in posts %}
               <tr>
-                <td>{{ post.created_at }}</td>  
+                <td>{{ post.created_at }}</td>
                 <td style="text-align: left"><a href={{ post.id }}>{{ post.post_title }}</a></td>
                 <td>{{ post.author }}</td>
               </tr>
@@ -171,10 +167,6 @@
         </div>
       </div>
     </section>
-          
-  </main><!-- End #main -->
-    
-
   <!-- Pagination -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> {% endcomment %}
