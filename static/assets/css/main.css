@@ -369,16 +369,6 @@ th {
   float: right;
 }
 
-.separator {
-  border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
-  margin: 20px 0; /* 선 위아래에 여백을 설정합니다 */
-}
-
-.separator2 {
-  border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
-  margin: 10px 0; /* 선 위아래에 여백을 설정합니다 */
-}
-
 .separator3 {
   border: none;
   width: 200px;
@@ -389,6 +379,7 @@ th {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: -50px;
 }
 
 .separator3:hover {
