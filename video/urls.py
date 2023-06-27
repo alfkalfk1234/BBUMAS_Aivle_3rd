@@ -6,7 +6,6 @@ from . import views
 app_name = 'video'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('video/', views.video, name='video'),
     path('upload/', views.video_upload, name='video_upload'),
-    # path('result/', views.video_result, name='video_result'),
+    path("video_db_save/", views.video_db_save, name="video_db_save"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
