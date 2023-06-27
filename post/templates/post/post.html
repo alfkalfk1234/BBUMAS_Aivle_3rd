@@ -93,11 +93,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/video">Video</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post" class="active">신고 게시판 목록</a></li>
-              <li><a href="/post/posting">신고하기</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
@@ -161,9 +165,9 @@
             {% endfor %}
             </tbody>
           </table>
-
-          <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
-                  
+          {% if user.is_authenticated %}
+            <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
+          {% endif %}      
         </div>
       </div>
     </section>
@@ -173,9 +177,12 @@
   {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> {% endcomment %}
 
   <script>
-    $(document).ready(function () {
-      $('#listTable').DataTable();
+    $(document).ready(function() {
+      $('#listTable').DataTable({
+          "order": [[ 0, "desc" ]]
+      });
     });
+  
   </script>
   <!-- Pagination End -->
 

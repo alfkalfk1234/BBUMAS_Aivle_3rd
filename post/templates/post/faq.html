@@ -56,11 +56,20 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/video">Video</a></li>
+          <li class="dropdown"><a href="/video"><span>Video</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              {% if user.is_authenticated %}
+                <li><a href="/video">Video</a></li>
+              {% endif %}
+              <li><a href="#">결과 확인하기</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
-              <li><a href="/post/posting">신고하기</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
               <li><a href="/post/faq" class="active">FAQ</a></li>
             </ul>
           </li>

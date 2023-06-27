@@ -56,11 +56,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/" class="active">Home</a></li>
-          <li><a href="/video">Video</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
           <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
-              <li><a href="/post/posting">신고하기</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
@@ -237,7 +241,7 @@
                 <img src="{%static 'assets/img/video.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/video" class="stretched-link">블랙박스 영상 분석</a></h3>
-              <p>Cumque eos in qui numquam. Aut aspernatur perferendis sed atque quia voluptas quisquam repellendus temporibus itaqueofficiis odit</p>
+              <p>Analyze black box images to detect road damage. After that, damaged facilities will be submitted to the department in charge.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -247,7 +251,7 @@
                 <img src="{%static 'assets/img/post.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/post" class="stretched-link">신고 게시판</a></h3>
-              <p>Asperiores provident dolor accusamus pariatur dolore nam id audantium ut et iure incidunt molestiae dolor ipsam ducimus occaecati nisi</p>
+              <p>This is a bulletin board that reports damaged facilities. If GPS is present in the picture, it automatically detects the location.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -257,7 +261,7 @@
                 <img src="{%static 'assets/img/mapimg.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/map" class="stretched-link">파손 현황 지도</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
+              <p>This is a map where you can see the status of the damaged. It is marked with various markers to distinguish different types of breakage.</p>
             </div>
           </div><!-- End Card Item -->
 
