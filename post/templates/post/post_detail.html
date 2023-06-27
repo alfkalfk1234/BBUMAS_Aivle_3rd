@@ -37,6 +37,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -166,11 +168,42 @@
                 </tr>
             </table>
             <div class="btn-back">
-                <button type="button" class="btn-btn"><a href="/post" style="color:white;">이전 페이지로</a></button>
+              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white;">이전 페이지로</button>
+              {% if request.user == post.author %}
+                    <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
+                {% endif %}
             </div>
+
+            
+            <script>
+                function confirmDelete(postId) {
+                    if (confirm('정말로 이 글을 삭제하시겠습니까?')) {
+                        $.ajax({
+                            url: '/post/post/delete/' + postId + '/',
+                            type: 'POST',
+                            data: {
+                                'csrfmiddlewaretoken': '{{ csrf_token }}'
+                            },
+                            success: function(result) {
+                                if (result.success) {
+                                    alert('게시물이 삭제되었습니다.');
+                                    window.location.href = "{% url 'post:post' %}";
+                                } else {
+                                    alert('오류가 발생했습니다.');
+                                }
+                            }
+                            
+                        });
+                    }
+                }
+                
+            </script>
+
+
             
         </div>
     </section>
     </main>
     </body>
+        
 </html>
