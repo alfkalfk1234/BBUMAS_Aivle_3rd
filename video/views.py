@@ -21,7 +21,7 @@ def index(request):
 
 def analyze_video(video_path):
     # YOLOv8 analysis code
-    yolov8_model_path = 'video/tool/custom_yolov8m_0619.pt'
+    yolov8_model_path = 'video/tool/custom_yolov8m_0628_2.pt'
     model = YOLO(yolov8_model_path)
     model.predict(
         source = video_path,
@@ -30,8 +30,8 @@ def analyze_video(video_path):
         save = True,
         save_txt = True,
         project = 'video/media',
-        classes = [0, 2, 3, 4, 5, 7, 8, 9],
-        # names: {0: 'bollard_abnormal', 1: 'bollard_normal', 2: 'crosswalk', 3: 'loading-box', 4: 'pothole', 5: 'road_separator', 6: 'road_separator_normal', 7: 'roadmarking', 8: 'speedbump', 9: 'tubular-marker-abnormal'}
+        classes = [0, 1, 3, 4, 5, 7, 8],
+        # names: {0: 'Pothole', 1: 'bollard_abnormal', 2: 'bollard_normal', 3: 'crosswalk', 4: 'road-marking', 5: 'road_separator_abnormal', 6: 'road_separator_normal', 7: 'speedbump', 8: 'tubular-marker-abnormal', 9: 'tubular-marker-normal'}
     )
 
     os.remove(video_path)
@@ -237,18 +237,19 @@ def video_upload(request):
         
         # 클래스 이름과 클래스 번호 분리
         all['class_num'] = all['class_name'].copy()
-        all.loc[all["class_name"] == '0', "class_name"] = '볼라드 손상'
+        all.loc[all["class_name"] == '0', "class_name"] = '포트홀'
         all.loc[all["class_name"] == '1', "class_name"] = '볼라드 정상'
-        all.loc[all["class_name"] == '2', "class_name"] = '횡단보도 손상'
-        all.loc[all["class_name"] == '3', "class_name"] = '제설함 손상'
-        all.loc[all["class_name"] == '4', "class_name"] = '포트홀'
+        all.loc[all["class_name"] == '2', "class_name"] = '볼라드 손상'
+        all.loc[all["class_name"] == '3', "class_name"] = '횡단보도 손상'
+        all.loc[all["class_name"] == '4', "class_name"] = '도로 표지 손상'
         all.loc[all["class_name"] == '5', "class_name"] = '도로 분리대 손상'
         all.loc[all["class_name"] == '6', "class_name"] = '도로 분리대 정상'
-        all.loc[all["class_name"] == '7', "class_name"] = '도로 표지 손상'
-        all.loc[all["class_name"] == '8', "class_name"] = '방지턱 손상'
-        all.loc[all["class_name"] == '9', "class_name"] = '시선 유도봉 손상'
-        all.loc[all["class_name"] == '10', "class_name"] = '시선 유도봉 정상'
+        all.loc[all["class_name"] == '7', "class_name"] = '방지턱 손상'
+        all.loc[all["class_name"] == '8', "class_name"] = '시선 유도봉 손상'
+        all.loc[all["class_name"] == '9', "class_name"] = '시선 유도봉 정상'
         
+        # names: {0: 'Pothole', 1: 'bollard_abnormal', 2: 'bollard_normal', 3: 'crosswalk', 4: 'road-marking', 5: 'road_separator_abnormal', 
+        # 6: 'road_separator_normal', 7: 'speedbump', 8: 'tubular-marker-abnormal', 9: 'tubular-marker-normal'}
         all['where'] = '도로 교통과'
         all['id'] = range(1, len(all) + 1)
         print(all)
