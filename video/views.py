@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Detected
-from .models import Video
+from .models import Video,Detected
 from storages.backends.s3boto3 import S3Boto3Storage
+from django.views.decorators.csrf import csrf_exempt
 from ultralytics import YOLO
 import urllib.parse
 import os
@@ -294,3 +295,10 @@ def video_db_save(request):
     else:
         print("error: Invalid request method")
         return JsonResponse({"success": False, "error": "Invalid request method"})
+
+@csrf_exempt
+def delete_video(request, video_id):
+    if request.method == 'POST':
+        post = Detected.objects.get(pk=video_id)
+        post.delete()
+        return JsonResponse({'success': True})

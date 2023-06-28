@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
   
   <!-- Favicons -->
-  <link href="{%static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/car_favicon.png' %}" rel="icon">
   <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -97,31 +97,33 @@
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
 
+            
+    
             <div class="col-lg-3 col-6">
               <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>파손 검출량</p>
+                <span id="videoDamageCount1" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                <p style="font-size: 14px;">비디오 파손 검출량</p>
+              </div>
+            </div><!-- End Stats   Item -->
+
+            <div class="col-lg-3 col-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span id="postDamageCount1" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                <p style="font-size: 14px;">신고 건수</p>
               </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-6">
               <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>신고 건수</p>
+                <span id="totalDamageCount1" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                <p style="font-size: 14px;">총 처리 건수</p>
               </div>
             </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-6">
               <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-                <p>누적 처리 건수</p>
-              </div>
-            </div><!-- End Stats Item -->
-
-            <div class="col-lg-3 col-6">
-              <div class="stats-item text-center w-100 h-100">
-                <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-                <p>운행 차량</p>
+                <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+                <p style="font-size: 14px;">운행 차량</p>
               </div>
             </div><!-- End Stats Item -->
 
@@ -131,7 +133,22 @@
         <!--<div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
           <img src="assets/img/autonomous-car.png" class="img-fluid mb-3 mb-lg-0" alt="">
         </div>-->
+        
 
+        <script>
+
+          var locations_post = {{ location_posts|safe }};
+          var locations_video = {{ location_videos|safe }};
+      
+          var postDamageCount = locations_post.length;
+          var videoDamageCount = locations_video.length;
+          var totalDamageCount = locations_post.length + locations_video.length;
+      
+      
+          document.getElementById('postDamageCount1').setAttribute("data-purecounter-end", postDamageCount);
+          document.getElementById('videoDamageCount1').setAttribute("data-purecounter-end", videoDamageCount);
+          document.getElementById('totalDamageCount1').setAttribute("data-purecounter-end", totalDamageCount);
+        </script>
       </div>
     </div>
   </section><!-- End Hero Section -->
@@ -173,6 +190,9 @@
             </div>
 
         </div>
+
+        
+
 
       </div>
     </section><!-- End Featured Services Section -->
@@ -501,6 +521,8 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
+
+  
 
 </body>
 </html>
