@@ -40,6 +40,7 @@
 </head>
 
 <body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -123,28 +124,28 @@
     
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>파손 검출량</p>
+                    <span id="videoDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>비디오 파손 검출량</p>
                   </div>
-                </div><!-- End Stats Item -->
+                </div><!-- End Stats   Item -->
     
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                    <span id="postDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
                     <p>신고 건수</p>
                   </div>
                 </div><!-- End Stats Item -->
     
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>누적 처리 건수</p>
+                    <span id="totalDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>총 처리 건수</p>
                   </div>
                 </div><!-- End Stats Item -->
     
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
                     <p>운행 차량</p>
                   </div>
                 </div><!-- End Stats Item -->
@@ -229,6 +230,7 @@
               var searchForm = document.getElementById('search-form');
               var searchInput = document.getElementById('search-input');
 
+              
             // 검색 폼의 제출 이벤트를 처리합니다
               searchForm.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -258,6 +260,16 @@
 
               // Django View에서 넘겨받은 데이터를 JavaScript 변수로 만듭니다.
               var locations_post = {{ location_posts|safe }};
+              var locations_video = {{ location_videos|safe }};
+
+              var postDamageCount = locations_post.length;
+              var videoDamageCount = locations_video.length;
+              var totalDamageCount = locations_post.length + locations_video.length;
+
+
+              document.getElementById('postDamageCount').setAttribute("data-purecounter-end", postDamageCount);
+              document.getElementById('videoDamageCount').setAttribute("data-purecounter-end", videoDamageCount);
+              document.getElementById('totalDamageCount').setAttribute("data-purecounter-end", totalDamageCount);
               // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
           
               var infowindowImage = new kakao.maps.InfoWindow({
@@ -281,6 +293,14 @@
                 'lane': '{% static "assets/img/yellow.png" %}', 
                 'speed_bump': '{% static "assets/img/skyblue.png" %}', 
                 'guide_post': '{% static "assets/img/blue.png" %}',
+                '볼라드 손상': '{% static "assets/img/green.png" %}', 
+                '횡단보도 손상': '{% static "assets/img/orange.png" %}', 
+                '제설함 손상': '{% static "assets/img/pink.png" %}', 
+                '포트홀': '{% static "assets/img/purple.png" %}', 
+                '도로 분리대 손상': '{% static "assets/img/red.png" %}', 
+                '도로 표지 손상': '{% static "assets/img/yellow.png" %}', 
+                '방지턱 손상': '{% static "assets/img/skyblue.png" %}', 
+                '시선 유도봉 손상': '{% static "assets/img/blue.png" %}',
               };
 
 
@@ -288,7 +308,7 @@
               for (var i = 0; i < locations_post.length; i++) {
                 var position = new kakao.maps.LatLng(locations_post[i][0], locations_post[i][1]);
                 var object = locations_post[i][2].toString(); // 객체 정보 
-
+              
                 var imageSrc = objectColors[object];
 
                 if (imageSrc) {
@@ -300,15 +320,36 @@
                     position: position,
                     image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
                 });
-
                 
             
                 // 마커에 대한 주소를 가져오는 함수
-                getAddress(marker, position, locations_post[i][2]);
+                getAddress_post(marker, position, locations_post[i][2],locations_post[i][3],locations_post[i][4]);
                 }
               }
 
-                // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+              for (var i = 0; i < locations_video.length; i++) {
+                var position = new kakao.maps.LatLng(locations_video[i][0], locations_video[i][1]);
+                var object = locations_video[i][2].toString(); // 객체 정보 
+                var videoid = locations_video[i][4]
+                var imageSrc = objectColors[object];
+
+                if (imageSrc) {
+                  var imageSize = new kakao.maps.Size(30, 30);
+                  var imageOption = { offset: new kakao.maps.Point(30, 30) };
+                
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: position,
+                    image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+                });
+                
+            
+                // 마커에 대한 주소를 가져오는 함수
+                getAddress_video(marker, position, locations_video[i][2],locations_video[i][3],locations_video[i][4]);
+                }
+              }
+
+              // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
               function makeOverListener(map, marker, infowindow) {
                 return function() {
                     infowindow.open(map, marker);
@@ -321,31 +362,45 @@
                 };
               } 
               
-              function handleClickMarker(map, marker, infowindowImage, imageSrc) {
+              function handleClickMarker_post(map, marker, infowindowImage, imageSrc,post_id) {
                 return function() {
                     var content =
-                        '<div style="padding:5px;">' +
-                        '<img src="' + imageSrc + '" width="200" height="150">' +
+                        '<div style="padding:2px;">' +
+                        '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
+                        '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
+                        '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_post('+post_id+')" style="color:white;">삭제</button>' +
+                        '</div>';
+                    infowindowImage.setContent(content);
+                    infowindowImage.open(map, marker);
+                };
+              }
+            
+              function handleClickMarker_video(map, marker, infowindowImage, imageSrc,video_id) {
+                return function() {
+                    var content =
+                        '<div style="padding:2px;">' +
+                        '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
+                        '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
+                        '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_video('+video_id+')" style="color:white;">삭제</button>' +
                         '</div>';
                     infowindowImage.setContent(content);
                     infowindowImage.open(map, marker);
                 };
               }
 
-              function getAddress(marker, position, markerId) {
+              function getAddress_post(marker, position, markerId, image_name,video_id) {
                 geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
                     if (status === kakao.maps.services.Status.OK) {
                         for (var i = 0; i < result.length; i++) {
                             // 행정동의 region_type은 'H'입니다.
                             if (result[i].region_type === 'H') {
                                 var address = result[i].region_3depth_name;
-                                var content = '<div>마커 ID: ' + markerId + '<br>' + address + '</div>';
+                                var content = '<div>' + markerId + '<br>' + ' - ' + address + '</div>';
             
                                 // 마커에 표시할 인포윈도우를 생성합니다
                                 var infowindow = new kakao.maps.InfoWindow({
                                     content: content // 인포윈도우에 표시할 내용
                                 });
-            
                                 // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
                                 kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
             
@@ -353,7 +408,7 @@
                                 kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
             
                                 // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
-                                kakao.maps.event.addListener(marker, 'click', handleClickMarker(map, marker, infowindowImage, '/static/images/aivle.png'));
+                                kakao.maps.event.addListener(marker, 'click', handleClickMarker_post(map, marker, infowindowImage, image_name,video_id));
             
                                 // 주소 정보를 가져왔으면 반복문을 종료합니다.
                                 break;
@@ -362,6 +417,83 @@
                     }
                 });
             }
+
+            function getAddress_video(marker, position, markerId, image_name,video_id) {
+              geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                  if (status === kakao.maps.services.Status.OK) {
+                      for (var i = 0; i < result.length; i++) {
+                          // 행정동의 region_type은 'H'입니다.
+                          if (result[i].region_type === 'H') {
+                              var address = result[i].region_3depth_name;
+                              var content = '<div>' + markerId + '<br>' + address + '</div>';
+          
+                              // 마커에 표시할 인포윈도우를 생성합니다
+                              var infowindow = new kakao.maps.InfoWindow({
+                                  content: content // 인포윈도우에 표시할 내용
+                              });
+                              var image_path = 'https://image-upload11.s3.ap-northeast-2.amazonaws.com/video/' + image_name
+                              // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+                              kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+          
+                              // 마커에서 마우스가 벗어났을 때 인포윈도우를 닫는 이벤트 리스너를 등록합니다
+                              kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+          
+                              // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+                              kakao.maps.event.addListener(marker, 'click', handleClickMarker_video(map, marker, infowindowImage, image_path,video_id));
+          
+                              // 주소 정보를 가져왔으면 반복문을 종료합니다.
+                              break;
+                          }
+                      }
+                  }
+              });
+            }
+
+
+            function confirmDelete_post(postId) {
+              if (confirm('정말로 이 글을 삭제하시겠습니까?')) {
+                  $.ajax({
+                      url: '/post/post/delete/' + postId + '/',
+                      type: 'POST',
+                      data: {
+                          'csrfmiddlewaretoken': '{{ csrf_token }}'
+                      },
+                      success: function(result) {
+                          if (result.success) {
+                              alert('게시물이 삭제되었습니다.');
+                              window.location.href = "{% url 'map:map' %}";
+                          } else {
+                              alert('오류가 발생했습니다.');
+                          }
+                      }
+                      
+                  });
+              }
+            
+            }
+
+            function confirmDelete_video(videoId) {
+                if (confirm('정말로 이 글을 삭제하시겠습니까?')) {
+                    $.ajax({
+                        url: '/video/video/delete/' + videoId + '/',
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function(result) {
+                            if (result.success) {
+                                alert('게시물이 삭제되었습니다.');
+                                window.location.href = "{% url 'map:map' %}";
+                            } else {
+                                alert('오류가 발생했습니다.');
+                            }
+                        }
+                        
+                    });
+                }
+              
+              }
+
               </script>
         </div>
 
