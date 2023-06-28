@@ -368,8 +368,10 @@
                         '<div style="padding:2px;">' +
                         '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
                         '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
-                        '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_post('+post_id+')" style="color:white;">삭제</button>' +
-                        '</div>';
+                        {% if user.is_authenticated and user.is_staff %}
+                          '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_post({{post_id}})" style="color:white;">삭제</button>'+
+                        {% endif %}            
+                        '</div>';            
                     infowindowImage.setContent(content);
                     infowindowImage.open(map, marker);
                 };
@@ -381,7 +383,9 @@
                         '<div style="padding:2px;">' +
                         '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
                         '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
-                        '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_video('+video_id+')" style="color:white;">삭제</button>' +
+                        {% if user.is_authenticated and user.is_staff %}
+                          '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_video('+video_id+')" style="color:white;">삭제</button>' +
+                        {% endif %}
                         '</div>';
                     infowindowImage.setContent(content);
                     infowindowImage.open(map, marker);
