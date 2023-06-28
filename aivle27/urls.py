@@ -3,10 +3,10 @@ from django.urls import path, include
 from django.shortcuts import render
 from django.contrib.auth import views as auth_views
 def index(request):
-    return render(request,'index.html')
+    return render(request,'main/index.html')
 
 urlpatterns = [
-    path('', index, name = 'main'),
+    path('', include('main.urls')),
     path("admin/", admin.site.urls),
     path('video/', include('video.urls')),
     path('post/', include('post.urls')),

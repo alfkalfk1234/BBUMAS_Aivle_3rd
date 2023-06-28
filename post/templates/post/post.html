@@ -162,7 +162,7 @@
             <tbody id="board">
             {% for post in posts %}
               <tr>
-                <td>{{ post.created_at }}</td>  
+                <td>{{ post.created_at|date:"SHORT_DATETIME_FORMAT" }}</td>  
                 <td style="text-align: left"><a href={{ post.id }}>{{ post.post_title }}</a></td>
                 <td>{{ post.author }}</td>
               </tr>
