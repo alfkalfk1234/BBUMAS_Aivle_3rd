@@ -129,6 +129,15 @@ AWS_SECRET_ACCESS_KEY = 'WUOgnITC5oKAJgnEZeq7Fs+HbuPoewOEVEULmKH4'
 AWS_STORAGE_BUCKET_NAME = 'image-upload11'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+        'TIMEOUT': 600,  # 10 minute
+    }
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
