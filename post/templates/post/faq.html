@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{%static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/car_favicon.png' %}" rel="icon">
   <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -56,14 +56,10 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li class="dropdown"><a href="/video"><span>Video</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              {% if user.is_authenticated %}
-                <li><a href="/video">Video</a></li>
-              {% endif %}
-              <li><a href="#">결과 확인하기</a></li>
-            </ul>
-          </li>
+          {% if user.is_authenticated %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
+          
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
@@ -91,20 +87,15 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/back1.jpg' %});">
+      <div class="short-page-header d-flex align-items-center">
         <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Sample Inner Page</h2>
-              <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
-            </div>
-          </div>
         </div>
       </div>
       <nav>
         <div class="container">
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/post">Post</a></li>
             <li>FAQ</li>
           </ol>
         </div>
