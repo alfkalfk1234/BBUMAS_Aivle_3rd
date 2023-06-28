@@ -46,6 +46,11 @@
 <body>
 
   <style>
+    tbody td a {
+      display:block;
+    　width:100%;
+    　height:100%;
+    }
 
     a {
       text-decoration: none;
@@ -76,6 +81,13 @@
       width:30%;
     }
 
+    #listTitle:hover {
+      background-color: #edeff39b;
+    }
+
+    #listTable_info {
+      font-size: 15px;
+    }
   </style>
 
   <!-- ======= Header ======= -->
@@ -154,15 +166,14 @@
                 <th style="width:63%;">제목</th>
                 <th style="width:23%;">작성자</th>
             </thead>
-
             <tbody id="board">
-            {% for post in posts %}
-              <tr>
-                <td>{{ post.created_at }}</td>
-                <td style="text-align: left"><a href={{ post.id }}>{{ post.post_title }}</a></td>
-                <td>{{ post.author }}</td>
-              </tr>
-            {% endfor %}
+              {% for post in posts %}
+                <tr id="listTitle">
+                  <td><a href={{ post.id }}>{{ post.created_at }}</a></td>
+                  <td style="text-align: left;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
+                  <td><a href={{ post.id }}>{{ post.author }}</a></td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
           {% if user.is_authenticated %}

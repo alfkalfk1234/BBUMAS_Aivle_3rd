@@ -40,14 +40,15 @@ body {
 }
 
 a {
-  color: var(--color-primary);
+  color: #000000;
   text-decoration: none;
 }
 
-a:hover {
+/* 게시판 목록 온클릭 파란색 */
+/* a:hover {
   color: #406aff;
   text-decoration: none;
-}
+} */
 
 h1,
 h2,
