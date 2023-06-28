@@ -225,13 +225,17 @@
                                 // 테이블에 행 추가
                                 var table = document.getElementById('damage-table');
                                 var row = table.insertRow(-1);
+                                row.onclick = function() {
+                                  moveMapToCoordinates(latitude, longitude);
+                                };
+                                
                                 var cell1 = row.insertCell(0);
                                 var cell2 = row.insertCell(1);
                                 var cell3 = row.insertCell(2);
                                 var cell4 = row.insertCell(3);
                                 var cell5 = row.insertCell(4);
 
-                                var checkboxId = 'checkbox' + i; // 고유한 체크박스 ID 생성
+                                var checkboxId = 'checkbox' + i;
                                 cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="' + checkboxId + '" name="checkedRows" onchange="handleChange(this, \'' + time + '\', \'' + class_name + '\', \'' + where + '\', \'' + latitude + '\', \'' + longitude + '\', \'' + file_path + '\')"></td>';
                                 cell2.innerHTML = '<td style="text-align: center;">' + time + '</td>';
                                 cell3.innerHTML = '<td style="text-align: center;">' + address + '</td>';
@@ -245,7 +249,6 @@
                       }
 
                       var checkedItems = []; // 체크된 항목들을 저장할 배열
-
                       function handleChange(checkbox, time, class_name, where, latitude, longitude, file_path) {
                         var item = {
                           time: time,
@@ -368,6 +371,12 @@
             // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
             var map = new kakao.maps.Map(mapContainer, mapOption); 
             var geocoder = new kakao.maps.services.Geocoder();
+
+            function moveMapToCoordinates(latitude, longitude) {
+              var coords = new kakao.maps.LatLng(latitude, longitude);
+              map.setCenter(coords);
+            }
+            
           // 검색 폼과 입력 필드를 변수로 가져옵니다
             var searchForm = document.getElementById('search-form');
             var searchInput = document.getElementById('search-input');
