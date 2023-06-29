@@ -200,7 +200,7 @@ h6 {
   transition: 0.3s;
 }
 .btn-btn {
-  background-color: #0e1d3444;
+  background-color: #6e7f9aa9;
 }
 .btn-btn:hover {
   background: #0e1d3449;
@@ -322,15 +322,19 @@ h6 {
   border-top: 2px solid #0e1d347c;
   width: 100%;
   margin-bottom: 20px;
+  border-bottom: 2px solid #0e1d347c;
 }
+
 #board>tr>td {
   text-align: center;
   border-bottom: 1px solid #ccc;
   padding: 8px;
 }
+/*
 #listTable>tbody>tr:last-child>td {
   border-bottom: 2px solid #0e1d347c;
-}
+}*/
+
 #search {
   position: relative;
   display: block;

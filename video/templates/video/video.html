@@ -49,7 +49,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.special %}
             <li><a href="/video" class='active'>Video</a></li>
           {% endif %}
           <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -102,7 +102,7 @@
   </main>
 
   <div class="container" data-aos="fade-up">
-    <table id="file-table">
+    <table id="file-table" style="box-shadow: 2px 2px 2px #dedede;">
       <tr>
         <th class="tb-th-1" scope="row">파일 이름</th>
         <th class="tb-th-2" scope="row">파일 크기</th>
@@ -141,7 +141,7 @@
     </form>
 
 
-    <label class="upload-btn" for="fileUpload">업로드</label>
+    <label class="upload-btn" for="fileUpload" style="box-shadow: 2px 2px 2px #dedede;">업로드</label>
   </div>
 
   <script>
