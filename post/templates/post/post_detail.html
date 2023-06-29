@@ -71,10 +71,10 @@
             </ul>
           </li>
           <li><a href="/map">Map</a></li>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}" class="get-a-quote">Logout</a></li>
-          {% else %}
-            <li><a class="get-a-quote" href="/login">Login</a></li>
+          {% if request.user == post.author %}
+            <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
+          {% elif user.is_authenticated and user.is_staff %}
+            <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
           {% endif %}
         </ul>
       </nav><!-- .navbar -->
@@ -169,7 +169,7 @@
             <div class="btn-back">
               <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white;">이전 페이지로</button>
               {% if request.user == post.author %}
-                    <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
+                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
               {% endif %}
             </div>
 
