@@ -161,16 +161,16 @@
           <!-- 게시판 목록 -->
           <table id="listTable">
             <thead>
-                <th style="width:24%;">등록일</th>
-                <th style="width:63%;">제목</th>
-                <th style="width:23%;">작성자</th>
+                <th style="width:24%; border-right: 2px solid #fff;">등록일</th>
+                <th style="width:63%; border-right: 2px solid #fff;">제목</th>
+                <th style="width:23%; border-right: 2px solid #fff;">작성자</th>
             </thead>
             <tbody id="board">
               {% for post in posts %}
                 <tr id="listTitle">
-                  <td><a href={{ post.id }}>{{ post.created_at }}</a></td>
-                  <td style="text-align: left;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
-                  <td><a href={{ post.id }}>{{ post.author }}</a></td>
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.created_at }}</a></td>
+                  <td style="border-right: 2px solid #fff; text-align: left; padding-left: 20px;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.author }}</a></td>
                 </tr>
               {% endfor %}
             </tbody>
