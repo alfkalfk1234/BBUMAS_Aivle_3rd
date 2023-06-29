@@ -133,18 +133,54 @@
 
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td style="background-color: #f3f6fc; padding: 20px; text-align: center;">작성일</td>
-                    <td><p style="text-align: left; margin-left: 5%; margin-top: 4%; width:40%;">{{post.created_at}}</p></td>
+                    <td style="width:40%;"><p style="text-align: left; margin-left: 5%; margin-top: 4%;">{{post.created_at}}</p></td>
                     <td style="background-color:#f3f6fc; padding: 20px; text-align: center;">작성자</td>
                     <td><p style="text-align: left; margin-left: 5%; margin-top: 4%;">{{post.author}}</p></td>
                 </tr>
 
                 <tr style="border-bottom: 1px solid #ccc;">
-                    <td style="background-color:#f3f6fc; text-align: center;">위치</td>
-                    <td style="float:left; margin-left: 30px; margin-top: 4%;">
-                        <p>{{post.post_latitude}}</p>
-                        <p>{{post.post_longitude}}</p>
-                    </td>
+                  <td style="background-color:#f3f6fc; text-align: center;">위치</td>
+                  <td style="float:left; margin-left: 30px; margin-top: 4%;" id="address">
+
+                  </td>
                 </tr>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
+                <script>
+
+                  var geocoder = new kakao.maps.services.Geocoder();
+
+                  var postLatitude = "{{post.post_latitude}}";
+                  var postLongitude = "{{post.post_longitude}}";
+              
+                  // Convert these values to numbers
+                  postLatitude = Number(postLatitude);
+                  postLongitude = Number(postLongitude);
+              
+                  // Create a LatLng object
+                  var position = new kakao.maps.LatLng(postLatitude, postLongitude);
+              
+                  // Call the function
+                  getAddress_post(position);
+
+                  function getAddress_post(position) {
+                    geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i].region_type === 'H') { // 행정동의 region_type은 'H'입니다.
+                                    var address = result[i].region_3depth_name;
+                                    // 주소 정보를 가져왔으면 반복문을 종료합니다.
+                                    break;
+                                }
+                            }
+                            // 주소 정보를 HTML 요소에 추가합니다.
+                            document.getElementById('address').innerHTML += '<p>' + address + '</p>';
+                        }
+                    });
+                  }
+                </script>
+              
+
+                
             
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
@@ -163,11 +199,11 @@
                 </tr>
             </table>
             <div class="btn-back">
-              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white;">이전 페이지로</button>
+              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white; box-shadow: 2px 2px 2px #dedede;">이전 페이지로</button>
               {% if request.user == post.author %}
-                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
+                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
               {% elif user.is_authenticated and user.is_staff %}
-                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
+                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
               {% endif %}
             </div>
 
