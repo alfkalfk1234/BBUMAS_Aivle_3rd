@@ -262,6 +262,16 @@
       </div>
     </form>
             
+    <script>
+      // 폼 제출 이벤트
+      document.querySelector('form').addEventListener('submit', function(e) {
+        var agreeUseMyInfo = document.querySelector('input[name="agreeUseMyInfo"]:checked').value;
+        if (agreeUseMyInfo === 'N') {
+          alert('개인정보 수집에 동의해주세요'); // 사용자에게 알림
+          e.preventDefault(); // 폼 제출 중단
+        }
+      });
+    </script>
     </section>
     <!-- End Service Details Section -->
 
