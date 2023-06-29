@@ -117,7 +117,7 @@
             <table id="bd-table">
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td style="background-color: #f3f6fc; padding: 20px; text-align: center;">신고 유형</td>
-                    <td style="float:left; margin-left: 5%; margin-top: 4%;">
+                    <td style="float:left; margin-left: 4%; margin-top: 4%;">
                         <p>{{post.report_type}}</p>
                     </td>
                 </tr>
@@ -133,14 +133,14 @@
 
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td style="background-color: #f3f6fc; padding: 20px; text-align: center;">작성일</td>
-                    <td><p style="text-align: left; margin-left: 5%; margin-top: 4%; width:40%;">{{post.created_at}}</p></td>
+                    <td style="width: 10%;"><p style="text-align: left; margin-left: 4%; margin-top: 4%;">{{post.created_at}}</p></td>
                     <td style="background-color:#f3f6fc; padding: 20px; text-align: center;">작성자</td>
-                    <td><p style="text-align: left; margin-left: 5%; margin-top: 4%;">{{post.author}}</p></td>
+                    <td><p style="text-align: left; margin-left: 10%; margin-top: 11%;">{{post.author}}</p></td>
                 </tr>
 
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td style="background-color:#f3f6fc; text-align: center;">위치</td>
-                    <td style="float:left; margin-left: 30px; margin-top: 4%;">
+                    <td style="float:left; margin-left: 4%; margin-top: 4%;">
                         <p>{{post.post_latitude}}</p>
                         <p>{{post.post_longitude}}</p>
                     </td>
@@ -149,12 +149,12 @@
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
                     <td>
-                        <p style="text-align: left; margin-left: 5%; margin-top: 4%; width: 121%;
+                        <p style="text-align: left; margin-left: 4%; margin-top: 4%; width: 140%;
                         height: 70px;
                         border: 5px solid #f3f6fc;">{{post.post_content}}</p>
                         <br>
                         {% if post.post_image %}
-                            <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px;">
+                            <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 5%;">
                             <br>
                         {% else %}
                             <p>No image uploaded for this post</p>
@@ -163,7 +163,7 @@
                 </tr>
             </table>
             <div class="btn-back">
-              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white;">이전 페이지로</button>
+              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white; margin-left:40%;">이전 페이지로</button>
               {% if request.user == post.author %}
                 <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white;">게시물 삭제</button>
               {% elif user.is_authenticated and user.is_staff %}
