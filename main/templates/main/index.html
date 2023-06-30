@@ -56,7 +56,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/" class="active">Home</a></li>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.special %}
             <li><a href="/video">Video</a></li>
           {% endif %}
           <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -204,7 +204,7 @@
 
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-            <img src="{%static 'assets/img/main_road.jpg' %}" class="img-fluid" alt="">
+            <img src="{%static 'assets/img/bbox.png' %}" class="img-fluid" alt="">
             <a href="https://youtu.be/75LI9MI9eEo" class="glightbox play-btn"></a>
           </div>
           <div class="col-lg-6 content order-last  order-lg-first">

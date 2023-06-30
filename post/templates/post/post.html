@@ -105,7 +105,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.special %}
             <li><a href="/video">Video</a></li>
           {% endif %}
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -161,22 +161,22 @@
           <!-- 게시판 목록 -->
           <table id="listTable">
             <thead>
-                <th style="width:24%;">등록일</th>
-                <th style="width:63%;">제목</th>
-                <th style="width:23%;">작성자</th>
+                <th style="width:24%; border-right: 2px solid #fff;">등록일</th>
+                <th style="width:63%; border-right: 2px solid #fff;">제목</th>
+                <th style="width:23%; border-right: 2px solid #fff;">작성자</th>
             </thead>
             <tbody id="board">
               {% for post in posts %}
                 <tr id="listTitle">
-                  <td><a href={{ post.id }}>{{ post.created_at }}</a></td>
-                  <td style="text-align: left;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
-                  <td><a href={{ post.id }}>{{ post.author }}</a></td>
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.created_at }}</a></td>
+                  <td style="border-right: 2px solid #fff; text-align: left; padding-left: 20px;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.author }}</a></td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
           {% if user.is_authenticated %}
-            <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
+            <button class="separator3" style="float:right; box-shadow: 2px 2px 2px #dedede;" onClick="location.href='/post/posting'">작성하기</button>
           {% endif %}      
         </div>
       </div>
