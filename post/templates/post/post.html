@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{%static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/car_favicon.png' %}" rel="icon">
   <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -26,6 +26,9 @@
   <link href="{%static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{%static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
   <link href="{%static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <!-- Pagination CSS-->
+  <link href="{%static 'assets/vendor/bootstrap/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
+  {% comment %} <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> {% endcomment %}
 
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
@@ -39,7 +42,53 @@
   ======================================================== -->
 </head>
 
+
 <body>
+
+  <style>
+    tbody td a {
+      display:block;
+    　width:100%;
+    　height:100%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+    
+    .page-link {
+      color: #000; 
+      background-color: #fff;
+      border: 1px solid #ccc; 
+    }
+    
+    .page-item.active .page-link {
+      z-index: 1;
+      color: #555;
+      font-weight:bold;
+      background-color: #edeff3;
+      border-color: #c6c9cf;  
+    }
+    
+    .page-link:focus, .page-link:hover {
+      color: #000;
+      background-color: #fafafa; 
+      border-color: #c6c9cf;
+    }
+
+    .col-md-7{
+      flex:0 0 auto;
+      width:30%;
+    }
+
+    #listTitle:hover {
+      background-color: #edeff39b;
+    }
+
+    #listTable_info {
+      font-size: 15px;
+    }
+  </style>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -56,11 +105,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/video">Video</a></li>
+          {% if user.is_authenticated and user.special %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post" class="active">신고 게시판 목록</a></li>
-              <li><a href="/post/posting">신고하기</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
@@ -77,18 +130,13 @@
   </header><!-- End Header -->
   <!-- End Header -->
 
+
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/back1.jpg' %});">
+      <div class="short-page-header d-flex align-items-center">
         <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>신고 게시판</h2>
-              {% comment %} <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> {% endcomment %}
-            </div>
-          </div>
         </div>
       </div>
       <nav>
@@ -101,223 +149,63 @@
       </nav>
     </div><!-- End Breadcrumbs -->
 
+    
+          
+  </main><!-- End #main -->
+    
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
-      <div class="container">
-          
-        <!-- 공간 -->
-        <div class="space"></div>
+      <div class="container" data-aos="fade-up">
+        <div class="side-control">
 
-        <!-- 검색창 -->
-        <input type="text" id="search" placeholder="검색어를 입력하세요">
-          
-        <!-- 선 -->
-        <div class="space2"></div>
-        <div class="separator2"></div>
-          
-        <!-- 게시판 -->
-   
-        <table>
-         <thead>
-          <tr class="go">   
-            <th>작성일</th>
-            <th>제목</th>
-            <th>작성자</th>
-          </tr>
-         </thead>
-         <tbody id="board">
-          {% for post in posts %}
-            <tr>
-              <td>{{ post.created_at }}</td>  
-              <td><a href={{ post.id}}> {{ post.post_title }}</a></td>
-              <td>{{ post.author }}</td>
-
-            </tr>
-          {% endfor %}
-         </tbody>
-        </table>
-        <hr class="psot-table">
-        
-        <!-- 작성하기 버튼 -->
-        <!--<div class="separator3" style='float:right;'>
-          <label for="writeBtn"><a  class="post-btn" href="/post/posting" style="color:white">작성하기</a></label>
-          <button id="writeBtn" style="display: none;"></button>-->
-        <button class="separator3" style='float:right;' onClick="location.href='/post/posting'">작성하기</button>
-        <!--</div>-->
-        <!--<button id="writeBtn"><a href="service-details.html" class="readmore stretched-link">작성하기<i class="bi bi-arrow-right"></i></a></button>-->
-        <!--<a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>-->
-        <!-- <button id="Delete">삭제하기</button> -->
-          
-        <!-- 작성 모달 창 -->
-      
-        <!--<div id="writeModal" class="modal">
-         <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>게시물 작성</h2>
-          <label for="titleInput">제목:</label>
-          <input type="text" id="titleInput" placeholder="제목을 입력하세요">
-          <br>
-          <label for="authorInput">작성자:</label>
-          <input type="text" id="authorInput" placeholder="작성자를 입력하세요">
-          <br>
-          <button id="submitBtn">작성 완료</button>
-         </div>
-        </div>-->
-
-
-        <!-- <div class="row gy-4">
-            
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-cart-flatbed"></i></div>
-            <div>
-              <h4 class="title">Lorem Ipsum</h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-          <!-- End Service Item 
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck"></i></div>
-            <div>
-              <h4 class="title">Dolor Sitema</h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item 
-
-          <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon flex-shrink-0"><i class="fa-solid fa-truck-ramp-box"></i></div>
-            <div>
-              <h4 class="title">Sed ut perspiciatis</h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-              <a href="service-details.html" class="readmore stretched-link"><span>Learn More</span><i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item 
-
-        </div>-->
-          
-          
-
-      
-
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <!--<section id="faq" class="faq">-->
-      <!--<div class="container" data-aos="fade-up">
-
-        <div class="section-header">
-          <span>자주 묻는 질문(FAQ)</span>
-          <h2>자주 묻는 질문(FAQ)</h2>
-
+          <!-- 게시판 목록 -->
+          <table id="listTable">
+            <thead>
+                <th style="width:24%; border-right: 2px solid #fff;">등록일</th>
+                <th style="width:63%; border-right: 2px solid #fff;">제목</th>
+                <th style="width:23%; border-right: 2px solid #fff;">작성자</th>
+            </thead>
+            <tbody id="board">
+              {% for post in posts %}
+                <tr id="listTitle">
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.created_at }}</a></td>
+                  <td style="border-right: 2px solid #fff; text-align: left; padding-left: 20px;"><a href={{ post.id }}>{{ post.post_title }}</a></td>
+                  <td style="border-right: 2px solid #fff;"><a href={{ post.id }}>{{ post.author }}</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% if user.is_authenticated %}
+            <button class="separator3" style="float:right; box-shadow: 2px 2px 2px #dedede;" onClick="location.href='/post/posting'">작성하기</button>
+          {% endif %}      
         </div>
-
-        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-10">
-
-            <div class="accordion accordion-flush" id="faqlist">
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    블랙박스 영상을 통해 파손 여부를 어떻게 확인하나요?
-                  </button>
-                </h3>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    영상 분석과 객체 탐지 기술을 이용해 학습한 모델이 파손을 감지합니다. 
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    블랙박스 영상을 통해 검출되는 객체는 무엇인가요?
-                  </button>
-                </h3>
-                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    도로 파손, 도로 분리대 파손, 차선, 횡단보도, 시선 유도봉, 볼라드, 방지턱, 도로글씨, 제설함, 표지판 등을 감지합니다.
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    신고한 내용에 대한 처리 과정이 어떻게 되나요?
-                  </button>
-                </h3>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    신고 게시판으로 접수된 안전신고의 처리 기관 지정 및 전달 등의 업무를 진행하고 있습니다. <br>
-                    신고처리 진행 상황, 결과 관련 문의는 관련 처리 기관의 안내된 연락처로 문의하시기 바랍니다.
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    신고 게시판으로 신고하는 대상은 무엇인가요?
-                  </button>
-                </h3>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    주요 신고대상은 다음과 같습니다. <br>
-                    (예시) <br>
-                    <li>도로 위 안전 시설물</li>
-                    <li>보행/교통 안전</li>
-                    <li>취약시설물</li>
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-              <!--<div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    회원에 반드시 가입해야 신고가 가능한가요?
-                  </button>
-                </h3>
-                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    <i class="bi bi-question-circle question-icon"></i>
-                    회원 가입 후 로그인을 통해 신고가 가능합니다. 
-                  </div>
-                </div>
-              </div>-->
-              <!-- # Faq item-->
-
-            <!--</div>
-
-          </div>
-        </div>
-
       </div>
-    </section>-->
-    <!-- End Frequently Asked Questions Section -->
+    </section>
+  <!-- Pagination -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> {% endcomment %}
 
-  </main><!-- End #main -->
+  <script>
+    $(document).ready(function() {
+      $('#listTable').DataTable({
+          "order": [[ 0, "desc" ]]
+      });
+    });
+  
+  </script>
+  <!-- Pagination End -->
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="/" class="logo d-flex align-items-center">
-            <span>Logis</span>
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>BBUMAS</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Black Box Urban Maintenance Automation System</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -327,35 +215,33 @@
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+          <h4>Policy</h4>
+          <ul class="policy_link">
+            <li>
+              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+            </li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="/">Main</a></li>
+            <li><a href="/video">Black box Upload</a></li>
+            <li><a href="/post">Alert Board</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
           <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
+            대전 서구 문정로48번길 30 <br>
+            (탄방동)<br>
+            <br>
+            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
+            <strong>Email:</strong> ktaivle@kt.com<br>
           </p>
 
         </div>
@@ -365,18 +251,18 @@
 
     <div class="container mt-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer>
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -390,6 +276,9 @@
   <script src="{%static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{%static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{%static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <script src="{%static 'assets/vendor/bootstrap/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/bootstrap/js/dataTables.bootstrap5.min.js' %}"></script>
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>

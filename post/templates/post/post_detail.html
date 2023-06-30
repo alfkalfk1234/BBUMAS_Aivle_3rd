@@ -1,9 +1,104 @@
-<html>
-    <head>
-        <title>Posting!</title>
-    </head>
-    <body>
-        <h1>게시글 개별 페이지입니다</h1>
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>신고 게시판</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{%static 'assets/img/car_favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{%static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Logis
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>BBUMAS</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/">Home</a></li>
+          {% if user.is_authenticated and user.special %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
+          <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/post" class="active">신고 게시판 목록</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
+              <li><a href="/post/faq">FAQ</a></li>
+            </ul>
+          </li>
+          <li><a href="/map">Map</a></li>
+
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="short-page-header d-flex align-items-center">
+        <div class="container position-relative">
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/post">Post</a></li>
+            <li>게시글 확인하기</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+        {% comment %} <h1>게시글 개별 페이지입니다</h1>
         <p>{{post.post_title}}</p>
         <p>{{post.post_content}}</p>
         {% if post.post_image %}
@@ -16,6 +111,145 @@
         <p>{{post.post_latitude}}</p>
         <p>{{post.post_longitude}}</p>
         <p>{{post.report_type}}</p>
-        <p></p>
+        <p></p> {% endcomment %}
+    <section id="featured-services" class="featured-services">
+        <div class="container" data-aos="fade-up">
+            <table id="bd-table">
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td style="background-color: #f3f6fc; padding: 20px; text-align: center;">신고 유형</td>
+                    <td style="float:left; margin-left: 4%; margin-top: 4%;">
+                        <p>{{post.report_type}}</p>
+                    </td>
+                </tr>
+            
+                <tr style="border-bottom: 1px solid #ccc;">
+                <td style="background-color:#f3f6fc; height: 50px; width: 20%; padding: 20px; text-align: center;">제목</td>
+                <td>
+                    <div class="title">
+                    <dd><p style="text-align: left; margin-left: 5%; margin-top: 4%;">{{post.post_title}}</p></dd>
+                    </div>
+                </td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td style="background-color: #f3f6fc; padding: 20px; text-align: center;">작성일</td>
+                    <td style="width: 10%;"><p style="text-align: left; margin-left: 4%; margin-top: 4%;">{{post.created_at}}</p></td>
+                    <td style="background-color:#f3f6fc; padding: 20px; text-align: center;">작성자</td>
+                    <td><p style="text-align: left; margin-left: 10%; margin-top: 11%;">{{post.author}}</p></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #ccc;">
+                  <td style="background-color:#f3f6fc; text-align: center;">위치</td>
+                  <td style="float:left; margin-left: 4%; margin-top: 4%;" id="address">
+
+                  </td>
+                </tr>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
+                <script>
+
+                  var geocoder = new kakao.maps.services.Geocoder();
+
+                  var postLatitude = "{{post.post_latitude}}";
+                  var postLongitude = "{{post.post_longitude}}";
+              
+                  // Convert these values to numbers
+                  postLatitude = Number(postLatitude);
+                  postLongitude = Number(postLongitude);
+              
+                  // Create a LatLng object
+                  var position = new kakao.maps.LatLng(postLatitude, postLongitude);
+              
+                  // Call the function
+                  getAddress_post(position);
+
+                  function getAddress_post(position) {
+                    geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i].region_type === 'H') { // 행정동의 region_type은 'H'입니다.
+                                    var address = result[i].region_3depth_name;
+                                    // 주소 정보를 가져왔으면 반복문을 종료합니다.
+                                    break;
+                                }
+                            }
+                            // 주소 정보를 HTML 요소에 추가합니다.
+                            document.getElementById('address').innerHTML += '<p>' + address + '</p>';
+                        }
+                    });
+                  }
+                </script>
+              
+
+                
+            
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
+                    <td>
+                        <p style="text-align: left; margin-left: 4%; margin-top: 4%; width: 140%;
+                        height: 70px;
+                        border: 5px solid #f3f6fc;">{{post.post_content}}</p>
+                        <br>
+                        {% if post.post_image %}
+                            <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 5%;">
+                            <br>
+                        {% else %}
+                            <p>No image uploaded for this post</p>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <div class="btn-back">
+              <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white; margin-left:40%; box-shadow: 2px 2px 2px #dedede;">이전 페이지로</button>
+              {% if request.user == post.author %}
+                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
+              {% elif user.is_authenticated and user.is_staff %}
+                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
+              {% endif %}
+            </div>
+
+            
+            <script>
+                function confirmDelete(postId) {
+                    if (confirm('정말로 이 글을 삭제하시겠습니까?')) {
+                        $.ajax({
+                            url: '/post/post/delete/' + postId + '/',
+                            type: 'POST',
+                            data: {
+                                'csrfmiddlewaretoken': '{{ csrf_token }}'
+                            },
+                            success: function(result) {
+                                if (result.success) {
+                                    alert('게시물이 삭제되었습니다.');
+                                    window.location.href = "{% url 'post:post' %}";
+                                } else {
+                                    alert('오류가 발생했습니다.');
+                                }
+                            }
+                            
+                        });
+                    }
+                  
+                  }
+                
+            </script>
+
+
+            
+        </div>
+    </section>
+    </main>
+    <script src="{%static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{%static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{%static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{%static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{%static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  
+    <script src="{%static 'assets/vendor/bootstrap/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{%static 'assets/vendor/bootstrap/js/dataTables.bootstrap5.min.js' %}"></script>
+  
+    <!-- Template Main JS File -->
+    <script src="{%static 'assets/js/main.js' %}"></script>
     </body>
+        
 </html>

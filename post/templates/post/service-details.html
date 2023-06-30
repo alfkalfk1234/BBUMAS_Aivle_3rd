@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{%static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{%static 'assets/img/car_favicon.png' %}" rel="icon">
   <link href="{%static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -56,11 +56,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/video">Video</a></li>
+          {% if user.is_authenticated and user.special %}
+            <li><a href="/video">Video</a></li>
+          {% endif %}
           <li class="dropdown"><a href="/post" class="active"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/post">신고 게시판 목록</a></li>
-              <li><a href="/post/posting" class="active">신고하기</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">신고하기</a></li>
+              {% endif %}
               <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </li>
@@ -82,14 +86,8 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url({%static 'assets/img/page-header.jpg' %});">
+      <div class="short-page-header d-flex align-items-center">
         <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>신고 게시판</h2>
-              <p>도로 위 모든 안전 위험요인을 촬영한 사진과 함께 신고해 주세요.</p>
-            </div>
-          </div>
         </div>
       </div>
       <nav>
@@ -113,14 +111,11 @@
 
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3;">신고 유형</td>
-              <td>
+              <td style="float:left; margin: 10px; margin-left: 40px;">
                 {{ form.report_type }}
               </td>
             </tr>
 
-
-          
-              
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3;">제목</td>
               <td>
@@ -130,77 +125,72 @@
               </td>
             </tr>
 
-              <tr style="border-bottom: 1px solid #ccc;">
-                <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
-                <td>
-                  <div class="choose">
-                    <label for="post_image" class="file-label">파일 선택</label>
-                    {{ form.post_image }} 
-                  </div>
-                  <form id='img_form'>
-                    <input type="reset" id="fileReset" style="display: none;"> 
-                    <!-- Add this script at the end of your HTML file or inside the <head> tag -->
-                      <script>
-                        // Reset img_form function
-                        function resetImgForm() {
-                          const imgForm = document.getElementById("img_form");
-                          imgForm.reset();
-                      
-                          // Clear the filename and filesize elements
-                          document.getElementById("filename").textContent = "";
-                          document.getElementById("filesize").textContent = "";
-                      
-                          // Clear the image preview element
-                          const preview = document.getElementById("preview");
-                          preview.src = "";
-                          preview.style.display = "none";
-                      
-                          // Remove image file data
-                          let fileInput = document.querySelector('#post_image');
-                          fileInput.value = '';
-                        }
-                      </script>
-                      
+            <tr style="border-bottom: 1px solid #ccc;">
+              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
+              <td>
+                <label for="post_image" class="file-label">파일 선택</label>
+                {{ form.post_image }} 
+                <form id='img_form'>
+                  <input type="reset" id="fileReset" style="display: none;"> 
+                  <!-- Add this script at the end of your HTML file or inside the <head> tag -->
+                    <script>
+                      // Reset img_form function
+                      function resetImgForm() {
+                        const imgForm = document.getElementById("img_form");
                     
-                    <!-- Use this reset button inside the img_form -->
-                    <button type="button" onclick="resetImgForm()" class='reset-label'>파일 제거</button>
-    
+                        // Clear the filename and filesize elements
+                        document.getElementById("filename").textContent = "";
+                        document.getElementById("filesize").textContent = "";
                     
-                    <div>
-                      <!-- 업로드 파일 정보 테이블 -->
-                      <table id="imgfile-table">
-                        <tr>
-                          <th class="fn-th" scope="row">파일 이름</th>
-                          <th class="fs-th" scope="row">파일 크기</th>
-                        </tr>
-                        <tr>
-                          <td id="filename"></td>
-                          <td id="filesize"></td>
-                        </tr>
-                      </table>
-                      
-                    </div>
-                  </form>
+                        // Clear the image preview element
+                        const preview = document.getElementById("preview");
+                        preview.src = "";
+                        preview.style.display = "none";
+                    
+                        // Remove image file data
+                        let fileInput = document.querySelector('#post_image');
+                        fileInput.value = '';
 
-                  <div class="upload-box">
-                    <div id="drop-file" class="drag-file">
-                      <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-                      <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
-                      <img src="" alt="미리보기 이미지" class="preview" id="preview">
-                      {{ form.post_image }}
-                    </div>
+                        document.getElementById("latitude").value = "";
+                        document.getElementById("longitude").value = "";
+                      }
+                    </script>
+                    
+                  
+                  <!-- Use this reset button inside the img_form -->
+                  <button type="button" onclick="resetImgForm()" class='reset-label'>파일 제거</button>
+  
+                  <div>
+                    <!-- 업로드 파일 정보 테이블 -->
+                    <table id="imgfile-table">
+                      <tr>
+                        <th class="fn-th" scope="row">파일 이름</th>
+                        <th class="fs-th" scope="row">파일 크기</th>
+                      </tr>
+                      <tr>
+                        <td id="filename"></td>
+                        <td id="filesize"></td>
+                      </tr>
+                    </table>
+                    
                   </div>
-                </td>
-              </tr>
-              
+                </form>
+
+                <div class="upload-box">
+                  <div id="drop-file" class="drag-file">
+                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
+                    <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
+                    <img src="" alt="미리보기 이미지" class="preview" id="preview">
+                    {{ form.post_image }}
+                  </div>
+                </div>
+              </td>
+            </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
               <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">신고 내용</td>
               <td>
-                  <div class="form-group">
-                    <label class="te" for="content" style="font-weight: 700;">신고 내용</label>
-                    {{ form.post_content }}
-                  </div>
+                {{ form.post_content }}
               </td>
             </tr>
 
@@ -261,16 +251,27 @@
             </tr>
 
           </table>
+
           <input type="hidden" id="latitude" name="latitude">
           <input type="hidden" id="longitude" name="longitude">
 
           <div class="btn-sub">
-            <button type="button" class="btn-btn"><a href="/post" style="color:white">이전 페이지로</a></button>
-            <button type="submit" class="btn-s">등록하기</button>
+            <button type="button" class="btn-btn" style="box-shadow: 2px 2px 2px #dedede;"><a href="/post" style="color:white">이전 페이지로</a></button>
+            <button type="submit" class="btn-s" style="box-shadow: 2px 2px 2px #dedede;">등록하기</button>
           </div>
       </div>
     </form>
             
+    <script>
+      // 폼 제출 이벤트
+      document.querySelector('form').addEventListener('submit', function(e) {
+        var agreeUseMyInfo = document.querySelector('input[name="agreeUseMyInfo"]:checked').value;
+        if (agreeUseMyInfo === 'N') {
+          alert('개인정보 수집에 동의해주세요'); // 사용자에게 알림
+          e.preventDefault(); // 폼 제출 중단
+        }
+      });
+    </script>
     </section>
     <!-- End Service Details Section -->
 
@@ -282,18 +283,22 @@
   <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
 
   <script>
-    // 개인정보 미동의 시 팝업창
-    {% comment %} function showPopup() {
-      alert("팝업창이 뜨는 코드입니다."); // 팝업창이 뜨는 동작을 수행하는 코드
+
+    function showPopup() {
+      // 팝업창을 띄우는 코드 작성
+      alert("개인정보 수집에 동의해야 등록할 수 있습니다.");
     }
   
-    function checkAgreement() {
-      const agreementNo = document.getElementById('agreeUseMyInfo2'); // "아니오" 버튼 요소 선택
-      if (agreementNo.checked) {
-        showPopup(); // "아니오" 버튼이 선택된 경우에만 팝업창 띄우기
+    function register() {
+      var agreeValue = document.querySelector('input[name="agreeUseMyInfo"]:checked').value;
+      if (agreeValue === 'N') {
+        showPopup();
+      } else {
+        // 등록 처리를 진행하는 코드 작성
+        // ...
+        // 등록 완료 메시지 출력 등
       }
-    } {% endcomment %}
-
+    }
 
     function DropFile(dropAreaId, fileListId) {
       let dropArea = document.getElementById(dropAreaId);
@@ -400,6 +405,7 @@
       let warningDisplayed = false;
 
       function handleFileUpload(file) {
+        let warningDisplayed = false;
         if (file) {
           const fileName = file.name;
           const fileSize = formatFileSize(file.size);
@@ -426,7 +432,7 @@
               document.getElementById('latitude').value = latitude;
               document.getElementById('longitude').value = longitude;
 
-              warningDisplayed = false; // Reset the warningDisplayed variable to false
+
             } else {
               if (!warningDisplayed) {
                 alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
@@ -449,33 +455,6 @@
       return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + units[i];
     }
     
-    var fileInput = document.getElementById('photo-upload');
-
-    fileInput.addEventListener('change', function(e) {
-      var file = e.target.files[0];
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        var imageData = e.target.result;
-        var exifData = EXIF.readFromBinaryFile(imageData);
-
-        if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
-          var latitude = calculateCoordinate(exifData.GPSLatitude);
-          var longitude = calculateCoordinate(exifData.GPSLongitude);
-
-          var gpsInfo = latitude + ", " + longitude;
-          console.log("사진의 GPS 정보:", gpsInfo);
-          warningDisplayed = false;
-        } else {
-          if (!warningDisplayed) {
-            alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
-            warningDisplayed = true;
-          }
-        }
-      };
-
-      reader.readAsArrayBuffer(file);
-    });
 
     function calculateCoordinate(coordinates) {
       var degree = coordinates[0];
@@ -516,10 +495,10 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="/" class="logo d-flex align-items-center">
-            <span>Logis</span>
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span>BBUMAS</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Black Box Urban Maintenance Automation System</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -529,35 +508,33 @@
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+          <h4>Policy</h4>
+          <ul class="policy_link">
+            <li>
+              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+            </li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="/">Main</a></li>
+            <li><a href="/video">Black box Upload</a></li>
+            <li><a href="/post">Alert Board</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact Us</h4>
           <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
+            대전 서구 문정로48번길 30 <br>
+            (탄방동)<br>
+            <br>
+            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
+            <strong>Email:</strong> ktaivle@kt.com<br>
           </p>
 
         </div>
@@ -567,18 +544,18 @@
 
     <div class="container mt-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer>
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

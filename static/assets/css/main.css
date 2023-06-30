@@ -40,14 +40,15 @@ body {
 }
 
 a {
-  color: var(--color-primary);
+  color: #000000;
   text-decoration: none;
 }
 
-a:hover {
+/* 게시판 목록 온클릭 파란색 */
+/* a:hover {
   color: #406aff;
   text-decoration: none;
-}
+} */
 
 h1,
 h2,
@@ -84,8 +85,7 @@ h6 {
   margin-bottom: 4px;
 }
 
-.choose {
-  /* display: flex; */
+/* .choose {
   align-items: center;
   position: relative;
   left: 50%;
@@ -93,14 +93,14 @@ h6 {
   width: 100%;
   height: 40%;
   margin-top: 10px;
-}
+} */
 
 .file-label,
 .reset-label,
 .moreBtn,
 .select-btn,
 .reset-btn {
-  background-color: #f7f7f7;
+  background-color: #f5f5f5;
   border: 1px solid #ccc;
   color: #666;
   font-size: 14px;
@@ -113,9 +113,9 @@ h6 {
 .file-label,
 .reset-label {
   width: 120px;
-  height: 38px;
   left: -29%;
   position: relative;
+  margin-top: 10px;
   padding: 8px;
 }
 
@@ -124,7 +124,7 @@ h6 {
 .select-btn:hover,
 .reset-btn:hover,
 .moreBtn:hover {
-  background: #f7f7f7bd;
+  background: #f7f7f781;
   transition: 0.3s;
 }
 
@@ -200,7 +200,7 @@ h6 {
   transition: 0.3s;
 }
 .btn-btn {
-  background-color: #0e1d3444;
+  background-color: #6e7f9aa9;
 }
 .btn-btn:hover {
   background: #0e1d3449;
@@ -219,7 +219,7 @@ h6 {
   transition: 0.3s;
 }
 
-.form-text {
+#post_content {
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -228,17 +228,21 @@ h6 {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0.375rem 0.75rem;
+
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: var(--bs-body-color);
+
   background-color: var(--bs-body-bg);
   background-clip: padding-box;
+
   border: 1px solid #ccc;
+  border-radius: 2px;
+
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 2px;
 }
 
 .te {
@@ -310,73 +314,90 @@ h6 {
 /*-----------------------------------------------------------
 신고 게시판
 ------------------------------------------------------------*/
+.side-control {
+  width: 94%;
+  margin-left: 3%;
+}
+#listTable {
+  border-top: 2px solid #0e1d347c;
+  width: 100%;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #0e1d347c;
+}
+
+#board>tr>td {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+}
+/*
+#listTable>tbody>tr:last-child>td {
+  border-bottom: 2px solid #0e1d347c;
+}*/
+
 #search {
+  position: relative;
   display: block;
   margin: 0 auto;
   width: 100%;
   max-width: 900px;
 }
-
-
-th {
-width: 1000px;
-text-align: center;
-/* 너비 조정을 위한 값 설정 */
+.btnSearch {
+  width: 80px;
+}
+select {
+  height: 34px;
+  padding: 5px 13px 7px 13px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  background-image: none;
 }
 
+th {
+  font-size: 16px;
+  font-weight: 5;
+  padding: 10px;
+  background-color: #edeff3;
+  width: 1000px;
+  text-align: center;
+}
 
 .space {
   height: 70px; /* 원하는 공간의 높이를 설정합니다 */
 }
 
-
 .space2 {
   height: 40px; /* 원하는 공간의 높이를 설정합니다 */
 }
-
 
 #writeBtn {
   float: right;
 }
 
-
-.separator {
-  border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
-  margin: 20px 0; /* 선 위아래에 여백을 설정합니다 */
-}
-
-
-.separator2 {
-  border-top: 1px solid #000; /* 선의 스타일을 설정합니다 */
-  margin: 10px 0; /* 선 위아래에 여백을 설정합니다 */
-}
-
 .separator3 {
-  width: 20%;
-  background-color: #0e1d34e6;
+  border: none;
+  width: 200px;
+  background-color: #0e1d34d2;
   color: #fff;
   text-align: center;
   padding: 10px 0;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
+  margin-top: -55px;
 }
 
 .separator3:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: #0e1d34e8;;
   color: #fff;
   transition: 0.3s;
 }
 
-.psot-table {
-  margin-left : auto;
-  margin-right : auto;
-  border-style:solid;
-  border-width: 3px thin
-}
 
-.post-btn {
+/* .post-btn {
   color: white;
-}
+} */
+
 
 /*--------------------------------------------
 faq페이지
@@ -1783,8 +1804,8 @@ section {
   padding: 40px;
   box-sizing: border-box;
   background-color: #f5f5f7;
-  margin-top: 70px;
-  margin-bottom: 150px;
+  margin-top: 100px;
+  margin-bottom: 140px;
   text-align: center;
 }
 .login-wrapper > h2{
@@ -1812,7 +1833,6 @@ section {
   color: #fff;
   font-size: 16px;
   background-color: #3a658a;
-  /* background-color: var(--color-secondary); */
   margin-top: 20px;
   margin-bottom: 12px;
 }
@@ -2265,7 +2285,7 @@ a.join-label:hover{
 video.html
 */
 #file-table{
-  margin-top: 20px;
+  margin-top: 50px;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -2337,7 +2357,7 @@ video.html
   margin-top: 70px;
   width: 600px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   
   height: 50px;
   color: #fff;
@@ -2367,4 +2387,14 @@ video.html
 
 .highlight {
   border: 2px dashed red;
+}
+
+/*-------------------------------------
+post_detail.html
+------------------------------------*/
+.post-detail {
+  padding: 80px;
+}
+.btn-back {
+  position: relative;
 }

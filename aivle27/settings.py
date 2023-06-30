@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     'post',
     'map',
     'login',
-    'join',
-    
+    'join',    
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +128,27 @@ TIME_ZONE = "Asia/Seoul"
 USE_I18N = True
 
 USE_TZ = True
+
+SESSION_COOKIE_AGE = 1800 # 세션 쿠키의 유효기간을 30분으로 설정
+SESSION_SAVE_EVERY_REQUEST = False # 사용자가 요청을 보낼 때마다 세션 쿠키의 유효기간을 연장하지 않음
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_SECURE_URLS = False       # use http instead of https
+AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
+
+AWS_ACCESS_KEY_ID = 'AKIAQ6GVOPASLTQEUYRC'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'image-upload11'
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+        'TIMEOUT': 600,  # 10 minute
+    }
+}
 
 
 # Static files (CSS, JavaScript, Images)
