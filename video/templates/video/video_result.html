@@ -30,6 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
   <link href="{%static 'assets/css/map.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/css/new_main.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Logis
@@ -121,18 +122,14 @@
               <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end=
-                      {% with last_result=results|last %}
-                      {{ last_result.id }}
-                      {% endwith %} 
-                    data-purecounter-duration="1" class="purecounter"></span>
+                    <span id='cnt_1' data-purecounter-start="0" data-purecounter-end='' data-purecounter-duration="1" class="purecounter"></span>
                     <p>파손 검출량</p>
                     <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
                     border-top: 2px solid black;">
                   </div>
                 </div><!-- End Stats Item -->
     
-                <div class="col-lg-3 col-6">
+                {% comment %} <div class="col-lg-3 col-6">
                   <div class="stats-item text-center w-100 h-100">
                     <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
                     <p>신고 건수</p>
@@ -157,7 +154,7 @@
                     <hr style="width: 50%; position: relative; left: 24%; height: 2px; border: none;
                     border-top: 2px solid black;">
                   </div>
-                </div><!-- End Stats Item -->
+                </div><!-- End Stats Item --> {% endcomment %}
     
               </div>
             </div>
@@ -178,22 +175,14 @@
               <thead>
                 <tr>
                   <th class="checkbox-cell" style="width: 5%; text-align: center;">
-                    <input type="checkbox" id="checkedRows" name="checkedRows" onchange="handleChange(this, time, class_name, where, latitude, longitude, file_path)" onclick="selectAll(this)">
+                    <input type="checkbox" onclick="toggleAllCheckboxes(this)">
                   </th>
                   <th style="width: 30%; text-align: center;">시간</th>
                   <th style="width: 13%; text-align: center;">위치</th>
                   <th style="text-align: center;">파손 내용</th>
                   <th style="width: 15%; text-align: center;">관련 부서</th>
                 </tr>
-                <script>
-                  function selectAll(selectAll) {
-                    const checkboxes = document.querySelectorAll('input[name="checkedRows"]');
-                    
-                    checkboxes.forEach((checkbox) => {
-                      checkbox.checked = selectAll.checked;
-                    });
-                  }
-                </script>
+
               </head>
               <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -202,94 +191,145 @@
                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
                     <script>
                       var geocoder = new kakao.maps.services.Geocoder();
-
-                      {% for result in results %}
-                        var position = new kakao.maps.LatLng({{ result.latitude }}, {{ result.longitude }});
-                        var latitude = '{{ result.latitude|escapejs }}';
-                        var longitude = '{{ result.longitude|escapejs }}';
-                        var time = '{{ result.time|escapejs }}';
-                        var class_name = '{{ result.class_name|escapejs }}';
-                        var where = '{{ result.where|escapejs }}';
-                        var file_path = '{{result.file_name|escapejs}}';
-                        getAddress_table(position, time, class_name, where, latitude, longitude, file_path);
-                      {% endfor %}
-
-                      function getAddress_table(position, time, class_name, where, latitude, longitude, file_path) {
-                        geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
-                          if (status === kakao.maps.services.Status.OK) {
-                            for (var i = 0; i < result.length; i++) {
-                              // 행정동의 region_type은 'H'입니다.
-                              if (result[i].region_type === 'H') {
-                                var address = result[i].region_3depth_name;
-
-                                // 테이블에 행 추가
-                                var table = document.getElementById('damage-table');
-                                var row = table.insertRow(-1);
-                                row.onclick = function() {
-                                  moveMapToCoordinates(latitude, longitude);
-                                };
-                                
-                                var cell1 = row.insertCell(0);
-                                var cell2 = row.insertCell(1);
-                                var cell3 = row.insertCell(2);
-                                var cell4 = row.insertCell(3);
-                                var cell5 = row.insertCell(4);
-
-                                var checkboxId = 'checkbox' + i;
-                                cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="' + checkboxId + '" name="checkedRows" onchange="handleChange(this, \'' + time + '\', \'' + class_name + '\', \'' + where + '\', \'' + latitude + '\', \'' + longitude + '\', \'' + file_path + '\')"></td>';
-                                cell2.innerHTML = '<td style="text-align: center;">' + time + '</td>';
-                                cell3.innerHTML = '<td style="text-align: center;">' + address + '</td>';
-                                cell4.innerHTML = '<td style="text-align: center;">' + class_name + '</td>';
-                                cell5.innerHTML = '<td style="text-align: center;">' + where + '</td>';
-                                break;
+                    
+                      async function createTable(results) {
+                        var rows = await Promise.all(results.map((result, i) => {
+                          var position = new kakao.maps.LatLng(result.latitude, result.longitude);
+                          return new Promise((resolve, reject) => {
+                            geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(res, status) {
+                              if (status === kakao.maps.services.Status.OK) {
+                                for (var i = 0; i < res.length; i++) {
+                                  if (res[i].region_type === 'H') {
+                                    resolve({
+                                      time: result.time,
+                                      class_name: result.class_name,
+                                      where: result.where,
+                                      latitude: result.latitude,
+                                      longitude: result.longitude,
+                                      file_path: result.file_name,
+                                      address: res[i].region_3depth_name,
+                                      index: i
+                                    });
+                                    break;
+                                  }
+                                }
+                              } else {
+                                reject(new Error('Failed to convert coordinates to address'));
                               }
-                            }
-                          }
-                        });
+                            });
+                          });
+                        }));
+                    
+                        // sort rows by time
+                        rows.sort((a, b) => new Date(a.time) - new Date(b.time));
+                    
+                        for (var i = 0; i < rows.length; i++) {
+                          var result = rows[i];
+                          var table = document.getElementById('damage-table');
+                          var row = table.insertRow(-1);
+                          row.onclick = (function(result) {
+                            return function() {
+                              moveMapToCoordinates(result.latitude, result.longitude);
+                            };
+                          })(result);
+                    
+                          var cell1 = row.insertCell(0);
+                          var cell2 = row.insertCell(1);
+                          var cell3 = row.insertCell(2);
+                          var cell4 = row.insertCell(3);
+                          var cell5 = row.insertCell(4);
+                    
+                          var checkboxId = 'checkbox' + result.index;
+                          cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="' + checkboxId + '" name="checkedRows" onchange="handleChange(this, \'' + result.time + '\', \'' + result.class_name + '\', \'' + result.where + '\', \'' + result.latitude + '\', \'' + result.longitude + '\', \'' + result.file_path + '\')"></td>';
+                          cell2.innerHTML = '<td style="text-align: center;">' + result.time + '</td>';
+                          cell3.innerHTML = '<td style="text-align: center;">' + result.address + '</td>';
+                          cell4.innerHTML = '<td style="text-align: center;">' + result.class_name + '</td>';
+                          cell5.innerHTML = '<td style="text-align: center;">' + result.where + '</td>';
+                        }
                       }
-
+                    
+                      var results = JSON.parse('{{ results|escapejs}}');
+                      createTable(results);
+                      
+                      // 단일 체크박스 활성화 / 비활성화
                       var checkedItems = []; // 체크된 항목들을 저장할 배열
                       function handleChange(checkbox, time, class_name, where, latitude, longitude, file_path) {
-                        var item = {
-                          time: time,
-                          class_name: class_name,
-                          where: where,
-                          latitude: latitude,
-                          longitude: longitude,
-                          file_path: file_path,
-                        };
+                        if (checkbox) {
+                          var item = {
+                            time: time,
+                            class_name: class_name,
+                            where: where,
+                            latitude: latitude,
+                            longitude: longitude,
+                            file_path: file_path,
+                          };
 
-                        if (checkbox.checked) {
-                          console.log("handleChange 함수가 호출되었습니다.");
-                          console.log(time, class_name, where, latitude, longitude, file_path);
+                          if (checkbox.checked) {
+                            console.log("handleChange 함수가 호출되었습니다.");
+                            console.log(checkedItems);
 
-                          // 이미 동일한 객체가 배열에 있는지 확인
-                          var isDuplicate = checkedItems.some(function(existingItem) {
-                            return isEqual(existingItem, item);
-                          });
+                            // 이미 동일한 객체가 배열에 있는지 확인
+                            var isDuplicate = checkedItems.some(function (existingItem) {
+                              return isEqual(existingItem, item);
+                            });
 
-                          // 중복된 객체가 없는 경우에만 배열에 추가
-                          if (!isDuplicate) {
+                            // 중복된 객체가 없는 경우에만 배열에 추가
+                            if (!isDuplicate) {
+                              checkedItems.push(item);
+                            }
+                          } else {
+                            // 선택 해제된 경우 해당 객체만 배열에서 제거
+                            checkedItems = checkedItems.filter(function (existingItem) {
+                              return !isEqual(existingItem, item);
+                            });
+                          }
+                        }
+                      }
+
+                      // 전체 체크박스 활성화 / 비활성화
+                      function toggleAllCheckboxes(is_checked) {
+                        const checkboxes = document.querySelectorAll('input[name="checkedRows"]');
+                    
+                        checkboxes.forEach((checkbox) => {
+                          checkbox.checked = is_checked.checked;
+                        });
+
+                        if (is_checked.checked){
+                          var results = JSON.parse('{{ results|safe }}');
+                          checkedItems.splice(0, checkedItems.length);
+                          for (var i = 0; i < results.length; i++) {
+                            var item = {
+                              time: results[i].time,
+                              class_name: results[i].class_name,
+                              where: results[i].where,
+                              latitude: results[i].latitude,
+                              longitude: results[i].longitude,
+                              file_path: results[i].file_name,
+                            };
+
                             checkedItems.push(item);
                           }
-                        } else {
-                          // 선택 해제된 경우 해당 객체만 배열에서 제거
-                          checkedItems = checkedItems.filter(function(existingItem) {
-                            return !isEqual(existingItem, item);
-                          });
                         }
+                        else{
+                          checkedItems.splice(0, checkedItems.length);
+                        }
+                        console.log("toggleAllCheckboxes 함수가 호출되었습니다.");
+                        console.log(checkedItems);
                       }
 
                       // 두 객체가 동일한지 확인하는 함수
                       function isEqual(item1, item2) {
-                        return (
-                          item1.time === item2.time &&
-                          item1.class_name === item2.class_name &&
-                          item1.where === item2.where &&
-                          item1.latitude === item2.latitude &&
-                          item1.longitude === item2.longitude &&
-                          item1.file_path === item2.file_path
-                        );
+                        // 모든 속성을 비교하여 일치 여부 확인
+                        for (var key in item1) {
+                          if (item1.hasOwnProperty(key) && item2.hasOwnProperty(key)) {
+                            if (item1[key] !== item2[key]) {
+                              return false; // 속성 값이 다르면 false 반환
+                            }
+                          } else {
+                            return false; // 동일한 속성이 존재하지 않으면 false 반환
+                          }
+                        }
+                        return true; // 모든 속성이 일치하면 true 반환
                       }
 
                       function sendCheckedItems() {
@@ -339,6 +379,14 @@
                         }
                         return cookieValue;
                       }
+
+                      // 파손 검출량 출력용
+                      // var results = JSON.parse('{{ results|escapejs }}');
+                      var lastResult = results[results.length - 1];
+                      var id_last = lastResult.id;
+                      var counterElement = document.getElementById('cnt_1');
+                      counterElement.setAttribute('data-purecounter-end', id_last);
+
                     </script>
                   </tr>
                 </tbody>
@@ -362,9 +410,10 @@
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
           <script>
+            var results = JSON.parse('{{ results|safe }}');
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
-                    center: new kakao.maps.LatLng({{ results.0.latitude }}, {{ results.0.longitude }}), // 지도의 중심좌표
+                    center: new kakao.maps.LatLng(results[0].latitude,  results[0].longitude ), // 지도의 중심좌표
                     level: 3 // 지도의 확대 레벨
                 };
             
@@ -404,42 +453,44 @@
                 var submitEvent = new Event('submit');
                 searchForm.dispatchEvent(submitEvent);
             }
-              // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-              var positions = [
-                  {% for result in results %}
-                  {
-                      content: '<div>{{ result.class_name }}</div>', 
-                      latlng: new kakao.maps.LatLng({{ result.latitude }}, {{ result.longitude }})
-                  },
-                  {% endfor %}
-              ];
-            // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
-              var infowindowImage = new kakao.maps.InfoWindow({
-                removable: true // 인포윈도우를 닫을 수 있도록 설정합니다
+            
+            // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+            var results = JSON.parse('{{ results|safe }}');
+            var positions = [];
+            var fileNames = [];
+            
+            for (var i = 0; i < results.length; i++) {
+              positions.push({
+                content: '<div>' + results[i].class_name + '</div>',
+                latlng: new kakao.maps.LatLng(results[i].latitude, results[i].longitude)
               });
-              var fileNames = [
-                {% for result in results %}
-                  '{{ result.file_name|escapejs }}',
-                {% endfor %}
-              ];
-              for (var i = 0; i < positions.length; i++) {
-                // 마커를 생성합니다
-                var marker = new kakao.maps.Marker({
-                    map: map, // 마커를 표시할 지도
-                    position: positions[i].latlng // 마커의 위치
-                });
             
-                // 마커에 표시할 인포윈도우를 생성합니다
-                var infowindow = new kakao.maps.InfoWindow({
-                    content: positions[i].content // 인포윈도우에 표시할 내용
-                });
-            
-                // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
-                kakao.maps.event.addListener(marker, 'click', handleClickMarker(map, marker, infowindowImage, '/video/media/images/' + fileNames[i]));
-                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-              }
-            
+              fileNames.push(results[i].file_name);
+            }
+
+          // 마커를 클릭했을 때 이미지를 표시할 인포윈도우를 생성합니다
+            var infowindowImage = new kakao.maps.InfoWindow({
+              removable: true, // 인포윈도우를 닫을 수 있도록 설정합니다
+            });
+
+            for (var i = 0; i < positions.length; i++) {
+              // 마커를 생성합니다
+              var marker = new kakao.maps.Marker({
+                  map: map, // 마커를 표시할 지도
+                  position: positions[i].latlng // 마커의 위치
+              });
+          
+              // 마커에 표시할 인포윈도우를 생성합니다
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: positions[i].content // 인포윈도우에 표시할 내용
+              });
+          
+              // 마커를 클릭했을 때 이미지를 표시하는 이벤트 리스너를 등록합니다
+              kakao.maps.event.addListener(marker, 'click', handleClickMarker(map, marker, infowindowImage, '/video/media/images/' + fileNames[i]));
+              kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+              kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+            }
+          
             // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
               function makeOverListener(map, marker, infowindow) {
                 return function() {
@@ -458,15 +509,43 @@
               window.history.back();
             }
 
+            function showLargeImage(imageSrc) {
+              var overlay = document.createElement('div');
+              overlay.className = 'image-overlay';
+              overlay.addEventListener('click', closeImageOverlay);
+
+              var frame = document.createElement('div');
+              frame.className = 'image-frame';
+            
+              var image = document.createElement('img');
+              image.src = imageSrc;
+              image.className = 'large-image';
+            
+              frame.appendChild(image);
+              overlay.appendChild(frame);
+              document.body.appendChild(overlay);
+            }
+            
+            function closeImageOverlay() {
+              var overlay = document.querySelector('.image-overlay');
+              if (overlay) {
+                overlay.remove();
+              }
+            }
+            
             function handleClickMarker(map, marker, infowindowImage, imageSrc) {
               return function() {
-                  var content =
-                      '<div>' +
-                      '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
-                      '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
-                      '</div>';
-                  infowindowImage.setContent(content);
-                  infowindowImage.open(map, marker);
+                var content =
+                  '<div class="image-container">' +
+                  '<img src="' + imageSrc + '" width="230px" height="130px" margin: 0px auto;>' + '<br>' +
+                  '<button class="zoom-button" onclick="showLargeImage(\'' + imageSrc + '\')">확대</button>' +
+                  '</div>';
+                infowindowImage.setContent(content);
+                infowindowImage.open(map, marker);
+                var overlay = document.querySelector('.image-overlay');
+                if (overlay) {
+                  overlay.style.zIndex = '9999'; // 최상위로 이동
+                }
               };
             }
           </script>
