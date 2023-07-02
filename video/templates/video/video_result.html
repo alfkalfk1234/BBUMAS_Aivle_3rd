@@ -30,7 +30,7 @@
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
   <link href="{%static 'assets/css/map.css' %}" rel="stylesheet">
-  <link href="{%static 'assets/css/new_main.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/css/kakaomap.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Logis
@@ -354,6 +354,7 @@
                           success: function(response) {
                             // 성공적으로 서버 응답을 받았을 때 수행할 작업
                             console.log("전송 성공");
+                            alert("저장되었습니다.");
                             // (주의) ajax handler가 존재할 때에 views.py에서 redirect나 render가 불가 해당 부분에서 처리 해야한다!!!!!!
                              window.location.href = "/video";
                           },
@@ -504,10 +505,6 @@
                   infowindow.close();
               };
             } 
-            
-            function goBack() {
-              window.history.back();
-            }
 
             function showLargeImage(imageSrc) {
               var overlay = document.createElement('div');

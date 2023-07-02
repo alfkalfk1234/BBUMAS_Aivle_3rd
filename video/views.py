@@ -26,7 +26,7 @@ def analyze_video(video_path):
     model = YOLO(yolov8_model_path)
     model.predict(
         source = video_path,
-        conf = 0.5,
+        conf = 0.85,
         iou = 0.15,
         save = True,
         save_txt = True,
