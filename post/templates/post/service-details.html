@@ -110,14 +110,14 @@
           <table id="bd-table">
 
             <tr style="border-bottom: 1px solid #ccc;">
-              <td style="background-color:#edeff3;">신고 유형</td>
+              <td style="background-color:#f3f6fc;">신고 유형</td>
               <td style="float:left; margin: 10px; margin-left: 40px;">
                 {{ form.report_type }}
               </td>
             </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
-              <td style="background-color:#edeff3;">제목</td>
+              <td style="background-color:#f3f6fc;">제목</td>
               <td>
                 <div class="title">
                   <dd>{{ form.post_title }}</dd>
@@ -126,7 +126,7 @@
             </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
-              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">파일 업로드</td>
+              <td style="background-color:#f3f6fc; padding: 20px; vertical-align: top;">파일 업로드</td>
               <td>
                 <label for="post_image" class="file-label">파일 선택</label>
                 {{ form.post_image }} 
@@ -178,8 +178,9 @@
 
                 <div class="upload-box">
                   <div id="drop-file" class="drag-file">
-                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
                     <p class="message">파일을 선택하거나 이곳에 드래그하여 업로드하세요.</p>
+                    <br>
+                    <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
                     <img src="" alt="미리보기 이미지" class="preview" id="preview">
                     {{ form.post_image }}
                   </div>
@@ -188,14 +189,14 @@
             </tr>
 
             <tr style="border-bottom: 1px solid #ccc;">
-              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">신고 내용</td>
+              <td style="background-color:#f3f6fc; padding: 20px; vertical-align: top;">신고 내용</td>
               <td>
                 {{ form.post_content }}
               </td>
             </tr>
 
             <tr>
-              <td style="background-color:#edeff3; padding: 20px; vertical-align: top;">개인정보 수집 동의</td>
+              <td style="background-color:#f3f6fc; padding: 20px; vertical-align: top;">개인정보 수집 동의</td>
               <td>
                 <article style="float:left; margin-top: 15px; margin-left: 40px;">
                   <div class="radio">
