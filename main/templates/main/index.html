@@ -261,7 +261,7 @@
                 <img src="{%static 'assets/img/video.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/video" class="stretched-link">블랙박스 영상 분석</a></h3>
-              <p>Analyze black box images to detect road damage. After that, damaged facilities will be submitted to the department in charge.</p>
+              <p>YOLOv8을 이용하여 도로의 손상된 부분을 감지합니다.  감지된 객체는 관리자가 검토 후 관련 부서로 전달합니다.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -271,7 +271,7 @@
                 <img src="{%static 'assets/img/post.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/post" class="stretched-link">신고 게시판</a></h3>
-              <p>This is a bulletin board that reports damaged facilities. If GPS is present in the picture, it automatically detects the location.</p>
+              <p>도로의 손상된 부분을 발견 시 직접 신고할 수 있습니다.  사진의 GPS 정보를 추출하여 수리가 필요한 시설물의 위치 정보를 자동으로 데이터베이스에 업데이트합니다.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -281,7 +281,7 @@
                 <img src="{%static 'assets/img/mapimg.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/map" class="stretched-link">파손 현황 지도</a></h3>
-              <p>This is a map where you can see the status of the damaged. It is marked with various markers to distinguish different types of breakage.</p>
+              <p>업로드된 동영상과 신고 게시판의 위치 및 손상된 시설물 정보를 지도 상으로 확인할 수 있습니다.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -350,15 +350,15 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="{%static 'assets/img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
+                <img src="{%static 'assets/img/111.png' %}" class="testimonial-img" alt="">
+                <h3>Injae Lee</h3>
                 <h4>Ceo &amp; Founder</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bi bi-quote quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  너희들은 입을 닫아야 예쁘다...
                   <i class="bi bi-quote quote-icon-right"></i>
                 </p>
               </div>
@@ -448,45 +448,53 @@
             <span>BBUMAS</span>
           </a>
           <p>Black Box Urban Maintenance Automation System</p>
-          <div class="social-links d-flex mt-4">
+          {% comment %} <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
             <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
             <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
+          </div> {% endcomment %}
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
+        {% comment %} <div class="col-lg-2 col-6 footer-links">
           <h4>Policy</h4>
           <ul class="policy_link">
             <li>
               <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
-              {% comment %} <a>개인정보 처리방침</a> {% endcomment %}
+
             </li>
           </ul>
-        </div>
+        </div> {% endcomment %}
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="/">Main</a></li>
-            <li><a href="/video">Black box Upload</a></li>
-            <li><a href="/post">Alert Board</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="/">Main</a></li>
+            <li><a href="/post">Alert Board</a></li>
+            <li><a href="/video">FAQ</a></li>
+          </ul>
+        </div>
+
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Policy</h4>
+          <a href="#" style="color: #ffffff99;" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+          <br><br><br>
+          
           <h4>Contact Us</h4>
-          <p>
+          <p style="color: #ffffff99;">
             대전 서구 문정로48번길 30 <br>
             (탄방동)<br>
-            <br>
             <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
-            <strong>Email:</strong> ktaivle@kt.com<br>
+            <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
           </p>
-
         </div>
 
       </div>
