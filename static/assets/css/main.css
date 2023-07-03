@@ -458,7 +458,19 @@ map
   cursor: pointer;
 }
 
+.map-num {
+  padding: 10px;
+  /* background-color: #e5e8f3b4; */
+  width: 150%;
+  height: 35%;
+  border-radius: 10px;
+  /* box-shadow: 2px 2px 2px #dedede; */
+}
 
+.v-line {
+  border-left : 2px solid #d1d5e7;
+  height : 50px;
+}
 
 /*--------------------------------------------------------------
 # Sections & Section Header
@@ -2405,6 +2417,7 @@ video.html
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  margin-bottom: 20px;
   margin-top: 70px;
   width: 600px;
   cursor: pointer;
