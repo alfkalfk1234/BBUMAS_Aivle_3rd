@@ -71,7 +71,11 @@
             </ul>
           </li>
           <li><a href="/map">Map</a></li>
-
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}" class="get-a-quote">Logout</a></li>
+          {% else %}
+            <li><a class="get-a-quote" href="/login">Login</a></li>
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
 
@@ -126,7 +130,7 @@
                 <td style="background-color:#f3f6fc; height: 50px; width: 20%; padding: 20px; text-align: center;">제목</td>
                 <td>
                     <div class="title">
-                    <dd><p style="text-align: left; margin-left: 5%; margin-top: 4%;">{{post.post_title}}</p></dd>
+                    <dd><p style="text-align: left; margin-left: 4%; margin-top: 4%;">{{post.post_title}}</p></dd>
                     </div>
                 </td>
                 </tr>
@@ -185,8 +189,8 @@
                 <tr style="border-bottom: 1px solid #ccc;">
                     <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
                     <td>
-                        <p style="text-align: left; margin-left: 4%; margin-top: 4%; width: 140%;
-                        height: 70px;
+                        <p style="text-align: left; margin-left: 3%; margin-top: 3%; width: 153%;
+                        height: 70px; padding: 7px;
                         border: 5px solid #f3f6fc;">{{post.post_content}}</p>
                         <br>
                         {% if post.post_image %}
