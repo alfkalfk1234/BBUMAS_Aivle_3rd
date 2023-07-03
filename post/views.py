@@ -21,9 +21,11 @@ def posting(request):
         if form.is_valid():
             latitude = request.POST.get('latitude')
             longitude = request.POST.get('longitude')
+            region = request.POST.get('address')
             post = form.save(commit=False)
             post.post_latitude = latitude
             post.post_longitude = longitude
+            post.post_region = region
             post.author = request.user  # set author as the current user
             post.save()
             return redirect('post:post')

@@ -18,3 +18,5 @@ class CustomUser(AbstractUser):
     # name 필드 추가
     name = models.CharField(max_length=150, blank=False, null=False)
 
+    region = models.CharField(max_length=150, blank=False, null=False, default=' ')
+

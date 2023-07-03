@@ -254,6 +254,7 @@
 
           <input type="hidden" id="latitude" name="latitude">
           <input type="hidden" id="longitude" name="longitude">
+          <input type="hidden" id="address" name="address">
 
           <div class="btn-sub">
             <button type="button" class="btn-btn" style="box-shadow: 2px 2px 2px #dedede;"><a href="/post" style="color:white">이전 페이지로</a></button>
@@ -281,8 +282,14 @@
   
   
   <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
 
   <script>
+
+    var geocoder = new kakao.maps.services.Geocoder();
+
+
+  // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 
     function showPopup() {
       // 팝업창을 띄우는 코드 작성
@@ -407,44 +414,61 @@
       function handleFileUpload(file) {
         let warningDisplayed = false;
         if (file) {
-          const fileName = file.name;
-          const fileSize = formatFileSize(file.size);
-
-          // 테이블 정보
-          filename.textContent = fileName;
-          filesize.textContent = fileSize;
-
-          //selectFile.textContent = `선택한 파일: ${fileName} (${fileSize})`;
-
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            var imageData = e.target.result;
-            var exifData = EXIF.readFromBinaryFile(imageData);
-
-            if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
-              var latitude = calculateCoordinate(exifData.GPSLatitude);
-              var longitude = calculateCoordinate(exifData.GPSLongitude);
-
-              var gpsInfo = latitude + ", " + longitude;
-              console.log("사진의 GPS 정보:", gpsInfo);
+            const fileName = file.name;
+            const fileSize = formatFileSize(file.size);
+    
+            // 테이블 정보
+            filename.textContent = fileName;
+            filesize.textContent = fileSize;
+    
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imageData = e.target.result;
+                var exifData = EXIF.readFromBinaryFile(imageData);
+    
+                if (exifData && exifData.GPSLatitude && exifData.GPSLongitude) {
+                    var latitude = calculateCoordinate(exifData.GPSLatitude);
+                    var longitude = calculateCoordinate(exifData.GPSLongitude);
+    
+                    var gpsInfo = latitude + ", " + longitude;
 
 
-              document.getElementById('latitude').value = latitude;
-              document.getElementById('longitude').value = longitude;
+                    console.log("사진의 GPS 정보:", gpsInfo);
+    
+                    document.getElementById('latitude').value = latitude;
+                    document.getElementById('longitude').value = longitude;
+                    var position = new kakao.maps.LatLng(latitude, longitude);
+                    getAddress_post(position);
+                    // 여기서 주소를 가져옵니다.
 
-
-            } else {
-              if (!warningDisplayed) {
-                alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
-                warningDisplayed = true;
-              }
-            }
-          };
-
-          reader.readAsArrayBuffer(file);
+                } else {
+                    if (!warningDisplayed) {
+                        alert("GPS 정보가 포함된 이미지를 업로드 해주세요.");
+                        warningDisplayed = true;
+                    }
+                }
+            };
+    
+            reader.readAsArrayBuffer(file);
         }
       }
-    
+
+              
+      function getAddress_post(position) {
+        geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].region_type === 'H') { // 행정동의 region_type은 'H'입니다.
+                        var address = result[i].region_2depth_name;
+                        document.getElementById('address').value = address;
+                    }
+                }
+            }
+        });
+      }
+  
+  
+
     function formatFileSize(size) {
       if (size === 0) {
         return '0 Bytes';
