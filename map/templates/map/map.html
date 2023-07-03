@@ -104,8 +104,8 @@
     </div><!-- End Breadcrumbs -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    {% comment %} <section id="contact" class="contact"> {% endcomment %}
+      <div class="container" data-aos="fade-up" style="margin-bottom: 70px;">
 
         <div class="container">
           <div class="row gy-4 d-flex justify-content-between">
@@ -113,44 +113,56 @@
               <br>
               <!-- <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p> -->
     
-              <div class="container" data-aos="fade-up">
-                <form id="search-form" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="container" data-aos="fade-up" style="margin-left: 20px;">
+                <form id="search-form" class="form-search d-flex align-items-stretch mb-3"data-aos="fade-up" data-aos-delay="200">
                     <input id="search-input" type="text" class="form-control" placeholder="점검이 필요한 도시를 검색해보세요.">
-                    <button type="submit" class="search-btn"  style="box-shadow: 2px 2px 2px #dedede; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+                    <button type="submit" class="search-btn" style="box-shadow: 2px 2px 2px #dedede; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Search</button>
                 </form>
               </div>
               <br>
               
     
-              <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
-    
-                <div class="col-lg-3 col-6">
-                  <div class="stats-item text-center w-100 h-100">
-                    <span id="videoDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>비디오 파손 검출량</p>
+              <div class="map-num" style="margin-top: -10px;">
+                <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
+                  <div class="col-lg-3 col-6" style="width:23%;">
+                    <div class="stats-item text-center w-100 h-100">
+                      <span id="videoDamageCount"data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                      <p>비디오 파손 검출량</p>
+                    </div>
+                  </div><!-- End Stats Item -->
+
+                  <div class="col-lg-3 col-6" style="width: 5px;">
+                    <div class='v-line'></div>
                   </div>
-                </div><!-- End Stats   Item -->
-    
-                <div class="col-lg-3 col-6">
-                  <div class="stats-item text-center w-100 h-100">
-                    <span id="postDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>신고 건수</p>
+
+                  <div class="col-lg-3 col-6" style="width:23%;">
+                    <div class="stats-item text-center w-100 h-100">
+                      <span id="postDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                      <p>신고 건수</p>
+                    </div>
+                  </div><!-- End Stats Item -->
+      
+                  <div class="col-lg-3 col-6" style="width: 5px;">
+                    <div class='v-line'></div>
                   </div>
-                </div><!-- End Stats Item -->
+
+                  <div class="col-lg-3 col-6" style="width:23%;">
+                    <div class="stats-item text-center w-100 h-100">
+                      <span id="totalDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
+                      <p>총 처리 건수</p>
+                    </div>
+                  </div><!-- End Stats Item -->
     
-                <div class="col-lg-3 col-6">
-                  <div class="stats-item text-center w-100 h-100">
-                    <span id="totalDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>총 처리 건수</p>
+                  <div class="col-lg-3 col-6" style="width: 5px;">
+                    <div class='v-line'></div>
                   </div>
-                </div><!-- End Stats Item -->
-    
-                <div class="col-lg-3 col-6">
-                  <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>운행 차량</p>
-                  </div>
-                </div><!-- End Stats Item -->
+
+                  <div class="col-lg-3 col-6" style="width:23%;">
+                    <div class="stats-item text-center w-100 h-100">
+                      <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+                      <p>운행 차량</p>
+                    </div>
+                  </div><!-- End Stats Item -->
     
               </div>
             </div>
@@ -214,7 +226,7 @@
         </div> {% endcomment %}
 
         <div>
-          <div id="map" style="width: 100%; height: 700px;"></div>
+          <div id="map" style="width: 100%; height: 700px; margin-top: -10px;"></div>
           <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6ea244010ed3342eff6810e6610527d&libraries=services"></script>
           <!--<iframe style="border:0; width: 100%; height: 340px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>-->
           <script>
@@ -553,7 +565,7 @@
         </div> {% endcomment %}
 
       </div>
-    </section><!-- End Contact Section -->
+    {% comment %} </section><!-- End Contact Section --> {% endcomment %}
 
   </main><!-- End #main -->
 
