@@ -229,16 +229,15 @@
                     <br>
                     <h4 style="font-size:17px; color:#666;">2. 수집하는 개인정보의 항목(개인정보보호법 제15조, 제16조)</h4>
                     <ul>
-                        <li>가. 필수항목: 위치 정보</li>
-                        <li>나. 선택항목: 성명, 기업명, 이메일 </li>
-                        <li>다. 자동수집항목: IP(Internet Protocol)주소, 이용내용의 기록- 부정한 방법으로 타인명의를 사용하는 경우에 대비하기 위해 정보이용내역 등을 자동수집 합니다.</li>
+                        <li>가. 필수항목: 위치 정보(GPS)</li>
+                        <li>나. 자동수집항목: IP(Internet Protocol)주소, 이용내용의 기록- 부정한 방법으로 타인명의를 사용하는 경우에 대비하기 위해 정보이용내역 등을 자동수집 합니다.</li>
                     </ul>
                     <p>※ 부정한 방법으로 타인명의 사용 시, 주민등록법 제37조(벌칙)에 의해 처벌 받을 수 있습니다. </p>
                     <br>
                     <h4 style="font-size:17px; color:#666;">3. 개인정보의 보유 및 이용기간(공공기록물 관리에 관한 법률 시행령 제26조)</h4>
                     <p>도로정비 자동화 시스템은 원칙적으로 개인정보 보존기간이 경과하거나, 처리목적이 달성된 경우에는 지체 없이 개인정보를 파기합니다. 다만, 다른 법령에 따라 보존하여야 하는 경우에는 그러하지 않을 수 있습니다.</p>
                     <ul>
-                        <li><strong class="useAgreeFont2">1) 신고, 제안: 10년</strong></li>
+                        <li><strong class="useAgreeFont2">1) 신고, 제안: 3년</strong></li>
                         <li><strong class="useAgreeFont2">2) 회원정보: 회원탈퇴시 즉시 파기</strong></li>
                         <li><strong class="useAgreeFont2">3) 자동수집항목 중 IP주소: 1년</strong></li>
                     </ul>
@@ -499,44 +498,53 @@
             <span>BBUMAS</span>
           </a>
           <p>Black Box Urban Maintenance Automation System</p>
-          <div class="social-links d-flex mt-4">
+          {% comment %} <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
             <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
             <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
+          </div> {% endcomment %}
         </div>
 
-        <div class="col-lg-2 col-6 footer-links">
+        {% comment %} <div class="col-lg-2 col-6 footer-links">
           <h4>Policy</h4>
           <ul class="policy_link">
             <li>
               <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+
             </li>
           </ul>
-        </div>
+        </div> {% endcomment %}
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="/">Main</a></li>
-            <li><a href="/video">Black box Upload</a></li>
-            <li><a href="/post">Alert Board</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="/">Main</a></li>
+            <li><a href="/post">Alert Board</a></li>
+            <li><a href="/video">FAQ</a></li>
+          </ul>
+        </div>
+
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Policy</h4>
+          <a href="#" style="color: #ffffff99;" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+          <br><br><br>
+          
           <h4>Contact Us</h4>
-          <p>
+          <p style="color: #ffffff99;">
             대전 서구 문정로48번길 30 <br>
             (탄방동)<br>
-            <br>
             <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
-            <strong>Email:</strong> ktaivle@kt.com<br>
+            <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
           </p>
-
         </div>
 
       </div>
