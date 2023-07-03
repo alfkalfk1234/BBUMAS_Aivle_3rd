@@ -11,5 +11,5 @@ class DetectionForm(forms.ModelForm):
 
     class Meta:
         model = Detection
-        fields = ['latitude', 'longitude', 'detected_object', 'detected_time', 'detected_where', 'image_path', 'checkedRows']  # Include checked_rows in the fields
+        fields = ['latitude', 'longitude', 'detected_object', 'detected_time', 'detected_where', 'image_path', 'checkedRows','video_region']  # Include checked_rows in the fields
 
