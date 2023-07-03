@@ -208,6 +208,7 @@
                                       longitude: result.longitude,
                                       file_path: result.file_name,
                                       address: res[i].region_3depth_name,
+                                      video_region : res[i].region_2depth_name,
                                       index: i
                                     });
                                     break;
@@ -240,7 +241,7 @@
                           var cell5 = row.insertCell(4);
                     
                           var checkboxId = 'checkbox' + result.index;
-                          cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="' + checkboxId + '" name="checkedRows" onchange="handleChange(this, \'' + result.time + '\', \'' + result.class_name + '\', \'' + result.where + '\', \'' + result.latitude + '\', \'' + result.longitude + '\', \'' + result.file_path + '\')"></td>';
+                          cell1.innerHTML = '<td class="checkbox-cell" style="text-align: center;"><input type="checkbox" id="' + checkboxId + '" name="checkedRows" onchange="handleChange(this, \'' + result.time + '\', \'' + result.class_name + '\', \'' + result.where + '\', \'' + result.latitude + '\', \'' + result.longitude + '\', \'' + result.file_path + '\',\'' + result.video_region + '\')"></td>';
                           cell2.innerHTML = '<td style="text-align: center;">' + result.time + '</td>';
                           cell3.innerHTML = '<td style="text-align: center;">' + result.address + '</td>';
                           cell4.innerHTML = '<td style="text-align: center;">' + result.class_name + '</td>';
@@ -253,7 +254,7 @@
                       
                       // 단일 체크박스 활성화 / 비활성화
                       var checkedItems = []; // 체크된 항목들을 저장할 배열
-                      function handleChange(checkbox, time, class_name, where, latitude, longitude, file_path) {
+                      function handleChange(checkbox, time, class_name, where, latitude, longitude, file_path,video_region) {
                         if (checkbox) {
                           var item = {
                             time: time,
@@ -262,6 +263,7 @@
                             latitude: latitude,
                             longitude: longitude,
                             file_path: file_path,
+                            video_region : video_region,
                           };
 
                           if (checkbox.checked) {
@@ -286,8 +288,30 @@
                         }
                       }
 
+
+
+                      function getAddress(position) {
+                        return new Promise((resolve, reject) => {
+                            geocoder.coord2RegionCode(position.getLng(), position.getLat(), function(result, status) {
+                                if (status === kakao.maps.services.Status.OK) {
+                                    for (var i = 0; i < result.length; i++) {
+                                        if (result[i].region_type === 'H') { // 행정동의 region_type은 'H'입니다.
+                                            var address = result[i].region_2depth_name;
+                                            resolve(address); // Promise를 성공 상태로 변경하고 결과값을 전달
+                                            return;
+                                        }
+                                    }
+                                    reject('No matching region_type found'); // 필요한 정보를 찾지 못한 경우 Promise를 실패 상태로 변경
+                                } else {
+                                    reject('Geocoder status is not OK'); // Geocoder의 상태가 OK가 아닌 경우 Promise를 실패 상태로 변경
+                                }
+                            });
+                        });
+                    }
+                    
+
                       // 전체 체크박스 활성화 / 비활성화
-                      function toggleAllCheckboxes(is_checked) {
+                      async function toggleAllCheckboxes(is_checked) {
                         const checkboxes = document.querySelectorAll('input[name="checkedRows"]');
                     
                         checkboxes.forEach((checkbox) => {
@@ -298,6 +322,8 @@
                           var results = JSON.parse('{{ results|safe }}');
                           checkedItems.splice(0, checkedItems.length);
                           for (var i = 0; i < results.length; i++) {
+                            var position = new kakao.maps.LatLng(results[i].latitude, results[i].longitude);
+                            var video_region = await getAddress(position);
                             var item = {
                               time: results[i].time,
                               class_name: results[i].class_name,
@@ -305,6 +331,7 @@
                               latitude: results[i].latitude,
                               longitude: results[i].longitude,
                               file_path: results[i].file_name,
+                              video_region: video_region,
                             };
 
                             checkedItems.push(item);

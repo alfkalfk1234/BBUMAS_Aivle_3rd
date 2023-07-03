@@ -31,6 +31,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     post_latitude = models.FloatField(null=True, blank=True)
     post_longitude = models.FloatField(null=True, blank=True)
+    post_region = models.CharField(max_length=150, blank=False, null=False, default=' ')
     report_type = models.CharField(max_length=20, choices=REPORT_TYPES, default='none')
 
     def save(self, *args, **kwargs):

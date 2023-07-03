@@ -277,6 +277,7 @@ def video_db_save(request):
                         latitude = item.get("latitude", ""),
                         longitude = item.get("longitude", ""),
                         image_path= item["file_path"],
+                        video_region = item['video_region']
                     )
                     storage = S3Boto3Storage()
                     fromfilepath = 'video/media/images/' + item["file_path"]

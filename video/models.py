@@ -33,5 +33,7 @@ class Detected(models.Model):
     detected_time = models.CharField(max_length=200, null=True)
     detected_where = models.CharField(max_length=200, null=True)
     image_path = models.CharField(max_length=200, null=True, blank=True)
+    video_region = models.CharField(max_length=150, blank=False, null=False, default=' ')
+
     def __str__(self):
         return f"Detected {self.pk}"
