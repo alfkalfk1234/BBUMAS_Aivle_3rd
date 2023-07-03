@@ -208,6 +208,7 @@
                                       longitude: result.longitude,
                                       file_path: result.file_name,
                                       address: res[i].region_3depth_name,
+                                      video_region : res[i].region_2depth_name,
                                       index: i
                                     });
                                     break;
@@ -262,6 +263,7 @@
                             latitude: latitude,
                             longitude: longitude,
                             file_path: file_path,
+                            video_region : video_region,
                           };
 
                           if (checkbox.checked) {
@@ -305,6 +307,7 @@
                               latitude: results[i].latitude,
                               longitude: results[i].longitude,
                               file_path: results[i].file_name,
+                              video_region: results[i].video_region,
                             };
 
                             checkedItems.push(item);
