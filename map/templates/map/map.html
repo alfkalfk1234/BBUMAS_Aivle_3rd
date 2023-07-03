@@ -29,6 +29,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{%static 'assets/css/kakaomap.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Logis
@@ -219,7 +220,7 @@
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                 mapOption = { 
                     center: new kakao.maps.LatLng(36.34892564237924, 127.38488260807728), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
+                    level: 7 // 지도의 확대 레벨
                 };
             
             // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -362,33 +363,65 @@
                 };
               } 
               
+              function showLargeImage(imageSrc) {
+                var overlay = document.createElement('div');
+                overlay.className = 'image-overlay';
+                overlay.addEventListener('click', closeImageOverlay);
+  
+                var frame = document.createElement('div');
+                frame.className = 'image-frame';
+              
+                var image = document.createElement('img');
+                image.src = imageSrc;
+                image.className = 'large-image';
+              
+                frame.appendChild(image);
+                overlay.appendChild(frame);
+                document.body.appendChild(overlay);
+              }
+              
+              function closeImageOverlay() {
+                var overlay = document.querySelector('.image-overlay');
+                if (overlay) {
+                  overlay.remove();
+                }
+              }
+
               function handleClickMarker_post(map, marker, infowindowImage, imageSrc,post_id) {
                 return function() {
                     var content =
-                        '<div style="padding:2px;">' +
-                        '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
-                        '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
+                        '<div class="image-container">' +
+                        '<img src="' + imageSrc + '" width="230px" height="130px" margin: 0px auto;>' + '<br>' +
+                        '<button class="zoom-button" onclick="showLargeImage(\'' + imageSrc + '\')">확대</button>' +
                         {% if user.is_authenticated and user.is_staff %}
-                          '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_post({{post_id}})" style="color:white;">삭제</button>'+
+                          '<button type="button" style="font-size:3px; margin-left:194px;" onclick="confirmDelete_post({{post_id}})" style="color:white;">삭제</button>'+
                         {% endif %}            
                         '</div>';            
                     infowindowImage.setContent(content);
                     infowindowImage.open(map, marker);
+                    var overlay = document.querySelector('.image-overlay');
+                    if (overlay) {
+                      overlay.style.zIndex = '9999'; // 최상위로 이동
+                    }
                 };
               }
             
               function handleClickMarker_video(map, marker, infowindowImage, imageSrc,video_id) {
                 return function() {
                     var content =
-                        '<div style="padding:2px;">' +
-                        '<img src="' + imageSrc + '" width="230" height="130"><br>' + 
-                        '<button type="button" style="font-size:3px"; onclick="location.href=' + "'" + imageSrc + "'" + '";>확대</button>' +
+                        '<div class="image-container">' +
+                        '<img src="' + imageSrc + '" width="230px" height="130px" margin: 0px auto;>' + '<br>' +
+                        '<button class="zoom-button" onclick="showLargeImage(\'' + imageSrc + '\')">확대</button>' +
                         {% if user.is_authenticated and user.is_staff %}
-                          '<button type="button" style="font-size:3px; margin-left:158px;" onclick="confirmDelete_video('+video_id+')" style="color:white;">삭제</button>' +
+                          '<button type="button" style="font-size:3px; margin-left:194px;" onclick="confirmDelete_video('+video_id+')" style="color:white;">삭제</button>' +
                         {% endif %}
                         '</div>';
                     infowindowImage.setContent(content);
                     infowindowImage.open(map, marker);
+                    var overlay = document.querySelector('.image-overlay');
+                    if (overlay) {
+                      overlay.style.zIndex = '9999'; // 최상위로 이동
+                    }
                 };
               }
 

@@ -2374,15 +2374,45 @@ video.html
   width: 600px;
   height: 320px;
   border: 2px dashed #ccc;
-  text-align: center;
   padding: 10px;
   padding-top: 100px;
   margin: 0 auto;
-  position: relative;
-  background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center 140px no-repeat;
 }
+
+#dropZonetext {
+  text-align: center;
+  position: relative;
+  background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #dropZone.highlight {
   border-color: var(--color-secondary);
+}
+
+#loading_msg {
+  text-align: center;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  margin: 0 auto;
+  align: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .highlight {

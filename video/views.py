@@ -26,7 +26,7 @@ def analyze_video(video_path):
     model = YOLO(yolov8_model_path)
     model.predict(
         source = video_path,
-        conf = 0.75,
+        conf = 0.85,
         iou = 0.15,
         save = True,
         save_txt = True,
@@ -239,8 +239,8 @@ def video_upload(request):
         # 클래스 이름과 클래스 번호 분리
         all['class_num'] = all['class_name'].copy()
         all.loc[all["class_name"] == '0', "class_name"] = '포트홀'
-        all.loc[all["class_name"] == '1', "class_name"] = '볼라드 정상'
-        all.loc[all["class_name"] == '2', "class_name"] = '볼라드 손상'
+        all.loc[all["class_name"] == '1', "class_name"] = '볼라드 손상'
+        all.loc[all["class_name"] == '2', "class_name"] = '볼라드 정상'
         all.loc[all["class_name"] == '3', "class_name"] = '횡단보도 손상'
         all.loc[all["class_name"] == '4', "class_name"] = '도로 표지 손상'
         all.loc[all["class_name"] == '5', "class_name"] = '도로 분리대 손상'
@@ -255,7 +255,8 @@ def video_upload(request):
         all['id'] = range(1, len(all) + 1)
         print(all)
         results = all.to_dict(orient='records')
-        context = {'results' : results}
+        json_data = json.dumps(results, ensure_ascii=False)
+        context = {'results' : json_data}
         return render(request, 'video/video_result.html', context)
     else:
         return render(request, 'video/video.html')

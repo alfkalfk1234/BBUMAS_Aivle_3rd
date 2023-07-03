@@ -116,10 +116,15 @@
     
     <!-- 드래그 앤 드롭 -->
     <div id="dropZone">
-      <p>압축 파일을 이곳에 드래그하여 업로드하세요.</p>
+      <div id="dropZonetext"> <p>블랙박스 파일을 이곳에 드래그하여 업로드하세요.</p> </div>
+      <div id="loading" style="display: none;">
+        <div class="loader"></div>
+      </div>
+      <div id="loading_msg" style="display: none;">
+        <br><p>잠시만 기다려 주세요. 영상을 분석 중 입니다...</p>
+      </div>
     </div>
 
-    
     <div class="group-select">
       <label class="select-btn" for="fileInput">파일 선택</label>
       <label class="reset-btn" for="fileReset">파일 제거</label>
@@ -224,7 +229,29 @@
     
   </script>
 
+  <!-- CSS for the loader -->
+  <style>
 
+  </style>
+
+  <!-- JavaScript to show and hide loader -->
+  <script>
+    document.getElementById('fileUpload').addEventListener('click', function() {
+        // Show the loading spinner
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('loading_msg').style.display = 'block';
+        // Hide the dropzone
+        document.getElementById('dropZonetext').style.display = 'none';
+    });
+
+    window.onload = function() {
+        // Hide the loading spinner
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('loading_msg').style.display = 'none';
+        // Show the dropzone
+        document.getElementById('dropZonetext').style.display = 'block';
+    };
+</script>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
