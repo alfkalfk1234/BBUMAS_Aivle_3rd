@@ -2238,7 +2238,7 @@ a.join-label:hover{
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
-  font-family: var(--font-primary);
+  font-family: Inter;
 }
 
 .footer .footer-info p {
