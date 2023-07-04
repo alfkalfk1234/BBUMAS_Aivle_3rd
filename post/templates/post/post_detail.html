@@ -30,13 +30,6 @@
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Logis
-  * Updated: May 30 2023 with Bootstrap v5.3.0
-  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -48,8 +41,6 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>BBUMAS</h1>
       </a>
 
@@ -81,7 +72,6 @@
 
     </div>
   </header><!-- End Header -->
-  <!-- End Header -->
 
   <main id="main">
 
@@ -94,28 +84,14 @@
       <nav>
         <div class="container">
           <ol>
-            <li><a href="/">Home</a></li>
-            <li><a href="/post">Post</a></li>
-            <li>게시글 확인하기</li>
+            <li><a href="/">홈</a></li>
+            <li><a href="/post">게시글 목록</a></li>
+            <li>{{post.post_title}}</li>
           </ol>
         </div>
       </nav>
     </div><!-- End Breadcrumbs -->
 
-        {% comment %} <h1>게시글 개별 페이지입니다</h1>
-        <p>{{post.post_title}}</p>
-        <p>{{post.post_content}}</p>
-        {% if post.post_image %}
-            <img src="{{post.post_image.url}}" alt="Post image">
-        {% else %}
-            <p>No image uploaded for this post</p>
-        {% endif %}
-        <p>{{post.author}}</p>
-        <p>{{post.created_at}}</p>
-        <p>{{post.post_latitude}}</p>
-        <p>{{post.post_longitude}}</p>
-        <p>{{post.report_type}}</p>
-        <p></p> {% endcomment %}
     <section id="featured-services" class="featured-services">
         <div class="container" data-aos="fade-up">
             <table id="bd-table">
@@ -182,26 +158,23 @@
                     });
                   }
                 </script>
-              
-
-                
             
                 <tr style="border-bottom: 1px solid #ccc;">
-                    <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
+                    <td rowspan="2" style="background-color:#f3f6fc; padding: 25px; text-align:center; vertical-align: top;">신고 내용</td>
                     <td>
-                        <p style="text-align: left; margin-left: 3%; margin-top: 3%; width: 153%;
-                        height: 70px; padding: 7px;
-                        border: 5px solid #f3f6fc;">{{post.post_content}}</p>
-                        <br>
-                        {% if post.post_image %}
-                            <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 5%;">
-                            <br>
-                        {% else %}
-                            <p>No image uploaded for this post</p>
-                        {% endif %}
+                      <p style="text-align: left; margin-left: 4%; margin-top: 4%; margin-bottom: 0; width: 150%;
+                      height: 100px; padding: 12px; background-color:#f1f3f7e6;">{{post.post_content}}</p>
+                      <br>
+                      {% if post.post_image %}
+                          <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 4%;">
+                          <br>
+                      {% else %}
+                          <p>No image uploaded for this post</p>
+                      {% endif %}
                     </td>
                 </tr>
             </table>
+
             <div class="btn-back">
               <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white; margin-left:40%; box-shadow: 2px 2px 2px #dedede;">이전 페이지로</button>
               {% if request.user == post.author %}
@@ -252,23 +225,7 @@
               <span>BBUMAS</span>
             </a>
             <p>Black Box Urban Maintenance Automation System</p>
-            {% comment %} <div class="social-links d-flex mt-4">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div> {% endcomment %}
           </div>
-
-          {% comment %} <div class="col-lg-2 col-6 footer-links">
-            <h4>Policy</h4>
-            <ul class="policy_link">
-              <li>
-                <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
-
-              </li>
-            </ul>
-          </div> {% endcomment %}
 
           <div class="col-lg-2 col-6 footer-links">
             <h4>Useful Links</h4>
@@ -302,7 +259,6 @@
             <p style="color: #ffffff99;">
               대전 서구 문정로48번길 30 <br>
               (탄방동)<br>
-              <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
               <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
             </p>
           </div>
@@ -313,13 +269,6 @@
       <div class="container mt-4">
         <div class="copyright">
           &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-          <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
         </div>
       </div>
 
