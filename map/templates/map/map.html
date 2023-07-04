@@ -313,6 +313,7 @@
                 '포트홀': '{% static "assets/img/purple.png" %}', 
                 '도로 분리대 손상': '{% static "assets/img/red.png" %}', 
                 '도로 표지 손상': '{% static "assets/img/yellow.png" %}', 
+                '차선 손상': '{% static "assets/img/yellow.png" %}',
                 '방지턱 손상': '{% static "assets/img/skyblue.png" %}', 
                 '시선 유도봉 손상': '{% static "assets/img/blue.png" %}',
               };
@@ -407,7 +408,7 @@
                         '<img src="' + imageSrc + '" width="230px" height="130px" margin: 0px auto;>' + '<br>' +
                         '<button class="zoom-button" onclick="showLargeImage(\'' + imageSrc + '\')">확대</button>' +
                         {% if user.is_authenticated and user.is_staff %}
-                          '<button type="button" style="font-size:3px; margin-left:194px;" onclick="confirmDelete_post({{post_id}})" style="color:white;">삭제</button>'+
+                          '<button type="button" style="font-size:3px; margin-left:194px;" onclick="confirmDelete_post('+post_id+')" style="color:white;">삭제</button>'+
                         {% endif %}            
                         '</div>';            
                     infowindowImage.setContent(content);
