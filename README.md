@@ -14,3 +14,11 @@
 ```bash
 pip install -r requirements.txt
 ```
+#### **Server 구동**  
+
+
+- **runserver**  
+
+```bash
+python manage.py runserver
+```
