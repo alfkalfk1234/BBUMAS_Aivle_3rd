@@ -819,6 +819,8 @@ section {
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
     border-radius: 4px;
+    animation-duration: 3s;
+    animation-name:
   }
 
   .navbar .dropdown ul li {
@@ -1899,7 +1901,7 @@ section {
 }
 
 #login-form > input[type="submit"]:hover{
-  background-color: rgba(108, 134, 155, 0.85)
+  background-color: rgba(108, 134, 155, 0.9)
 }
 
 a.join-label {

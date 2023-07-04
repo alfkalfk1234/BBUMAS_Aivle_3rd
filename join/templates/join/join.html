@@ -90,7 +90,7 @@
         <div class="container">
           <ol>
             <li><a href="/">Home</a></li>
-            <li>Login</li>
+            <li>Join Us</li>
           </ol>
         </div>
       </nav>
@@ -98,51 +98,51 @@
     
     <!-- wrapper -->
     <div>      
-      <div class="create" id="create-content">
-        <h2 style="text-align: center;">Join us</h2>
+      <div class="create" id="create-content" style="box-shadow: 2px 2px 2px #dedede;">
+        <h2 style="text-align: center; color: #3a658a;">Join us</h2>
         <!-- ID -->
         <form method="post">
           {% csrf_token %}
           <div class="form-field">
-            <label for="{{ form.username.id_for_label }}">ID:</label>
+            <label for="{{ form.username.id_for_label }}">아이디</label>
             {{ form.username }}
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
 
           <!-- password 필드 -->
           <div class="form-field">
-            <label for="{{ form.password.id_for_label }}">비밀번호:</label>
+            <label for="{{ form.password.id_for_label }}">비밀번호</label>
             {{ form.password }}
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
 
           <!-- 비밀번호 확인 필드 -->
           <div class="form-field">
-            <label>비밀번호 확인:</label>
-            <input type="password" id="pswd2" name="password_check">
+            <label>비밀번호 확인</label>
+            <input type="password" id="pswd2" name="password_check" placeholder="동일한 PW를 입력하시오">
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
 
           <!-- name 필드 -->
           <div class="form-field">
-            <label for="{{ form.name.id_for_label }}">이름:</label>
+            <label for="{{ form.name.id_for_label }}">이름</label>
             {{ form.name }}
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
 
           <!-- email 필드 -->
           <div class="form-field">
-            <label for="{{ form.email.id_for_label }}">Email:</label>
+            <label for="{{ form.email.id_for_label }}">Email</label>
             {{ form.email }}
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
 
           <!-- phone 필드 -->
           <div class="form-field">
-            <label for="{{ form.phone.id_for_label }}">전화번호:</label>
+            <label for="{{ form.phone.id_for_label }}">전화번호</label>
             {{ form.phone }}
           </div>
-          <div class="error_next_box" style="display:none;"></div>
+          <div class="error_next_box"></div>
           <br>
           <button type="submit" class="joinus" style="box-shadow: 2px 2px 2px #dedede;">Create</button>
         </form>
@@ -195,8 +195,14 @@
           <h4>Our Services</h4>
           <ul>
             <li><a href="/">Main</a></li>
+            {% if user.is_authenticated and user.special %}
+              <li><a href="/video">Upload Videos</a></li>
+            {% endif %}
             <li><a href="/post">Alert Board</a></li>
-            <li><a href="/video">FAQ</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/post/posting">Write Reports</a></li>
+            {% endif %}
+            <li><a href="/post/faq">FAQ</a></li>
           </ul>
         </div>
 
