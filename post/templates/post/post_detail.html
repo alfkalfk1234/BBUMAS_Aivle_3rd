@@ -205,9 +205,9 @@
             <div class="btn-back">
               <button type="button" class="btn-btn" onclick="location.href='/post';" style="color:white; margin-left:40%; box-shadow: 2px 2px 2px #dedede;">이전 페이지로</button>
               {% if request.user == post.author %}
-                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
+                <button type="button" class="btn-s" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
               {% elif user.is_authenticated and user.is_staff %}
-                <button type="button" class="btn-btn" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
+                <button type="button" class="btn-s" onclick="confirmDelete({{ post.id }})" style="color:white; color:white; box-shadow: 2px 2px 2px #dedede;">게시물 삭제</button>
               {% endif %}
             </div>
 
@@ -282,8 +282,14 @@
             <h4>Our Services</h4>
             <ul>
               <li><a href="/">Main</a></li>
+              {% if user.is_authenticated and user.special %}
+                <li><a href="/video">Upload Videos</a></li>
+              {% endif %}
               <li><a href="/post">Alert Board</a></li>
-              <li><a href="/video">FAQ</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="/post/posting">Write Reports</a></li>
+              {% endif %}
+              <li><a href="/post/faq">FAQ</a></li>
             </ul>
           </div>
 
