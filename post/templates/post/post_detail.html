@@ -166,7 +166,7 @@
                       height: 100px; padding: 12px; background-color:#f1f3f7e6;">{{post.post_content}}</p>
                       <br>
                       {% if post.post_image %}
-                          <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 4%;">
+                          <img src="{{post.detected_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 4%;">
                           <br>
                       {% else %}
                           <p>No image uploaded for this post</p>
