@@ -310,14 +310,7 @@ h6 {
   vertical-align: bottom;
   vertical-align: middle;
 }
-#filename-v, #filesize-v {
-  /* border: 1px solid #ccc; */
-  vertical-align: top;
-  vertical-align: bottom;
-  vertical-align: middle;
-  height: 45px;
-  background-color: #fff;
-}
+
 #filename, #filesize {
   border: 1px solid #ccc;
   vertical-align: top;
@@ -2357,7 +2350,7 @@ video.html
   width: 600px;
 }
 #file-table th{
-  /* border: 1px solid #ccc; */
+  border: 1px solid #ccc;
   background-color: #d8ddeb;
   font-weight: 1;
   /* color: #fff; */
