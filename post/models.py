@@ -27,6 +27,7 @@ class Post(models.Model):
     post_title = models.CharField(max_length=200)
     post_content = models.TextField(null=True, blank=True)
     post_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    detected_image = models.ImageField(upload_to='', null=True, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     post_latitude = models.FloatField(null=True, blank=True)
