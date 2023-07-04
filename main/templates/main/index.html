@@ -191,9 +191,6 @@
 
         </div>
 
-        
-
-
       </div>
     </section><!-- End Featured Services Section -->
 
@@ -250,7 +247,6 @@
         <div class="section-header">
           <span>Our Services</span>
           <h2>Our Services</h2>
-
         </div>
 
         <div class="row gy-4">
@@ -478,8 +474,14 @@
           <h4>Our Services</h4>
           <ul>
             <li><a href="/">Main</a></li>
+            {% if user.is_authenticated and user.special %}
+              <li><a href="/video">Upload Videos</a></li>
+            {% endif %}
             <li><a href="/post">Alert Board</a></li>
-            <li><a href="/video">FAQ</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/post/posting">Write Reports</a></li>
+            {% endif %}
+            <li><a href="/post/faq">FAQ</a></li>
           </ul>
         </div>
 
