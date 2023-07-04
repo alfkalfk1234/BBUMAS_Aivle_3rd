@@ -77,3 +77,8 @@
 .search-btn:hover {
   background-color: #0e1d34e8;
 }
+
+#typing {
+  margin-left: 5px;
+  margin-right: 5px;
+}
