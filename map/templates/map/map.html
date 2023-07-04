@@ -303,7 +303,7 @@
                 '포트홀': '{% static "assets/img/purple.png" %}', 
                 '도로 분리대 손상': '{% static "assets/img/red.png" %}', 
                 '도로 표지 손상': '{% static "assets/img/yellow.png" %}', 
-                '차선 손상': '{% static "assets/img/yellow.png" %}',
+                '차선 손상': '{% static "assets/img/yellow.png" %}', 
                 '방지턱 손상': '{% static "assets/img/skyblue.png" %}', 
                 '시선 유도봉 손상': '{% static "assets/img/blue.png" %}',
               };
@@ -436,7 +436,7 @@
                             // 행정동의 region_type은 'H'입니다.
                             if (result[i].region_type === 'H') {
                                 var address = result[i].region_3depth_name;
-                                var content = '<div>' + markerId + '<br>' + ' - ' + address + '</div>';
+                                var content = '<div id = "typing"><strong>' + address  + '</strong><br>' + markerId  + '</div>';
             
                                 // 마커에 표시할 인포윈도우를 생성합니다
                                 var infowindow = new kakao.maps.InfoWindow({
@@ -466,7 +466,7 @@
                           // 행정동의 region_type은 'H'입니다.
                           if (result[i].region_type === 'H') {
                               var address = result[i].region_3depth_name;
-                              var content = '<div>' + markerId + '<br>' + address + '</div>';
+                              var content = '<div id = "typing"><strong>' + address  + '</strong><br>' + markerId  + '</div>';
           
                               // 마커에 표시할 인포윈도우를 생성합니다
                               var infowindow = new kakao.maps.InfoWindow({
