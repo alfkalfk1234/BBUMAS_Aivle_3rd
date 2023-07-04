@@ -30,13 +30,6 @@
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Logis
-  * Updated: May 30 2023 with Bootstrap v5.3.0
-  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -78,7 +71,7 @@
       </nav><!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+  </header>
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
@@ -88,23 +81,20 @@
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h2 data-aos="fade-up" style="font-family: 'GmarketSansMedium';">블랙박스를 활용한 <br> 도심정비 자동화 시스템</h2>
           <br>
-          <!-- <p data-aos="fade-up" data-aos-delay="100">Facere distinctio molestiae nisi fugit tenetur repellat non praesentium nesciunt optio quis sit odio nemo quisquam. eius quos reiciendis eum vel eum voluptatem eum maiores eaque id optio ullam occaecati odio est possimus vel reprehenderit</p> -->
-
+          
           <form action="http://127.0.0.1:8000/map/" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
             <input type="text" class="form-control" name="q" id="search-input" placeholder="점검이 필요한 도시를 검색해보세요.">
             <button type="submit" class="btn btn-primary">Search</button>
           </form>
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
-
-            
     
             <div class="col-lg-3 col-6">
               <div class="stats-item text-center w-100 h-100">
                 <span id="videoDamageCount1" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
                 <p style="font-size: 14px;">비디오 파손 검출량</p>
               </div>
-            </div><!-- End Stats   Item -->
+            </div><!-- End Stats Item -->
 
             <div class="col-lg-3 col-6">
               <div class="stats-item text-center w-100 h-100">
@@ -129,21 +119,14 @@
 
           </div>
         </div>
-
-        <!--<div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-          <img src="assets/img/autonomous-car.png" class="img-fluid mb-3 mb-lg-0" alt="">
-        </div>-->
-        
-
+      
         <script>
-
           var locations_post = {{ location_posts|safe }};
           var locations_video = {{ location_videos|safe }};
       
           var postDamageCount = locations_post.length;
           var videoDamageCount = locations_video.length;
           var totalDamageCount = locations_post.length + locations_video.length;
-      
       
           document.getElementById('postDamageCount1').setAttribute("data-purecounter-end", postDamageCount);
           document.getElementById('videoDamageCount1').setAttribute("data-purecounter-end", videoDamageCount);
@@ -154,8 +137,6 @@
   </section><!-- End Hero Section -->
 
   <main id="main">
-
-
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
       <div class="container">
@@ -166,17 +147,14 @@
             <div class="icon flex-shrink-0"><i class="fa-solid fa-video"></i></div>
             <div>
               <a href="/video" class="readmore stretched-link"><h4 class="title">블랙박스 영상 분석</h4></a>
-              <!-- <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p> -->
               <a href="/video" class="readmore stretched-link"><span>영상 업로드하기</span><i class="bi bi-arrow-right"></i></a>
             </div>
-          </div>
-          <!-- End Service Item -->
+          </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="icon flex-shrink-0"><i class="fa-sharp fa-solid fa-circle-exclamation"></i></div>
             <div>
-              <a href="/post" class="readmore stretched-link"></a><h4 class="title">신고 게시판</h4></a>
-              <!-- <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p> -->
+              <a href="/post" class="readmore stretched-link"><h4 class="title">신고 게시판</h4></a>
               <a href="/post" class="readmore stretched-link"><span>게시글 올리기</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
@@ -184,13 +162,11 @@
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="icon flex-shrink-0"><i class="fa-solid fa-map-location-dot"></i></div>
             <div>
-              <a href="/map" class="readmore stretched-link"></a><h4 class="title">파손 현황 지도</h4></a>
-              <!-- <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p> -->
+              <a href="/map" class="readmore stretched-link"><h4 class="title">파손 현황 지도</h4></a>
               <a href="/map" class="readmore stretched-link"><span>지도 확인하기</span><i class="bi bi-arrow-right"></i></a>
             </div>
-
-        </div>
-
+          </div><!-- End Service Item -->
+        </div> 
       </div>
     </section><!-- End Featured Services Section -->
 
@@ -202,6 +178,7 @@
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
             <img src="{%static 'assets/img/bbox.png' %}" class="img-fluid" alt="">
+            {% comment %} 동영상 링크 {% endcomment %}
             <a href="https://youtu.be/75LI9MI9eEo" class="glightbox play-btn"></a>
           </div>
           <div class="col-lg-6 content order-last  order-lg-first">
@@ -280,37 +257,6 @@
               <p>업로드된 동영상과 신고 게시판의 위치 및 손상된 시설물 정보를 지도 상으로 확인할 수 있습니다.</p>
             </div>
           </div><!-- End Card Item -->
-
-          <!-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/trucking-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Trucking</a></h3>
-              <p>Dicta quam similique quia architecto eos nisi aut ratione aut ipsum reiciendis sit doloremque oluptatem aut et molestiae ut et nihil</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/packaging-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Packaging</a></h3>
-              <p>Illo consequuntur quisquam delectus praesentium modi dignissimos facere vel cum onsequuntur maiores beatae consequatur magni voluptates</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="card">
-              <div class="card-img">
-                <img src="assets/img/warehousing-service.jpg" alt="" class="img-fluid">
-              </div>
-              <h3><a href="service-details.html" class="stretched-link">Warehousing</a></h3>
-              <p>Quas assumenda non occaecati molestiae. In aut earum sed natus eatae in vero. Ab modi quisquam aut nostrum unde et qui est non quo nulla</p>
-            </div>
-          </div> -->
-
         </div>
 
       </div>
@@ -335,8 +281,6 @@
     </section><!-- End Call To Action Section -->
 
     
-    
-
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container">
@@ -484,16 +428,6 @@
           </div> {% endcomment %}
         </div>
 
-        {% comment %} <div class="col-lg-2 col-6 footer-links">
-          <h4>Policy</h4>
-          <ul class="policy_link">
-            <li>
-              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
-
-            </li>
-          </ul>
-        </div> {% endcomment %}
-
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
@@ -526,7 +460,6 @@
           <p style="color: #ffffff99;">
             대전 서구 문정로48번길 30 <br>
             (탄방동)<br>
-            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
             <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
           </p>
         </div>
@@ -537,13 +470,6 @@
     <div class="container mt-4">
       <div class="copyright">
         &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 
@@ -567,7 +493,6 @@
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
 
-  
 
 </body>
 </html>
