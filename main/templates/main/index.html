@@ -141,7 +141,7 @@
     <section id="featured-services" class="featured-services">
       <div class="container">
 
-        <div class="row gy-4">
+        <div class="row gy-4" style="margin-left: 90px;">
 
           <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
             <div class="icon flex-shrink-0"><i class="fa-solid fa-video"></i></div>
@@ -222,8 +222,8 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <span>Our Services</span>
-          <h2>Our Services</h2>
+          {% comment %} <span>자주 찾는 서비스</span> {% endcomment %}
+          <h2>자주 찾는 서비스</h2>
         </div>
 
         <div class="row gy-4">
@@ -234,7 +234,7 @@
                 <img src="{%static 'assets/img/video.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/video" class="stretched-link">블랙박스 영상 분석</a></h3>
-              <p>YOLOv8을 이용하여 도로의 손상된 부분을 감지합니다.  감지된 객체는 관리자가 검토 후 관련 부서로 전달합니다.</p>
+              <p>AI 알고리즘을 통해 도로의 손상된 부분을 감지합니다.<br>감지된 객체는 관리자가 검토 후 공공기관 내 관련 부서로 전달합니다.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -244,7 +244,7 @@
                 <img src="{%static 'assets/img/post.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/post" class="stretched-link">신고 게시판</a></h3>
-              <p>도로의 손상된 부분을 발견 시 직접 신고할 수 있습니다.  사진의 GPS 정보를 추출하여 수리가 필요한 시설물의 위치 정보를 자동으로 데이터베이스에 업데이트합니다.</p>
+              <p>도로의 손상된 부분을 발견 시 직접 신고할 수 있습니다.<br>사진의 GPS 정보를 추출하여 수리가 필요한 시설물의 위치 정보를 자동으로 데이터베이스에 업데이트합니다.</p>
             </div>
           </div><!-- End Card Item -->
 
@@ -254,7 +254,7 @@
                 <img src="{%static 'assets/img/mapimg.png' %}" alt="" class="img-fluid">
               </div>
               <h3><a href="/map" class="stretched-link">파손 현황 지도</a></h3>
-              <p>업로드된 동영상과 신고 게시판의 위치 및 손상된 시설물 정보를 지도 상으로 확인할 수 있습니다.</p>
+              <p>업로드된 블랙박스 영상과 신고 게시판에서 감지된 손상된 시설물 및 위치 정보를 지도 상으로 확인할 수 있습니다.</p>
             </div>
           </div><!-- End Card Item -->
         </div>
