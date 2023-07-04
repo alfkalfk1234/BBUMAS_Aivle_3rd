@@ -1,15 +1,3 @@
-/**
-* Template Name: Logis
-* Updated: May 30 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Set main reusable colors and fonts using CSS variables
-# Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
---------------------------------------------------------------*/
 /* Fonts */
 :root {
   --font-default: "SUIT-Regular", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -293,6 +281,10 @@ h6 {
   width: 90%;
   text-align: left;
 }
+.useAgreeFont {
+  color: red;
+}
+
 
 /* 파일 확인 테이블 */
 #imgfile-table{
@@ -320,15 +312,13 @@ h6 {
 }
 
 .fn-th{
-  background-color: #97a3b3;
-  color: #fff;
+  background-color: #d8ddeb;
   width: 480px;
   text-align: left;
   padding: 10px;
 }
 .fs-th{
-  background-color: #97a3b3;
-  color: #fff;
+  background-color: #d8ddeb;
   width: 120px;
   text-align: right;
   padding: 10px;
