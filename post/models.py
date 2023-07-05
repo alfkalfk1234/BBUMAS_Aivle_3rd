@@ -22,7 +22,7 @@ class Post(models.Model):
         ('road_barrier_damage', '도로 분리대 손상'),
         ('lane', '도로 표시 손상'),
         ('speed_bump', '방지턱'),
-        ('guide_post', '시선 유도봉'),
+        ('tubular_marker', '시선 유도봉'),
     )
     post_title = models.CharField(max_length=200)
     post_content = models.TextField(null=True, blank=True)

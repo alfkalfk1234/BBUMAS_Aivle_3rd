@@ -51,7 +51,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Home</a></li>
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.special %}
             <li><a href="/video">Video</a></li>
           {% endif %}
           <li class="dropdown"><a href="/post"><span>Post</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -139,7 +139,7 @@
                   <div class="col-lg-3 col-6" style="width:23%;">
                     <div class="stats-item text-center w-100 h-100">
                       <span id="totalDamageCount" data-purecounter-start="0" data-purecounter-duration="1" class="purecounter"></span>
-                      <p>총 처리 건수</p>
+                      <p>총 검출 건수</p>
                     </div>
                   </div><!-- End Stats Item -->
     
@@ -296,7 +296,7 @@
                 'road_barrier_damage': '{% static "assets/img/red.png" %}', 
                 'lane': '{% static "assets/img/yellow.png" %}', 
                 'speed_bump': '{% static "assets/img/skyblue.png" %}', 
-                'guide_post': '{% static "assets/img/blue.png" %}',
+                'tubular_marker': '{% static "assets/img/blue.png" %}',
                 '볼라드 손상': '{% static "assets/img/green.png" %}', 
                 '횡단보도 손상': '{% static "assets/img/orange.png" %}', 
                 '제설함 손상': '{% static "assets/img/pink.png" %}', 
