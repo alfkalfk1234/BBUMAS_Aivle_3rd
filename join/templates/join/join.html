@@ -99,42 +99,42 @@
             <label for="{{ form.username.id_for_label }}">아이디</label>
             {{ form.username }}
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
 
           <!-- password 필드 -->
           <div class="form-field">
             <label for="{{ form.password.id_for_label }}">비밀번호</label>
             {{ form.password }}
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
 
           <!-- 비밀번호 확인 필드 -->
           <div class="form-field">
             <label>비밀번호 확인</label>
             <input type="password" id="pswd2" name="password_check" placeholder="동일한 PW를 입력하시오">
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
 
           <!-- name 필드 -->
           <div class="form-field">
             <label for="{{ form.name.id_for_label }}">이름</label>
             {{ form.name }}
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
 
           <!-- email 필드 -->
           <div class="form-field">
             <label for="{{ form.email.id_for_label }}">Email</label>
             {{ form.email }}
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
 
           <!-- phone 필드 -->
           <div class="form-field">
             <label for="{{ form.phone.id_for_label }}">전화번호</label>
             {{ form.phone }}
           </div>
-          <div class="error_next_box"></div>
+          <div class="error_next_box" style="display: none;">Error message</div>
           <br>
           <button type="submit" class="joinus" style="box-shadow: 2px 2px 2px #dedede;">Create</button>
         </form>
@@ -216,7 +216,12 @@
 
   <div id="preloader"></div>
 
-  
+  <script src="{%static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{%static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{%static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{%static 'assets/vendor/php-email-form/validate.js' %}"></script>
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
   <script src="{%static 'assets/js/new_main.js'%}"></script>    
