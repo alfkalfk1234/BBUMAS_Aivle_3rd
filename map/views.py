@@ -11,10 +11,9 @@ def index(request):
 
 # get_locations 창으로 DB 내부 정보 확인용
 def get_locations(request):
-    locations_video = Detected.objects.all()
-    location_videos = [[loc.latitude, loc.longitude, loc.detected_object,loc.image_path,loc.pk] for loc in locations_video]
-    # location_list = serializers.serialize('json', locations)  # QuerySet을 JSON으로 변환
-    return JsonResponse(location_videos, safe=False)  # JSON 응답 반환
+    locations_post = Post.objects.all()
+    location_posts = [[loc.post_latitude, loc.post_longitude, loc.report_type,loc.detected_image.url,loc.pk,loc.post_region] for loc in locations_post]    # location_list = serializers.serialize('json', locations)  # QuerySet을 JSON으로 변환
+    return JsonResponse(location_posts, safe=False)  # JSON 응답 반환
 
 # DB에서 정보 가져와서 리스트로 변환 후 html로 정보 전송
 def map_view(request):
@@ -36,7 +35,7 @@ def map_view(request):
     else:
         user_region = []
 
-    location_posts = [[loc.post_latitude, loc.post_longitude, loc.report_type,loc.post_image.url,loc.pk,loc.post_region] for loc in locations_post]
+    location_posts = [[loc.post_latitude, loc.post_longitude, loc.report_type,loc.detected_image.url,loc.pk,loc.post_region] for loc in locations_post]
     location_videos = [[loc.latitude, loc.longitude, loc.detected_object,loc.image_path,loc.pk,loc.video_region] for loc in locations_video]
 
     context = {

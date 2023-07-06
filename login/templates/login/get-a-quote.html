@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Login</title>
+  <title>로그인</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -79,8 +79,8 @@
       <nav>
         <div class="container">
           <ol>
-            <li><a href="/">Home</a></li>
-            <li>Login</li>
+            <li><a href="/">홈</a></li>
+            <li>로그인</li>
           </ol>
         </div>
       </nav>
@@ -189,7 +189,9 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
-  <script type="text/javascript">
+  <script src="{%static 'assets/js/login.js' %}"></script>
+  
+  {% comment %} <script type="text/javascript">
     window.onload = function() {
       var error_message = document.getElementById('error-message');
       if (error_message) {
@@ -198,7 +200,7 @@
         }, 3000);  // 3초 후에 사라짐
       }
     };
-  </script>
+  </script> {% endcomment %}
   
 </body>
 

@@ -7,3 +7,18 @@
 - `AI 충남/충북 7반 27조`
 > 이인재(조장), 안성균, 강태경, 유태종, 김예린, 곽다은, 이창렬
 
+## 설정 및 구동
+
+#### **Install requirements**
+
+```bash
+pip install -r requirements.txt
+```
+#### **Server 구동**  
+
+
+- **runserver**  
+
+```bash
+python manage.py runserver
+```

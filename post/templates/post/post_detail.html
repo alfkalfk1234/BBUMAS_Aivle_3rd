@@ -84,9 +84,9 @@
       <nav>
         <div class="container">
           <ol>
-            <li><a href="/">Home</a></li>
-            <li><a href="/post">Post</a></li>
-            <li>게시글 확인하기</li>
+            <li><a href="/">홈</a></li>
+            <li><a href="/post">게시글 목록</a></li>
+            <li>{{post.post_title}}</li>
           </ol>
         </div>
       </nav>
@@ -160,18 +160,17 @@
                 </script>
             
                 <tr style="border-bottom: 1px solid #ccc;">
-                    <td rowspan="2" style="background-color:#f3f6fc; padding: 50px; text-align:center;">신고 내용</td>
+                    <td rowspan="2" style="background-color:#f3f6fc; padding: 25px; text-align:center; vertical-align: top;">신고 내용</td>
                     <td>
-                        <p style="text-align: left; margin-left: 3%; margin-top: 3%; width: 153%;
-                        height: 70px; padding: 7px;
-                        border: 5px solid #f3f6fc;">{{post.post_content}}</p>
-                        <br>
-                        {% if post.post_image %}
-                            <img src="{{post.post_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 5%;">
-                            <br>
-                        {% else %}
-                            <p>No image uploaded for this post</p>
-                        {% endif %}
+                      <p style="text-align: left; margin-left: 4%; margin-top: 4%; margin-bottom: 0; width: 150%;
+                      height: 100px; padding: 12px; background-color:#f1f3f7e6;">{{post.post_content}}</p>
+                      <br>
+                      {% if post.post_image %}
+                          <img src="{{post.detected_image.url}}" alt="Post image" style="width: 500px; height: auto; margin-bottom: 30px; margin-left: 4%;">
+                          <br>
+                      {% else %}
+                          <p>No image uploaded for this post</p>
+                      {% endif %}
                     </td>
                 </tr>
             </table>

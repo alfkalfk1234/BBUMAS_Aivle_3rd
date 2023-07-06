@@ -190,7 +190,7 @@ h6 {
 }
 
 .btn-sub {
-  width: 290px;
+  width: 320px;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -201,6 +201,7 @@ h6 {
   height: 50px;
   color: #fff;
   text-align: center;
+  margin: 3px;
   padding: 10px 0;
   border-radius: 5px;
   border: none;
@@ -208,10 +209,10 @@ h6 {
   transition: 0.3s;
 }
 .btn-btn {
-  background-color: #b9bdc4fc;
+  background-color: #c8ccd5fc;
 }
 .btn-btn:hover {
-  background: #0e1d345e;
+  background: #babec8fc;
   color: #fff;
   transition: 0.3s;
 }
@@ -452,7 +453,7 @@ map
 }
 
 .v-line {
-  border-left : 2px solid #d1d5e7;
+  border-left : 4px solid #d1d5e7;
   height : 50px;
 }
 
@@ -803,7 +804,6 @@ section {
     transition: 0.3s;
     border-radius: 4px;
     animation-duration: 3s;
-    animation-name:
   }
 
   .navbar .dropdown ul li {
@@ -1430,7 +1430,7 @@ section {
 # Frequently Asked Questions Section
 --------------------------------------------------------------*/
 .faq {
-  padding-top: 80px;
+  padding-top: 20px;
 }
 
 .faq .accordion-item {
