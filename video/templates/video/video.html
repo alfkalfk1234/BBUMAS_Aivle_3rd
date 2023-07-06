@@ -72,7 +72,6 @@
 
     </div>
   </header><!-- End Header -->
-  <!-- End Header -->
 
   <main id="main">
   {% block content %}
@@ -92,8 +91,8 @@
       <nav>
         <div class="container">
           <ol>
-            <li><a href="/">Home</a></li>
-            <li>Video Upload</li>
+            <li><a href="/">홈</a></li>
+            <li>블랙박스 영상 업로드</li>
           </ol>
         </div>
       </nav>
@@ -102,7 +101,7 @@
   </main>
 
   <div class="container" data-aos="fade-up">
-    <table id="file-table" style="box-shadow: 2px 2px 2px #dedede;">
+    <table id="file-table" style="box-shadow: 2px 2px 2px #ccc;">
       <tr>
         <th class="tb-th-1" scope="row">파일 이름</th>
         <th class="tb-th-2" scope="row">파일 크기</th>
@@ -124,6 +123,7 @@
         <br><p>잠시만 기다려 주세요. 영상을 분석 중 입니다...</p>
       </div>
     </div>
+  
 
     <div class="group-select">
       <label class="select-btn" for="fileInput">파일 선택</label>
@@ -146,7 +146,7 @@
     </form>
 
 
-    <label class="upload-btn" for="fileUpload" style="box-shadow: 2px 2px 2px #dedede;">업로드</label>
+    <label class="upload-btn" for="fileUpload" style="box-shadow: 2px 2px 2px #ccc;">업로드</label>
   </div>
 
   <script>
@@ -263,44 +263,48 @@
             <span>BBUMAS</span>
           </a>
           <p>Black Box Urban Maintenance Automation System</p>
-          <div class="social-links d-flex mt-4">
+          {% comment %} <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
             <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
             <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Policy</h4>
-          <ul class="policy_link">
-            <li>
-              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
-            </li>
-          </ul>
+          </div> {% endcomment %}
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="/">Main</a></li>
-            <li><a href="/video">Black box Upload</a></li>
-            <li><a href="/post">Alert Board</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="/">Main</a></li>
+            {% if user.is_authenticated and user.special %}
+              <li><a href="/video">Upload Videos</a></li>
+            {% endif %}
+            <li><a href="/post">Alert Board</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/post/posting">Write Reports</a></li>
+            {% endif %}
+            <li><a href="/post/faq">FAQ</a></li>
+          </ul>
+        </div>
+
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Policy</h4>
+          <a href="#" style="color: #ffffff99;" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+          <br><br><br>
+          
           <h4>Contact Us</h4>
-          <p>
+          <p style="color: #ffffff99;">
             대전 서구 문정로48번길 30 <br>
             (탄방동)<br>
-            <br>
-            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
-            <strong>Email:</strong> ktaivle@kt.com<br>
+            <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
           </p>
-
         </div>
 
       </div>
@@ -309,13 +313,6 @@
     <div class="container mt-4">
       <div class="copyright">
         &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 

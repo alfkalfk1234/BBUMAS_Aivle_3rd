@@ -26,13 +26,14 @@ def analyze_video(video_path):
     model = YOLO(yolov8_model_path)
     model.predict(
         source = video_path,
-        conf = 0.85,
+        conf = 0.65,
         iou = 0.15,
         save = True,
         save_txt = True,
         project = 'video/media',
-        classes = [0, 1, 3, 4, 5, 7, 8],
-        # names: {0: 'Pothole', 1: 'bollard_abnormal', 2: 'bollard_normal', 3: 'crosswalk', 4: 'road-marking', 5: 'road_separator_abnormal', 6: 'road_separator_normal', 7: 'speedbump', 8: 'tubular-marker-abnormal', 9: 'tubular-marker-normal'}
+        classes = [0, 1, 3, 4, 5, 7, 8], # road-marking + lane
+        # names: {0: 'Pothole', 1: 'bollard_abnormal', 2: 'bollard_normal', 3: 'crosswalk', 4: 'road-marking', 5: 'road_separator_abnormal', 
+        # 6: 'road_separator_normal', 7: 'speedbump', 8: 'tubular-marker-abnormal', 9: 'tubular-marker-normal', 10: 'loading-box'}
     )
 
     os.remove(video_path)
@@ -277,6 +278,7 @@ def video_db_save(request):
                         latitude = item.get("latitude", ""),
                         longitude = item.get("longitude", ""),
                         image_path= item["file_path"],
+                        video_region = item['video_region']
                     )
                     storage = S3Boto3Storage()
                     fromfilepath = 'video/media/images/' + item["file_path"]

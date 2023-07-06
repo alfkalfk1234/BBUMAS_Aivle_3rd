@@ -1,20 +1,8 @@
-/**
-* Template Name: Logis
-* Updated: May 30 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Set main reusable colors and fonts using CSS variables
-# Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
---------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-primary: "Inter", sans-serif;
-  --font-secondary: "Poppins", sans-serif;
+  --font-default: "SUIT-Regular", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: "SUIT-Regular", sans-serif;
+  --font-secondary: "SUIT-Regular", sans-serif;
 }
 
 /* Colors */
@@ -31,6 +19,26 @@
   scroll-behavior: smooth;
 }
 
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -69,8 +77,8 @@ h6 {
   left: 50%;
   transform: translate(-50%);
   margin-bottom: 20px;
-  border-top: 3px solid #c6c9cf;
-  border-bottom: 3px solid #c6c9cf;
+  border-top: 2px solid #274165d2;
+  border-bottom: 2px solid #274165d2;
 }
 
 .title input[type='text']{
@@ -182,7 +190,7 @@ h6 {
 }
 
 .btn-sub {
-  width: 290px;
+  width: 320px;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -193,6 +201,7 @@ h6 {
   height: 50px;
   color: #fff;
   text-align: center;
+  margin: 3px;
   padding: 10px 0;
   border-radius: 5px;
   border: none;
@@ -200,13 +209,14 @@ h6 {
   transition: 0.3s;
 }
 .btn-btn {
-  background-color: #6e7f9aa9;
+  background-color: #c8ccd5fc;
 }
 .btn-btn:hover {
-  background: #0e1d3449;
+  background: #babec8fc;
   color: #fff;
   transition: 0.3s;
 }
+
 .btn-s,
 .upload-btn {
   background-color: #0e1d34d2;
@@ -272,6 +282,10 @@ h6 {
   width: 90%;
   text-align: left;
 }
+.useAgreeFont {
+  color: red;
+}
+
 
 /* 파일 확인 테이블 */
 #imgfile-table{
@@ -284,28 +298,28 @@ h6 {
 }
 #imgfile-table th{
   font-weight: 1;
-  border: 1px solid #a9a8a8;
+  border: 1px solid #ccc;
   vertical-align: top;
   vertical-align: bottom;
   vertical-align: middle;
 }
+
 #filename, #filesize {
-  border: 1px solid #a9a8a8;
+  border: 1px solid #ccc;
   vertical-align: top;
   vertical-align: bottom;
   vertical-align: middle;
   height: 45px;
 }
+
 .fn-th{
-  background-color: #97a3b3;
-  color: #fff;
+  background-color: #d8ddeb;
   width: 480px;
   text-align: left;
   padding: 10px;
 }
 .fs-th{
-  background-color: #97a3b3;
-  color: #fff;
+  background-color: #d8ddeb;
   width: 120px;
   text-align: right;
   padding: 10px;
@@ -319,10 +333,10 @@ h6 {
   margin-left: 3%;
 }
 #listTable {
-  border-top: 2px solid #0e1d347c;
+  border-top: 2px solid #274165d2;
   width: 100%;
   margin-bottom: 20px;
-  border-bottom: 2px solid #0e1d347c;
+  border-bottom: 1px solid #274165d2;
 }
 
 #board>tr>td {
@@ -357,7 +371,7 @@ th {
   font-size: 16px;
   font-weight: 5;
   padding: 10px;
-  background-color: #edeff3;
+  background-color: #f3f6fc;
   width: 1000px;
   text-align: center;
 }
@@ -415,22 +429,6 @@ faq페이지
   line-height: 1.2;
 }
 
-.faq-line {
-  margin-left : auto;
-  margin-right : auto;
-  border : 0px;
-  border-top: 3px solid rgba(13, 66, 255, 0.8);
-  content: "";
-  position: relative;
-  display: block;
-  width: 65%;
-  height: 3px;
-  background: var(--color-primary);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin-bottom: auto;
-}
 
 /*--------------------------------------------
 map
@@ -445,8 +443,19 @@ map
   cursor: pointer;
 }
 
+.map-num {
+  padding: 10px;
+  /* background-color: #e5e8f3b4; */
+  width: 150%;
+  height: 35%;
+  border-radius: 10px;
+  /* box-shadow: 2px 2px 2px #dedede; */
+}
 
-
+.v-line {
+  border-left : 4px solid #d1d5e7;
+  height : 50px;
+}
 
 /*--------------------------------------------------------------
 # Sections & Section Header
@@ -714,7 +723,7 @@ section {
   margin: 0;
   font-weight: 700;
   color: #fff;
-  font-family: var(--font-primary);
+  font-family: Inter;
 }
 
 /*--------------------------------------------------------------
@@ -794,6 +803,7 @@ section {
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
     border-radius: 4px;
+    animation-duration: 3s;
   }
 
   .navbar .dropdown ul li {
@@ -1420,7 +1430,7 @@ section {
 # Frequently Asked Questions Section
 --------------------------------------------------------------*/
 .faq {
-  padding-top: 80px;
+  padding-top: 20px;
 }
 
 .faq .accordion-item {
@@ -1433,6 +1443,42 @@ section {
 }
 
 .faq .accordion-button {
+  padding: 15px 30px 20px 60px;
+  font-weight: 600;
+  border: 0;
+  font-size: 18px;
+  color: var(--color-default);
+  text-align: left;
+  background: rgba(14, 29, 52, 0.03);
+  border-radius: 5px;
+}
+
+
+.faq .accordion-button1 {
+  
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+
+
+  padding: 15px 30px 20px 60px;
+  font-weight: 600;
+  border: 0;
+  font-size: 18px;
+  color: var(--color-default);
+  text-align: left;
+  background: rgba(14, 29, 52, 0.03);
+  border-radius: 5px;
+}
+
+.faq .accordion-button1 {
+  width: 70%;
+  
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+
+
   padding: 15px 30px 20px 60px;
   font-weight: 600;
   border: 0;
@@ -1838,7 +1884,7 @@ section {
 }
 
 #login-form > input[type="submit"]:hover{
-  background-color: rgba(108, 134, 155, 0.85)
+  background-color: rgba(108, 134, 155, 0.9)
 }
 
 a.join-label {
@@ -2190,7 +2236,7 @@ a.join-label:hover{
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
-  font-family: var(--font-primary);
+  font-family: Inter;
 }
 
 .footer .footer-info p {
@@ -2285,7 +2331,8 @@ a.join-label:hover{
 video.html
 */
 #file-table{
-  margin-top: 50px;
+  margin-top: 40px;
+  margin-bottom: 10px;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -2293,10 +2340,10 @@ video.html
   width: 600px;
 }
 #file-table th{
-  border: 1px solid #a9a8a8;
-  background-color: #97a3b3;
+  border: 1px solid #ccc;
+  background-color: #d8ddeb;
   font-weight: 1;
-  color: #fff;
+  /* color: #fff; */
   padding: 10px;
 }
 #file-table th,td{
@@ -2316,10 +2363,12 @@ video.html
 }
 
 #filename{
+  background-color: #fff;
   text-align: left;
   padding: 10px;
 }
 #filesize{
+  background-color: #fff;
   text-align: right;
   padding: 10px;
 }
@@ -2354,12 +2403,13 @@ video.html
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  margin-bottom: 20px;
   margin-top: 70px;
   width: 600px;
   cursor: pointer;
   margin-bottom: 50px;
   
-  height: 50px;
+  height: 45px;
   color: #fff;
   text-align: center;
   padding: 10px 0;
@@ -2374,6 +2424,7 @@ video.html
   width: 600px;
   height: 320px;
   border: 2px dashed #ccc;
+  background-color: #fff;
   padding: 10px;
   padding-top: 100px;
   margin: 0 auto;
@@ -2384,7 +2435,7 @@ video.html
   position: relative;
   background: url(https://cdn-icons-png.flaticon.com/64/4131/4131814.png) center no-repeat;
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2428,3 +2479,5 @@ post_detail.html
 .btn-back {
   position: relative;
 }
+
+

@@ -28,18 +28,10 @@
   <link href="{%static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
   <!-- Pagination CSS-->
   <link href="{%static 'assets/vendor/bootstrap/css/dataTables.bootstrap5.min.css' %}" rel="stylesheet">
-  {% comment %} <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> {% endcomment %}
 
   <!-- Template Main CSS File -->
   <link href="{%static 'assets/css/main.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Logis
-  * Updated: May 30 2023 with Bootstrap v5.3.0
-  * Template URL: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 
@@ -95,8 +87,6 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>BBUMAS</h1>
       </a>
 
@@ -128,7 +118,6 @@
 
     </div>
   </header><!-- End Header -->
-  <!-- End Header -->
 
 
   <main id="main">
@@ -142,14 +131,12 @@
       <nav>
         <div class="container">
           <ol>
-            <li><a href="/">Home</a></li>
-            <li>Post</li>
+            <li><a href="/">홈</a></li>
+            <li>게시글 목록</li>
           </ol>
         </div>
       </nav>
     </div><!-- End Breadcrumbs -->
-
-    
           
   </main><!-- End #main -->
     
@@ -181,11 +168,11 @@
         </div>
       </div>
     </section>
+
+
   <!-- Pagination -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> {% endcomment %}
-  {% comment %} <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> {% endcomment %}
-
+ 
   <script>
     $(document).ready(function() {
       $('#listTable').DataTable({
@@ -199,6 +186,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
+
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
@@ -206,44 +194,42 @@
             <span>BBUMAS</span>
           </a>
           <p>Black Box Urban Maintenance Automation System</p>
-          <div class="social-links d-flex mt-4">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-6 footer-links">
-          <h4>Policy</h4>
-          <ul class="policy_link">
-            <li>
-              <a href="#" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
-            </li>
-          </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="/">Main</a></li>
-            <li><a href="/video">Black box Upload</a></li>
-            <li><a href="/post">Alert Board</a></li>
             <li><a href="/login">Login</a></li>
             <li><a href="/join">Join</a></li>
           </ul>
         </div>
 
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="/">Main</a></li>
+            {% if user.is_authenticated and user.special %}
+              <li><a href="/video">Upload Videos</a></li>
+            {% endif %}
+            <li><a href="/post">Alert Board</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/post/posting">Write Reports</a></li>
+            {% endif %}
+            <li><a href="/post/faq">FAQ</a></li>
+          </ul>
+        </div>
+
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Policy</h4>
+          <a href="#" style="color: #ffffff99;" onclick="window.open('/login/policy','개인정보 처리방침', 'resizable=no width=800 height=600'); return false">개인정보 처리방침</a>
+          <br><br><br>
+          
           <h4>Contact Us</h4>
-          <p>
+          <p style="color: #ffffff99;">
             대전 서구 문정로48번길 30 <br>
             (탄방동)<br>
-            <br>
-            <!-- <strong>Phone:</strong> +1 5589 55488 55<br> -->
-            <strong>Email:</strong> ktaivle@kt.com<br>
+            <strong style="color: #fff;">Email:</strong> ktaivle@kt.com<br>
           </p>
-
         </div>
 
       </div>
@@ -252,13 +238,6 @@
     <div class="container mt-4">
       <div class="copyright">
         &copy; Copyright <strong><span>KT</span></strong>. All Rights Reserved.
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
 
@@ -282,7 +261,6 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
-  <!-- <script src="js/write.js"></script> -->
 
 </body>
 

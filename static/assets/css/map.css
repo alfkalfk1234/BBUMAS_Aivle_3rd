@@ -30,7 +30,7 @@
 
 #damage-table thead tr {
   /*background-color: #808080;*/
-  background-color: #6685b362;
+  background-color: #f3f6fc;
 }
 
 #damage-table tbody tr {
@@ -42,7 +42,7 @@
 }
 
 #damage-table tbody tr:hover {
-  background-color: #eef4fb;
+  background-color: #edeff39b;
 }
 
 .checkbox-cell {
@@ -71,5 +71,14 @@
 
 .search-btn {
   background-color: #0e1d34d2;
-  
+  margin-left: 10px;
+}
+
+.search-btn:hover {
+  background-color: #0e1d34e8;
+}
+
+#typing {
+  margin-left: 5px;
+  margin-right: 5px;
 }
