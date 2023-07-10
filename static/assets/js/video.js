@@ -46,21 +46,21 @@ function handleFileUpload(file) {
 
     if (src.toLowerCase() == "zip") {
     
-    filename.textContent = fileName;
-    filesize.textContent = fileSize;
+        filename.textContent = fileName;
+        filesize.textContent = fileSize;
 
-    // 동영상 파일 업로드 처리
-    console.log('압축 파일 업로드:', file);
+        // 동영상 파일 업로드 처리
+        console.log('압축 파일 업로드:', file);
 
-    // 테스트용!!!!!!!!!!!!!!!!!!!!!!!! 추후 avi 파일을 제외한 나머지는 삭제할 것임
-    } else if (src.toLowerCase() == "avi" || src.toLowerCase() == "mp4" || src.toLowerCase() == "jpg" || src.toLowerCase() == "png") {
-    filename.textContent = fileName;
-    filesize.textContent = fileSize;
-    // 동영상 파일 업로드 처리
-    console.log('영상 파일 업로드:', file);
+    // avi 파일만 업로드
+    } else if (src.toLowerCase() == "avi" ) {
+        filename.textContent = fileName;
+        filesize.textContent = fileSize;
+        // 동영상 파일 업로드 처리
+        console.log('영상 파일 업로드:', file);
     } else {
-    console.log('유효한 동영상 파일이 아닙니다.');
-    alert("압축 파일이나 동영상 파일을 첨부하세요.");
+        console.log('유효한 동영상 파일이 아닙니다.');
+        alert("블랙박스 영상 파일을 첨부하세요.");
     }
 }
 
