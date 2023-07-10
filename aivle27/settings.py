@@ -70,10 +70,10 @@ WSGI_APPLICATION = "aivle27.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aivle27_big',
+        'NAME': 'aivle27',
         'USER': 'admin',
         'PASSWORD': 'aivle202303',
-        'HOST': 'database-big1.cvafnevemvap.ap-northeast-2.rds.amazonaws.com',
+        'HOST': 'aivle-27.czqb4x9zq3oq.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',  # MySQL의 기본 포트는 3306입니다.
     }
 }
@@ -123,10 +123,10 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
 
-AWS_ACCESS_KEY_ID = 'AKIAQ6GVOPASLTQEUYRC'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAWB2HWKHG3YKBY566'
+AWS_SECRET_ACCESS_KEY = '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'
 
-AWS_STORAGE_BUCKET_NAME = 'image-upload11'
+AWS_STORAGE_BUCKET_NAME = 'aivle27-bucket'
 AWS_S3_REGION_NAME = 'ap-northeast-2'
 
 CACHES = {
