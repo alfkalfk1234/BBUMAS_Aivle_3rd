@@ -106,6 +106,7 @@ h6 {
 .file-label,
 .reset-label,
 .moreBtn,
+.download-btn,
 .select-btn,
 .reset-btn {
   background-color: #f5f5f5;
@@ -129,6 +130,7 @@ h6 {
 
 .file-label:hover,
 .reset-label:hover,
+.download-btn:hover,
 .select-btn:hover,
 .reset-btn:hover,
 .moreBtn:hover {
@@ -2382,6 +2384,14 @@ video.html
   transform: translate(-50%);
   width: 600px;
   margin-top: 10px;
+}
+
+.download-btn {
+  width: 120px;  
+  height: 38px;
+  margin-top: 10px;
+  padding: 8px;
+  margin-left: 250px;
 }
 
 .select-btn {

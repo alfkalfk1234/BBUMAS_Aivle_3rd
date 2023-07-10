@@ -46,7 +46,7 @@ def get_latlng(path,video_path):
     
     name,ext = os.path.splitext(video_path)
     os.mkdir(f'{path}/bin')
-    if ext =='.avi' or ext=='.mp4':
+    if ext =='.avi':
         file_name = name
 
         input_file = f"{path}/{file_name}.avi"
@@ -54,6 +54,7 @@ def get_latlng(path,video_path):
 
         command = ["video/tool/ffmpeg","-i", input_file,"-map","0:3","-c","copy","-f", "data", output_file]
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
+        
         print(f'{output_file} 저장')
     else:
         print('등록된 확장자가 아닙니다.')
@@ -208,7 +209,11 @@ def video_upload(request):
         # 위치 정보 csv 파일로 저장
         path = 'video/media/'
         filename = video.video_file.name
-        L = get_latlng(path, filename)
+        try:
+            L = get_latlng(path, filename)
+        except:
+            message = 'GPS 정보가 없습니다!'
+            return render(request, 'video/video.html', {'message': message})
         LL = []
         for latlng in L:
             tmp = extract_latitude_longitude(latlng)
