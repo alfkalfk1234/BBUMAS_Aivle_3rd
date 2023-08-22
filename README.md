@@ -6,11 +6,12 @@
 ## 소개 이미지와 썸네일
 <details>
 <summary> 소개 이미지 </summary>
-<img src= 'https://github.com/AIVLE-School-Third-Big-Project/Auto_City/assets/65906789/90250916-9e51-44d1-a3ef-c480c5592d5e' width='900' height='600'>
+  
+<img src= 'https://github.com/alfkalfk1234/BBUMAS_Aivle_3rd/assets/65906789/3f40eb7b-0ac7-4e45-9030-17c89086f21d' width='900' height='600'>
 </details>
 <details>
 <summary> 썸네일 </summary>
-<img src= 'https://github.com/AIVLE-School-Third-Big-Project/Auto_City/assets/65906789/a0c97cde-a928-4e51-b70a-2f415cc78ecc' width='500' height='500'>
+<img src= 'https://github.com/alfkalfk1234/BBUMAS_Aivle_3rd/assets/65906789/f299a22b-581a-4873-8da2-5f6d2ff00f30' width='500' height='500'>
 </details>
 
 ## 개발 배경 및 목적
